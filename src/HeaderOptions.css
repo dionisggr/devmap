@@ -1,0 +1,17 @@
+.header-options {
+  align-self: flex-end;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 5px;
+  width: 200px;
+}
+
+.header-options a:link, .header-options a:visited {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.header-options a:hover {
+  color: rgba(255, 255, 255, 0.651);
+}

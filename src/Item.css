@@ -1,0 +1,28 @@
+.item {
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  border: solid;
+  border-width: 1px;
+  border-radius: 10px;
+  margin: 15px 0;
+  padding: 5% 10%;
+}
+
+.item-health {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.item-health label {
+  border: solid;
+  border-width: 1px;
+  margin: 1px 0;
+  width: 125px;
+  padding: 5px 0;
+}
+
+.item-tags {
+  align-self: center;
+}

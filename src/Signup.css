@@ -1,0 +1,26 @@
+.signup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  width: 50%;
+  margin-top: 10%;
+}
+
+.signup input {
+  height: 1.5em;
+  margin-bottom: 20px;
+  border-radius: 3px;
+}
+
+.signup-buttons {
+  display: flex;
+  justify-content: space-around;
+  width: 50%;
+  height: 2em;
+  margin-top: 25px;
+}
+
+.signup-buttons button {
+  width: 100px;
+}
