@@ -12,7 +12,6 @@ function App() {
 
       <Header />
       <Route exact path='/' component={List} />
-      <Route path='/:project/issues' component={List} />
       <Route path='/signup' component={Signup} />
       <Route path='/login' component={Login} />
 

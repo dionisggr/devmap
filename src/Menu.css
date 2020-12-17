@@ -1,0 +1,26 @@
+.header-options {
+  display: flex;
+  justify-content: space-between;
+  align-self: flex-end;
+  width: 250px;
+  margin-bottom: 10px;
+}
+
+.header-options a {
+  color: white;
+  text-decoration: none;
+  font-size: 25px;
+  font-weight: bold;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+@media all and (max-width: 400px) {
+  .header-options {
+    box-sizing: border-box;
+    width: 125px;
+  }
+  
+  .header-options a {
+    font-size: 15px;
+  }
+}

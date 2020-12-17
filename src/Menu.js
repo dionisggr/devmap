@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './HeaderOptions.css';
+import './Menu.css';
 
-class HeaderOptions extends React.Component {
+class Menu extends React.Component {
   render() {
     return (
       <div className='header-options'>
@@ -13,4 +13,4 @@ class HeaderOptions extends React.Component {
   };
 };
 
-export default HeaderOptions;
+export default Menu;

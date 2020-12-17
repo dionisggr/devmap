@@ -11,6 +11,8 @@ class List extends React.Component {
         ? issues
         : projects;
     return (
+      <>
+      <h3>Recent Projects</h3>
       <div className='item-list'>
       {
         item.map(item => 
@@ -18,6 +20,7 @@ class List extends React.Component {
         )
       }
       </div>
+      </>
     );
   };
 };

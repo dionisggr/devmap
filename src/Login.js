@@ -1,5 +1,6 @@
 import React from 'react';
-import './Login.css'
+import { withRouter } from 'react-router-dom';
+import './Login.css';
 
 class Login extends React.Component {
   render() {
@@ -9,13 +10,16 @@ class Login extends React.Component {
         <input type='text' name='username'/>
         <label htmlFor='password'>Password:</label>
         <input type='text' name='password'/>
-        <div className='signup-buttons'>
-          <button type='Login'>Login</button>
-          <button type='button'>Cancel</button>
+        <div className='login-buttons'>
+          <button type='Login'>LOGIN</button>
+          <button
+            type='button'
+            onClick={() => this.props.history.push('/')}
+          >CANCEL</button>
         </div>
       </div>
     );
   };
 };
 
-export default Login;
+export default withRouter(Login);

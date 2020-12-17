@@ -4,15 +4,27 @@
   width: 300px;
   color: white;
   font-size: 18px;
-  margin-top: 10%;
+  margin-top: 25%;
+  border: solid;
 }
 
-.login input {
+/* .login input {
   height: 2.5em;
   margin-bottom: 25px;
   border-radius: 5px;
-}
+  margin-top: 5px;
+} */
 
-.login button {
-  border-radius: 5px;
-}
+/* .login-buttons {
+  display: flex;
+  justify-content: space-around;
+  color: white;
+  margin-top: 25px;
+} */
+
+/* .login button {
+  width: 100px;
+  height: 2.8em;
+  background-color: rgb(85, 248, 85);
+  cursor: pointer;
+} */

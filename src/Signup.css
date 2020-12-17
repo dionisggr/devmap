@@ -4,7 +4,13 @@
   align-items: center;
   color: white;
   width: 50%;
-  margin-top: 10%;
+  margin-top: 4%;
+}
+
+.signup h3 {
+  text-align: center;
+  font-size: 4vh;
+  margin-bottom: 50px;
 }
 
 .signup input {
@@ -18,9 +24,53 @@
   justify-content: space-around;
   width: 50%;
   height: 2em;
-  margin-top: 25px;
+  margin-top: 50px;
 }
 
 .signup-buttons button {
-  width: 100px;
+  background-color: rgb(8, 255, 8);
+  border: none;
+  width: 120px;
+  height: 1.8em;
+  outline: none;
+  font-family:'Courier New', Courier, monospace;
+  font-weight: bolder;
+  font-size: 20px;
+  color: rgb(95, 0, 95);
+  border-radius: 3px;
+}
+
+.signup button:hover {
+  background-color: rgba(8, 255, 8, 0.76);
+  border: solid;
+  border-color: rgba(8, 255, 8, 0.76);
+}
+
+.signup button:active {
+  transform: scale(0.92);
+}
+
+@media all and (max-width: 400px) {
+  .signup {
+    width: 100%;
+  }
+
+  .signup h3 {
+    font-size: 3.2vh;
+    margin-bottom: 30px;
+  }
+
+  .signup-buttons {
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .signup button {
+    margin: 0 10px;
+    min-height: 1.5em;
+    width: 100px;
+    height: 1.8em;
+    font-size: 18px;
+  }
 }

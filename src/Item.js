@@ -10,11 +10,11 @@ class Item extends React.Component {
         <div className='item-main'>
           <label>{name}</label>
           <p>{description}</p>
-        <div className='item-health'>
-          <label>{phase}</label>
-          <label>{status}</label>
+          <div className='item-health'>
+            <label>{phase}</label>
+            <label>{status}</label>
+          </div>
         </div>
-      </div>
         <div className='item-tags'>
           <label>{tools}</label>
         </div>

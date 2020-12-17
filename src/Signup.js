@@ -5,6 +5,7 @@ class Signup extends React.Component {
   render() {
     return (
       <div className='signup'>
+        <h3>Sign-up for an account:</h3>
         <label htmlFor='username'>Username:</label>
         <input type='text' name='username'/>
         <label htmlFor='email'>E-mail:</label>
