@@ -6,7 +6,7 @@ import Signup from './Signup';
 import Login from './Login';
 import ProjectPage from './ProjectPage';
 import IssuePage from './IssuePage';
-import { projects, issues, posts } from './data';
+import api from './api';
 import './App.css';
 
 class App extends React.Component {
@@ -59,8 +59,15 @@ class App extends React.Component {
     );
   }
   componentDidMount() {
-    this.setState({ projects, issues })
+    api.getData()
+    .then(data => {
+      const [ projects, issues ] = data;
+      this.setState({ projects, issues });
+    })
+    .catch(error => {
+      console.log(`Could not fetch data. Error: ${error.message}`);
+    });
   };
-}
+};
 
 export default App;
