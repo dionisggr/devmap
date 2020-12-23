@@ -1,12 +1,15 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import './Item.css';
 
 class Item extends React.Component {
   render() {
-    const { name, description, tools, phase, status } = this.props.item;
+    const { id, name, description, tools, phase, status, projectID } = this.props.item;
     return (
-      <div className='item'>
+      <Link to={
+        (projectID)
+          ? `${this.props.location.pathname}/${id}`
+          : `projects/${id}`} className='item'>
         <div className='item-main'>
           <label>{name}</label>
           <p>{description}</p>
@@ -18,7 +21,7 @@ class Item extends React.Component {
         <div className='item-tags'>
           <label>{tools}</label>
         </div>
-      </div>
+      </Link>
     );
   };
 };

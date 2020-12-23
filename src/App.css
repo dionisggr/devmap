@@ -1,13 +1,13 @@
 html, body, #root, main {
+  background-color: rgba(0, 0, 0, 0.945);
+  box-sizing: border-box;
   height: 100%;
 }
 
 main {
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.925);
   font-family: 'Courier New', Courier, monospace;
 }

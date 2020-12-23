@@ -1,10 +1,15 @@
 import React from 'react';
-import './Signup.css'
+import { withRouter } from 'react-router-dom';
+import './Signup.css';
 
 class Signup extends React.Component {
+  handleSubmit = () => {
+    
+  };
+
   render() {
     return (
-      <div className='signup'>
+      <form className='signup'>
         <h3>Sign-up for an account:</h3>
         <label htmlFor='username'>Username:</label>
         <input type='text' name='username'/>
@@ -15,12 +20,21 @@ class Signup extends React.Component {
         <label htmlFor='repeatPassword'>Repeat password:</label>
         <input type='text' name='repeatPassword'/>
         <div className='signup-buttons'>
-          <button type='submit'>Sign-Up</button>
-          <button type='button'>Cancel</button>
+          <button
+            type='submit'
+          >
+            Sign-Up
+          </button>
+          <button
+            type='button'
+            onClick={() => this.props.history.push('/')}
+          >
+            Cancel
+          </button>
         </div>
-      </div>
+      </form>
     );
   };
 };
 
-export default Signup;
+export default withRouter(Signup);

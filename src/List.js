@@ -1,25 +1,30 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import Item from './Item';
-import { projects, issues } from './data';
+import Error from './Error';
 import './List.css';
 
 class List extends React.Component {
   render() {
-    const item = 
-      (this.props.match.params.project)
-        ? issues
-        : projects;
+    const projectID = this.props.match.params.projectID;
+    const listTitle = (projectID) ? 'Project Issues' : 'Recent Projects';
+    console.log(this.props.items);
+    const items = 
+      (projectID)
+        ? this.props.items.filter(issue => issue.projectID === projectID)
+        : this.props.items;
+    if (!items) return <Error target='project' />
     return (
       <>
-      <h3>Recent Projects</h3>
-      <div className='item-list'>
-      {
-        item.map(item => 
-          <Item item={item} />
-        )
-      }
-      </div>
+        <h3>{listTitle}</h3>
+        {
+          (projectID)
+            ? <Link className='create' to={`/projects/${projectID}/new-issue`}>New Issue</Link>
+            : <Link className='create' to='/new-project'>New Project</Link>
+        }
+        <div className='item-list'>
+        {items.map(item => <Item item={item} />)}
+        </div>
       </>
     );
   };

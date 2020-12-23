@@ -1,10 +1,44 @@
 .item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: 40%;
-  min-width: 250px;
   margin: 5px 0;
-  padding: 20px;
+  padding: 25px;
+  border: solid;
+  border-color: white;
+  border-width: 0.1px;
+  border-radius: 4px;
+  color: white;
+  background-color: rgba(46, 45, 45, 0.699);
+  font-size: 18px;
+  text-decoration: none;
+}
 
+.item label {
+  cursor: pointer;
+}
+
+.item-health {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-health label {
+  text-align: center;
+  width: 125px;
   border: solid;
   border-width: 1px;
-  color: white;
+}
+
+.item:hover {
+  transform: scale(1.008);
+  cursor: pointer;
+  border-color: rgba(212, 133, 212, 0.582);
+}
+
+@media all and (max-width: 400px) {
+  .item {
+    width: calc(90% - 50px);
+  }
 }
