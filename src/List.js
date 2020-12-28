@@ -12,7 +12,6 @@ class List extends React.Component {
       (projectID)
         ? this.props.items.filter(issue => issue.projectID == projectID)
         : this.props.items;
-    console.log(items);
     if (!items) return <Error target='project' />
     return (
       <>

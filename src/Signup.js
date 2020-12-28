@@ -3,10 +3,6 @@ import { withRouter } from 'react-router-dom';
 import './Signup.css';
 
 class Signup extends React.Component {
-  handleSubmit = () => {
-    
-  };
-
   render() {
     return (
       <form className='signup'>

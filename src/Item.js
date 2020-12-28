@@ -9,7 +9,7 @@ class Item extends React.Component {
       <Link to={
         (projectID)
           ? `${this.props.location.pathname}/${id}`
-          : `projects/${id}`} className='item'>
+          : `projects/${id}`} className='item'>;
         <div className='item-main'>
           <label>{name}</label>
           <p>{description}</p>

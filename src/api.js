@@ -8,7 +8,7 @@ function getData() {
   .then(response => Promise.all(response.map(res => {
     if (!res.ok) throw new Error('Could not fetch data.');
     return res.json();
-  })))
+  })));
 };
 
 function addProject(newProject) {
@@ -32,8 +32,8 @@ function editProject(id, values) {
 function deleteProject(id) {
   return fetch(`${baseURL}/projects/${id}`, {
     method: 'DELETE'
-  })
-}
+  });
+};
 
 function addIssue(newIssue) {
   return fetch(`${baseURL}/issues`, {
@@ -56,8 +56,8 @@ function editIssue(id, values) {
 function deleteIssue(id) {
   return fetch(`${baseURL}/issues/${id}`, {
     method: 'DELETE'
-  })
-}
+  });
+};
 
 export default {
   getData,

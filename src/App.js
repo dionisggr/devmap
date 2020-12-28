@@ -10,7 +10,7 @@ import api from './api';
 import './App.css';
 
 class App extends React.Component {
-  state = { projects: [], issues: [] }
+  state = { projects: [], issues: [] };
 
   updateProjects = (projects) => {
     const newState = {...this.state};
@@ -57,17 +57,17 @@ class App extends React.Component {
         <Route path='/login' component={Login} />
       </main>
     );
-  }
+  };
   
   componentDidMount() {
     api.getData()
-    .then(data => {
-      const [ projects, issues ] = data;
-      this.setState({ projects, issues });
-    })
-    .catch(error => {
-      console.log(`Could not fetch data. Error: ${error.message}`);
-    });
+      .then(data => {
+        const [ projects, issues ] = data;
+        this.setState({ projects, issues });
+      })
+      .catch(error => {
+        console.log(`Could not fetch data. Error: ${error.message}`);
+      });
   };
 };
 
