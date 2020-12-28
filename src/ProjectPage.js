@@ -1,10 +1,16 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import api from './api';
 import './ProjectPage.css';
 
 class ProjectPage extends React.Component {
   static defaultProps = { projects: [] };
+
+  static propTypes = {
+    projects: PropTypes.array.isRequired,
+    updateProjects: PropTypes.func.isRequired
+  };
   
   handleSave = (evt) => {
     evt.preventDefault();

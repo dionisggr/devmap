@@ -1,10 +1,16 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import api from './api';
 import './IssuePage.css';
 
 class IssuePage extends React.Component {
   static defaultProps = { issues: [] };
+
+  static propTypes = {
+    issues:  PropTypes.array.isRequired,
+    updateIssues: PropTypes.func.isRequired
+  };
   
   handleSave = (evt) => {
     evt.preventDefault();

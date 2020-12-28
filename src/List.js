@@ -1,10 +1,15 @@
 import React from 'react';
 import { withRouter, Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Item from './Item';
 import Error from './Error';
 import './List.css';
 
 class List extends React.Component {
+  static defaultProps = { items: [] };
+
+  static propTypes = { items: PropTypes.array.isRequired };
+
   render() {
     const projectID = this.props.match.params.projectID;
     const listTitle = (projectID) ? 'Project Issues' : 'Recent Projects';

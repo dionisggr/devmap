@@ -1,8 +1,13 @@
 import React from 'react';
 import { withRouter, Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import './Item.css';
 
 class Item extends React.Component {
+  static defaultProps = { item: {} };
+
+  static propTypes = { item: PropTypes.object };
+
   render() {
     const { id, name, description, tools, phase, status, projectID } = this.props.item;
     return (
