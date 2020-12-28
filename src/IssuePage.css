@@ -58,3 +58,9 @@
 .issue-page button {
   margin-top: 25px;
 }
+
+@media all and (max-width: 400px) {
+  .issue-buttons button {
+    margin: 0 10px;
+  }
+}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import api from './api';
 import './ProjectPage.css';
 
 class ProjectPage extends React.Component {
@@ -7,38 +8,55 @@ class ProjectPage extends React.Component {
   
   handleSave = (evt) => {
     evt.preventDefault();
+    const projectID = this.props.match.params.projectID;
+    let projects = [...this.props.projects];
     const values = {
-      id: 'p'+ this.props.length,
       name: evt.target.name.value,
       description: evt.target.description.value,
       tools: evt.target.tools.value,
       phase: evt.target.phase.value,
       status: evt.target.status.value,
-      startDate: evt.target.startDate.value,
+      start_date: evt.target.startDate.value,
       owner: evt.target.owner.value,
       collaboration: evt.target.collaboration.value,
-      collaborators: evt.target.collaborators.value,
       github: evt.target.github.value
     };
-    const projectID = this.props.match.params.projectID;
-    let projects = [...this.props.projects];
     if (!projectID) {
-      projects.push(values);
+      api.addProject(values)
+        .then(project => {
+          project.id = project.project_id.toString();
+          project.startDate = project.start_date.toString();
+          delete project.project_id;
+          delete project.start_date;
+          projects.push(project);
+          this.props.updateProjects(projects);
+          this.props.history.push('/');
+        })
     } else {
-      projects = projects.map(project => {
-        if (project.id === projectID) Object.assign(project, values);
-        return project;
-      });
+      api.editProject(projectID, values)
+        .then(() => {
+          values.id = projectID.toString();
+          values.startDate = values.start_date.toString();
+          delete values.start_date;
+          projects = projects.map(project => {
+            if (project.id === projectID) Object.assign(project, values);
+            return project;
+          });
+          this.props.updateProjects(projects);
+          this.props.history.push('/');
+        });
     };
-    this.props.updateProjects(projects);
-    this.props.history.push('/');
   };
 
   handleDelete = () => {
-    let projects = [...this.props.projects];
-    projects = projects.filter(project => project.id !== this.props.match.params.projectID);
-    this.props.updateProjects(projects);
-    this.props.history.push('/');
+    const projectID = this.props.match.params.projectID;
+    api.deleteProject(projectID)
+      .then(() => {
+        let projects = [...this.props.projects];
+        projects = projects.filter(project => project.id !== this.props.match.params.projectID);
+        this.props.updateProjects(projects);
+        this.props.history.push('/');
+      });
   };
 
   render() {

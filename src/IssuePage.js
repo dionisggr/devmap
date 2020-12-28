@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import Error from './Error';
+import api from './api';
 import './IssuePage.css';
 
 class IssuePage extends React.Component {
@@ -11,42 +11,63 @@ class IssuePage extends React.Component {
     const issueID = this.props.match.params.issueID;
     let issues = [...this.props.issues];
     const values = {
-      id: `i${issues.length+1}`,
-      projectID: evt.target.projectID.value,
+      project_id: evt.target.projectID.value,
       name: evt.target.name.value,
       description: evt.target.description.value,
       tools: evt.target.tools.value,
       phase: evt.target.phase.value,
       status: evt.target.status.value,
-      startDate: evt.target.startDate.value,
+      start_date: evt.target.startDate.value,
       owner: evt.target.owner.value,
       collaboration: evt.target.collaboration.value,
-      collaborators: evt.target.collaborators.value,
       github: evt.target.github.value
     };
     if (!issueID) {
-      issues.push(values);
+      api.addIssue(values)
+        .then(issue => {
+          issue.id = issue.issue_id.toString();
+          issue.startDate = issue.start_date.toString();
+          issue.projectID = issue.project_id;
+          delete issue.issue_id;
+          delete issue.start_date;
+          delete issue.project_id;
+          issues.push(issue);
+          console.log(this.props.issues);
+          this.props.updateIssues(issues);
+          console.log(this.props.issues);
+          this.props.history.push(`/projects/${issue.projectID}/issues`);
+        })
     } else {
-      issues = issues.map(issue => {
-        if (issue.id === issueID) Object.assign(issue, values);
-        return issue;
-      });
+      api.editIssue(issueID, values)
+        .then(() => {
+          values.id = issueID.toString();
+          values.projectID = values.project_id.toString();
+          values.startDate = values.start_date.toString();
+          delete values.project_id;
+          delete values.start_date;
+          issues = issues.map(issue => {
+            if (issue.id === issueID) Object.assign(issue, values);
+            return issue;
+          });
+          this.props.updateIssues(issues);
+          this.props.history.push(`/projects/${values.projectID}/issues`);
+        });
     };
-    this.props.updateIssues(issues);
-    this.props.history.push(`/projects/${this.props.match.params.projectID}/issues`);
   };
 
   handleDelete = () => {
     const issueID = this.props.match.params.issueID;
-    const issue = this.props.issues.find(issue => issue.id === issueID) || {};
-    let issues = [...this.props.issues];
-    issues = issues.filter(issue => issue.id !== this.props.match.params.issueID);
-    this.props.updateIssues(issues);
-    this.props.history.push(`/projects/${issue.projectID}/issues`);
+    api.deleteIssue(issueID)
+      .then(() => {
+        const issue = this.props.issues.find(issue => issue.id === issueID) || {};
+        let issues = [...this.props.issues];
+        issues = issues.filter(issue => issue.id !== this.props.match.params.issueID);
+        this.props.updateIssues(issues);
+        this.props.history.push(`/projects/${issue.projectID}/issues`);
+      });
   };
 
   render() {
-    console.log(this.props.issues);
     const issueID = this.props.match.params.issueID;
     const issue = this.props.issues.find(issue => issue.id === issueID) || {};
     return (

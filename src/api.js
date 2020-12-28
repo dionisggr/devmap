@@ -11,6 +11,60 @@ function getData() {
   })))
 };
 
+function addProject(newProject) {
+  return fetch(`${baseURL}/projects`, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(newProject)
+  })
+  .then(res => res.json());
+};
+
+function editProject(id, values) {
+  return fetch(`${baseURL}/projects/${id}`, {
+    method: 'PATCH',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(values)
+  })
+  .then(res => res.json());
+};
+
+function deleteProject(id) {
+  return fetch(`${baseURL}/projects/${id}`, {
+    method: 'DELETE'
+  })
+}
+
+function addIssue(newIssue) {
+  return fetch(`${baseURL}/issues`, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(newIssue)
+  })
+  .then(res => res.json());
+};
+
+function editIssue(id, values) {
+  return fetch(`${baseURL}/issues/${id}`, {
+    method: 'PATCH',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(values)
+  })
+  .then(res => res.json());
+};
+
+function deleteIssue(id) {
+  return fetch(`${baseURL}/issues/${id}`, {
+    method: 'DELETE'
+  })
+}
+
 export default {
-  getData
+  getData,
+  addProject,
+  editProject,
+  deleteProject,
+  addIssue,
+  editIssue,
+  deleteIssue
 };

@@ -58,3 +58,9 @@
 .project-page button {
   margin-top: 25px;
 }
+
+@media all and (max-width: 400px) {
+  .project-buttons button {
+    margin: 10px;
+  }
+}

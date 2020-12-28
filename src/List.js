@@ -8,11 +8,11 @@ class List extends React.Component {
   render() {
     const projectID = this.props.match.params.projectID;
     const listTitle = (projectID) ? 'Project Issues' : 'Recent Projects';
-    console.log(this.props.items);
     const items = 
       (projectID)
-        ? this.props.items.filter(issue => issue.projectID === projectID)
+        ? this.props.items.filter(issue => issue.projectID == projectID)
         : this.props.items;
+    console.log(items);
     if (!items) return <Error target='project' />
     return (
       <>

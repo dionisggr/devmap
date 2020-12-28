@@ -10,7 +10,7 @@ import api from './api';
 import './App.css';
 
 class App extends React.Component {
-  state = { projects: [], issues: []}
+  state = { projects: [], issues: [] }
 
   updateProjects = (projects) => {
     const newState = {...this.state};
@@ -58,6 +58,7 @@ class App extends React.Component {
       </main>
     );
   }
+  
   componentDidMount() {
     api.getData()
     .then(data => {
