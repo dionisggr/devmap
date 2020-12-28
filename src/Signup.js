@@ -8,19 +8,15 @@ class Signup extends React.Component {
       <form className='signup'>
         <h3>Sign-up for an account:</h3>
         <label htmlFor='username'>Username:</label>
-        <input type='text' name='username'/>
+        <input type='text' name='username' id='username' />
         <label htmlFor='email'>E-mail:</label>
-        <input type='text' name='email'/>
+        <input type='text' name='email' id='email'/>
         <label htmlFor='password'>Password:</label>
-        <input type='text' name='password'/>
+        <input type='text' name='password' id='password' />
         <label htmlFor='repeatPassword'>Repeat password:</label>
-        <input type='text' name='repeatPassword'/>
+        <input type='text' name='repeatPassword' id='repeatPassword' />
         <div className='signup-buttons'>
-          <button
-            type='submit'
-          >
-            Sign-Up
-          </button>
+          <button type='submit'>Sign-Up</button>
           <button
             type='button'
             onClick={() => this.props.history.push('/')}

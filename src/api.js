@@ -59,7 +59,7 @@ function deleteIssue(id) {
   });
 };
 
-export default {
+const api = {
   getData,
   addProject,
   editProject,
@@ -68,3 +68,5 @@ export default {
   editIssue,
   deleteIssue
 };
+
+export default api;

@@ -15,8 +15,8 @@ class List extends React.Component {
     const listTitle = (projectID) ? 'Project Issues' : 'Recent Projects';
     const items = 
       (projectID)
-        ? this.props.items.filter(issue => issue.projectID == projectID)
-        : this.props.items;
+        ? this.props.items.filter(issue => issue.projectID === projectID)
+        : this.props.items
     if (!items) return <Error target='project' />
     return (
       <>
@@ -27,7 +27,7 @@ class List extends React.Component {
             : <Link className='create' to='/new-project'>New Project</Link>
         }
         <div className='item-list'>
-        {items.map(item => <Item item={item} />)}
+        {items.map(item => <Item key={item.id} item={item} />)}
         </div>
       </>
     );

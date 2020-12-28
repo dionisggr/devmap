@@ -6,7 +6,7 @@ import './Item.css';
 class Item extends React.Component {
   static defaultProps = { item: {} };
 
-  static propTypes = { item: PropTypes.object };
+  static propTypes = { item: PropTypes.object.isRequired };
 
   render() {
     const { id, name, description, tools, phase, status, projectID } = this.props.item;
@@ -14,7 +14,7 @@ class Item extends React.Component {
       <Link to={
         (projectID)
           ? `${this.props.location.pathname}/${id}`
-          : `projects/${id}`} className='item'>;
+          : `projects/${id}`} className='item'>
         <div className='item-main'>
           <label>{name}</label>
           <p>{description}</p>
