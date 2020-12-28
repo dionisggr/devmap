@@ -1,12 +1,12 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import Header from './Header';
-import List from './List';
-import Signup from './Signup';
-import Login from './Login';
-import ProjectPage from './ProjectPage';
-import IssuePage from './IssuePage';
-import ErrorBoundary from './ErrorBoundary';
+import Header from './Header/Header';
+import List from './Main/List/List';
+import Signup from './Header/Signup';
+import Login from './Header/Login';
+import ProjectPage from './Main/List/Items/ProjectPage';
+import IssuePage from './Main/List/Items/IssuePage';
+import ErrorBoundary from './Main/Errors/ErrorBoundary';
 import api from './api';
 import './App.css';
 

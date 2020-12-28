@@ -1,9 +1,9 @@
 import React from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Item from './Item';
-import Error from './Error';
-import ErrorBoundary from './ErrorBoundary';
+import Item from './Items/Item';
+import Error from '../Errors/Error';
+import ErrorBoundary from '../Errors/ErrorBoundary';
 import './List.css';
 
 class List extends React.Component {
