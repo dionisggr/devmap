@@ -6,6 +6,7 @@ import Signup from './Signup';
 import Login from './Login';
 import ProjectPage from './ProjectPage';
 import IssuePage from './IssuePage';
+import ErrorBoundary from './ErrorBoundary';
 import api from './api';
 import './App.css';
 
@@ -27,34 +28,45 @@ class App extends React.Component {
   render = () => {
     return (
       <main className='App'>
-
-        <Header />
-        <Route exact path={['/', '/projects']} render={() => 
-          <List items={this.state.projects} />
-        }/>
-        <Route exact path={[
-          '/projects/:projectID',
-          '/new-project'
-         ]} render={() => 
-          <ProjectPage
-            projects={this.state.projects}
-            updateProjects={this.updateProjects}
-          />
-        }/>
-        <Route exact path='/projects/:projectID/issues' render={() => 
-          <List items={this.state.issues} />
-        }/>
-        <Route path={[
-          '/projects/:projectID/new-issue',
-          '/projects/:projectID/issues/:issueID'
-        ]} render={() => 
-          <IssuePage
-            issues={this.state.issues}
-            updateIssues={this.updateIssues}
-          />
-        }/>
-        <Route path='/signup' component={Signup} />
-        <Route path='/login' component={Login} />
+        <ErrorBoundary>
+          <Header />
+        </ErrorBoundary>
+        <ErrorBoundary>
+          <Route exact path={['/', '/projects']} render={() => 
+            <List items={this.state.projects} />
+          }/>
+        </ErrorBoundary>
+        <ErrorBoundary>
+          <Route exact path={[
+            '/projects/:projectID',
+            '/new-project'
+          ]} render={() => 
+            <ProjectPage
+              projects={this.state.projects}
+              updateProjects={this.updateProjects}
+            />
+          }/>
+        </ErrorBoundary>
+        <ErrorBoundary>
+          <Route exact path='/projects/:projectID/issues' render={() => 
+            <List items={this.state.issues} />
+          }/>
+        </ErrorBoundary>
+        <ErrorBoundary>
+          <Route path={[
+            '/projects/:projectID/new-issue',
+            '/projects/:projectID/issues/:issueID'
+          ]} render={() => 
+            <IssuePage
+              issues={this.state.issues}
+              updateIssues={this.updateIssues}
+            />
+          }/>
+        </ErrorBoundary>
+        <ErrorBoundary>
+          <Route path='/signup' component={Signup} />
+          <Route path='/login' component={Login} />
+        </ErrorBoundary>
       </main>
     );
   };
