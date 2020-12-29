@@ -6,6 +6,7 @@ import Signup from './Header/Signup';
 import Login from './Header/Login';
 import ProjectPage from './Main/List/Items/ProjectPage';
 import IssuePage from './Main/List/Items/IssuePage';
+import UserPage from './Main/Users/UserPage';
 import ErrorBoundary from './Main/Errors/ErrorBoundary';
 import api from './api';
 import './App.css';
@@ -66,6 +67,9 @@ class App extends React.Component {
         <ErrorBoundary>
           <Route path='/signup' component={Signup} />
           <Route path='/login' component={Login} />
+        </ErrorBoundary>
+        <ErrorBoundary>
+          <Route path='/users/:userID' component={UserPage} />
         </ErrorBoundary>
       </main>
     );
