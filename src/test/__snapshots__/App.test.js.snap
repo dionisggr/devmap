@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The App Snapshot Test renders the UI as expected 1`] = `
+<main
+  className="App"
+>
+  <header>
+    <a
+      className="logo"
+      href="/"
+      onClick={[Function]}
+    >
+      <h1>
+        #DevMap
+      </h1>
+    </a>
+    <div
+      className="header-options"
+    >
+      <a
+        href="/signup"
+        onClick={[Function]}
+      >
+        Sign-Up
+      </a>
+      <a
+        href="/login"
+        onClick={[Function]}
+      >
+        Login
+      </a>
+    </div>
+  </header>
+  <h3>
+    Recent Projects
+  </h3>
+  <a
+    className="create"
+    href="/new-project"
+    onClick={[Function]}
+  >
+    New Project
+  </a>
+  <div
+    className="item-list"
+  />
+</main>
+`;

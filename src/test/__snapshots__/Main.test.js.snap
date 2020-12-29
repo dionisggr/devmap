@@ -1,0 +1,436 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Main Section The Errors render the UI as expected 1`] = `
+<div
+  className="error"
+>
+  ERROR
+</div>
+`;
+
+exports[`Main Section The Items The Issue Page renders the UI as expected 1`] = `
+<form
+  className="issue-page"
+  onSubmit={[Function]}
+>
+  <h3>
+    New Issue
+  </h3>
+  <label
+    htmlFor="name"
+  >
+    Name:
+    <input
+      id="name"
+      name="name"
+      type="text"
+    />
+  </label>
+  <label
+    htmlFor="description"
+  >
+    Description:
+    <input
+      name="description"
+      type="text"
+    />
+  </label>
+  <label
+    htmlFor="projectID"
+  >
+    Project ID:
+    <input
+      name="projectID"
+      type="text"
+    />
+  </label>
+  <label
+    htmlFor="tools"
+  >
+    Languages/Tools:
+    <input
+      name="tools"
+      type="text"
+    />
+  </label>
+  <label
+    htmlFor="phase"
+  >
+    Phase:
+    <input
+      name="phase"
+      type="text"
+    />
+  </label>
+  <label
+    htmlFor="status"
+  >
+    Status:
+    <input
+      name="status"
+      type="text"
+    />
+  </label>
+  <label
+    htmlFor="start-date"
+  >
+    Start Date:
+    <input
+      name="startDate"
+      type="text"
+    />
+  </label>
+  <label
+    htmlFor="owner"
+  >
+    Owner:
+    <input
+      name="owner"
+      type="text"
+    />
+  </label>
+  <label
+    htmlFor="collaboration"
+  >
+    Collaboration:
+    <input
+      name="collaboration"
+      type="text"
+    />
+  </label>
+  <label
+    htmlFor="collaborators"
+  >
+    Collaborators:
+    <input
+      name="collaborators"
+      type="text"
+    />
+  </label>
+  <label
+    htmlFor="github"
+  >
+    GitHub:
+    <input
+      name="github"
+      type="text"
+    />
+  </label>
+  <div
+    className="issue-buttons"
+  >
+    <button
+      type="submit"
+    >
+      Save
+    </button>
+    <button
+      onClick={[Function]}
+      type="button"
+    >
+      Cancel
+    </button>
+    <button
+      onClick={[Function]}
+      type="button"
+    >
+      Delete
+    </button>
+  </div>
+</form>
+`;
+
+exports[`Main Section The Items The Item component render the UI as expected 1`] = `
+<a
+  className="item"
+  href="/projects/undefined"
+  onClick={[Function]}
+>
+  <div
+    className="item-main"
+  >
+    <label />
+    <p />
+    <div
+      className="item-health"
+    >
+      <label />
+      <label />
+    </div>
+  </div>
+  <div
+    className="item-tags"
+  >
+    <label />
+  </div>
+</a>
+`;
+
+exports[`Main Section The Items The Project Page renders the UI as expected 1`] = `
+<form
+  className="project-page"
+  onSubmit={[Function]}
+>
+  <h3>
+    New Project
+  </h3>
+  <label
+    htmlFor="name"
+  >
+    Name:
+    <input
+      id="name"
+      name="name"
+      type="text"
+    />
+  </label>
+  <label
+    htmlFor="description"
+  >
+    Description:
+    <input
+      id="description"
+      name="description"
+      type="text"
+    />
+  </label>
+  <label
+    htmlFor="tools"
+  >
+    Languages/Tools:
+    <input
+      id="tools"
+      name="tools"
+      type="text"
+    />
+  </label>
+  <label
+    htmlFor="phase"
+  >
+    Phase:
+    <input
+      id="phase"
+      name="phase"
+      type="text"
+    />
+  </label>
+  <label
+    htmlFor="status"
+  >
+    Status:
+    <input
+      id="status"
+      name="status"
+      type="text"
+    />
+  </label>
+  <label
+    htmlFor="startDate"
+  >
+    Start Date:
+    <input
+      id="startDate"
+      name="startDate"
+      type="text"
+    />
+  </label>
+  <label
+    htmlFor="owner"
+  >
+    Owner:
+    <input
+      id="owner"
+      name="owner"
+      type="text"
+    />
+  </label>
+  <label
+    htmlFor="collaboration"
+  >
+    Collaboration:
+    <input
+      id="collaboration"
+      name="collaboration"
+      type="text"
+    />
+  </label>
+  <label
+    htmlFor="collaborators"
+  >
+    Collaborators:
+    <input
+      id="collaborators"
+      name="collaborators"
+      type="text"
+    />
+  </label>
+  <label
+    htmlFor="github"
+  >
+    GitHub:
+    <input
+      id="github"
+      name="github"
+      type="text"
+    />
+  </label>
+  <div
+    className="project-buttons"
+  >
+    <button
+      type="submit"
+    >
+      Save
+    </button>
+    <button
+      onClick={[Function]}
+      type="button"
+    >
+      Cancel
+    </button>
+    <button
+      onClick={[Function]}
+      type="button"
+    >
+      Delete
+    </button>
+  </div>
+</form>
+`;
+
+exports[`Main Section The List renders the UI as expected 1`] = `
+Array [
+  <h3>
+    Recent Projects
+  </h3>,
+  <a
+    className="create"
+    href="/new-project"
+    onClick={[Function]}
+  >
+    New Project
+  </a>,
+  <div
+    className="item-list"
+  />,
+]
+`;
+
+exports[`Main Section The Menu render the UI as expected 1`] = `
+<div
+  className="header-options"
+>
+  <a
+    href="/signup"
+    onClick={[Function]}
+  >
+    Sign-Up
+  </a>
+  <a
+    href="/login"
+    onClick={[Function]}
+  >
+    Login
+  </a>
+</div>
+`;
+
+exports[`Main Section The Users render the UI as expected 1`] = `
+<form
+  className="user-page"
+>
+  <h3>
+    Profile
+  </h3>
+  <label
+    htmlFor="username"
+  >
+    Username:
+    <input
+      id="username"
+      name="username"
+      type="text"
+    />
+  </label>
+  <label
+    htmlFor="firstName"
+  >
+    First Name:
+    <input
+      id="firstName"
+      name="firstName"
+      type="text"
+    />
+  </label>
+  <label
+    htmlFor="lastName"
+  >
+    Last Name:
+    <input
+      id="lastName"
+      name="lastName"
+      type="text"
+    />
+  </label>
+  <label
+    htmlFor="email"
+  >
+    E-mail:
+    <input
+      id="email"
+      name="email"
+      type="text"
+    />
+  </label>
+  <label
+    htmlFor="tools"
+  >
+    Tools:
+    <input
+      id="tools"
+      name="tools"
+      type="text"
+    />
+  </label>
+  <label
+    htmlFor="startDate"
+  >
+    Start Date:
+    <input
+      id="startDate"
+      name="startDate"
+      type="text"
+    />
+  </label>
+  <label
+    htmlFor="github"
+  >
+    GitHub:
+    <input
+      id="github"
+      name="github"
+      type="text"
+    />
+  </label>
+  <div
+    className="issue-buttons"
+  >
+    <button
+      type="submit"
+    >
+      Save
+    </button>
+    <button
+      onClick={[Function]}
+      type="button"
+    >
+      Cancel
+    </button>
+    <button
+      type="button"
+    >
+      Delete
+    </button>
+  </div>
+</form>
+`;

@@ -1,0 +1,141 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header Section The Header renders the UI as expected 1`] = `
+<header>
+  <a
+    className="logo"
+    href="/"
+    onClick={[Function]}
+  >
+    <h1>
+      #DevMap
+    </h1>
+  </a>
+  <div
+    className="header-options"
+  >
+    <a
+      href="/signup"
+      onClick={[Function]}
+    >
+      Sign-Up
+    </a>
+    <a
+      href="/login"
+      onClick={[Function]}
+    >
+      Login
+    </a>
+  </div>
+</header>
+`;
+
+exports[`Header Section The Login page renders the UI as expected 1`] = `
+<form
+  className="login"
+>
+  <h3>
+    Login:
+  </h3>
+  <label
+    htmlFor="username"
+  >
+    Username:
+  </label>
+  <input
+    id="username"
+    name="username"
+    type="text"
+  />
+  <label
+    htmlFor="password"
+  >
+    Password:
+  </label>
+  <input
+    id="password"
+    name="password"
+    type="text"
+  />
+  <div
+    className="login-buttons"
+  >
+    <button
+      type="submit"
+    >
+      Login
+    </button>
+    <button
+      onClick={[Function]}
+      type="button"
+    >
+      Cancel
+    </button>
+  </div>
+</form>
+`;
+
+exports[`Header Section The Sign-Up page renders the UI as expected 1`] = `
+<form
+  className="signup"
+>
+  <h3>
+    Sign-up for an account:
+  </h3>
+  <label
+    htmlFor="username"
+  >
+    Username:
+  </label>
+  <input
+    id="username"
+    name="username"
+    type="text"
+  />
+  <label
+    htmlFor="email"
+  >
+    E-mail:
+  </label>
+  <input
+    id="email"
+    name="email"
+    type="text"
+  />
+  <label
+    htmlFor="password"
+  >
+    Password:
+  </label>
+  <input
+    id="password"
+    name="password"
+    type="text"
+  />
+  <label
+    htmlFor="repeatPassword"
+  >
+    Repeat password:
+  </label>
+  <input
+    id="repeatPassword"
+    name="repeatPassword"
+    type="text"
+  />
+  <div
+    className="signup-buttons"
+  >
+    <button
+      type="submit"
+    >
+      Sign-Up
+    </button>
+    <button
+      onClick={[Function]}
+      type="button"
+    >
+      Cancel
+    </button>
+  </div>
+</form>
+`;
