@@ -15,9 +15,10 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
+    "prestart": "npm test",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

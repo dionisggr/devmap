@@ -9,7 +9,7 @@ class ProjectPage extends React.Component {
 
   static propTypes = {
     projects: PropTypes.array.isRequired,
-    updateProjects: PropTypes.func.isRequired
+    updateProjects: PropTypes.func
   };
   
   handleSave = (evt) => {
