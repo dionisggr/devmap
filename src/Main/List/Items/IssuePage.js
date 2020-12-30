@@ -43,6 +43,7 @@ class IssuePage extends React.Component {
           console.log(this.props.issues);
           this.props.history.push(`/projects/${issue.projectID}/issues`);
         })
+        .catch(error => console.log(error));
     } else {
       api.editIssue(issueID, values)
         .then(() => {
@@ -57,7 +58,8 @@ class IssuePage extends React.Component {
           });
           this.props.updateIssues(issues);
           this.props.history.push(`/projects/${values.projectID}/issues`);
-        });
+        })
+        .catch(error => console.log(error));
     };
   };
 
@@ -70,7 +72,8 @@ class IssuePage extends React.Component {
         issues = issues.filter(issue => issue.id !== this.props.match.params.issueID);
         this.props.updateIssues(issues);
         this.props.history.push(`/projects/${issue.projectID}/issues`);
-      });
+      })
+      .catch(error => console.log(error));
   };
 
   render() {

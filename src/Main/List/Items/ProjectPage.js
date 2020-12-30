@@ -38,6 +38,7 @@ class ProjectPage extends React.Component {
           this.props.updateProjects(projects);
           this.props.history.push('/');
         })
+        .catch(error => console.log(error));
     } else {
       api.editProject(projectID, values)
         .then(() => {
@@ -50,7 +51,8 @@ class ProjectPage extends React.Component {
           });
           this.props.updateProjects(projects);
           this.props.history.push('/');
-        });
+        })
+        .catch(error => console.log(error));
     };
   };
 
@@ -62,7 +64,8 @@ class ProjectPage extends React.Component {
         projects = projects.filter(project => project.id !== this.props.match.params.projectID);
         this.props.updateProjects(projects);
         this.props.history.push('/');
-      });
+      })
+      .catch(error => console.log(error));
   };
 
   render() {

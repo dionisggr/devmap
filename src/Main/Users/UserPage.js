@@ -44,6 +44,7 @@ class UserPage extends React.Component {
     const id = this.props.match.params.userID;
     api.getUserById(id)
       .then(user => this.setState({user}))
+      .catch(error => console.log(error));
   };
 };
 

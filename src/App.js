@@ -18,13 +18,13 @@ class App extends React.Component {
     const newState = {...this.state};
     newState.projects = projects;
     this.setState(newState);
-  }
+  };
 
   updateIssues = (issues) => {
     const newState = {...this.state};
     newState.issues = issues;
     this.setState(newState);
-  }
+  };
 
   render = () => {
     return (

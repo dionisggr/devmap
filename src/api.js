@@ -8,8 +8,7 @@ function getData() {
   .then(response => Promise.all(response.map(res => {
     if (!res.ok) throw new Error('Could not fetch data.');
     return res.json();
-  })))
-  .catch(error => console.log(error));
+  })));
 };
 
 function addProject(newProject) {
@@ -18,8 +17,7 @@ function addProject(newProject) {
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(newProject)
   })
-  .then(res => res.json())
-  .catch(error => console.log(error));
+  .then(res => res.json());
 };
 
 function editProject(id, values) {
@@ -28,8 +26,7 @@ function editProject(id, values) {
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(values)
   })
-  .then(res => res.json())
-  .catch(error => console.log(error));
+  .then(res => res.json());
 };
 
 function deleteProject(id) {
@@ -44,8 +41,7 @@ function addIssue(newIssue) {
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(newIssue)
   })
-  .then(res => res.json())
-  .catch(error => console.log(error));
+  .then(res => res.json());
 };
 
 function editIssue(id, values) {
@@ -54,15 +50,13 @@ function editIssue(id, values) {
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(values)
   })
-  .then(res => res.json())
-  .catch(error => console.log(error));
+  .then(res => res.json());
 };
 
 function deleteIssue(id) {
   return fetch(`${baseURL}/issues/${id}`, {
     method: 'DELETE'
-  })
-  .catch(error => console.log(error));
+  });
 };
 
 function addUser(newUser) {
@@ -71,8 +65,7 @@ function addUser(newUser) {
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(newUser)
   })
-  .then(res => res.json())
-  .catch(error => console.log(error));
+  .then(res => res.json());
 };
 
 function editUser(id, values) {
@@ -81,21 +74,18 @@ function editUser(id, values) {
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(values)
   })
-  .then(res => res.json())
-  .catch(error => console.log(error));
+  .then(res => res.json());
 };
 
 function deleteUser(id) {
   return fetch(`${baseURL}/users/${id}`, {
     method: 'DELETE'
-  })
-  .catch(error => console.log(error));
+  });
 };
 
 function getUserById(id) {
   return fetch(`${baseURL}/users/${id}`)
     .then(res => res.json())
-    .catch(error => console.log(error));
 };
 
 const api = {
