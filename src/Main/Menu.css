@@ -2,16 +2,24 @@
   display: flex;
   justify-content: space-between;
   align-self: flex-end;
-  width: 250px;
+  /* width: 250px; */
   margin-bottom: 10px;
 }
 
-.header-options a {
+.header-options a, .header-options button {
   color: white;
   text-decoration: none;
   font-size: 25px;
   font-weight: bold;
   font-family: 'Courier New', Courier, monospace;
+  margin-left: 35px;
+}
+
+.header-options button {
+  background-color: transparent;
+  border: none;
+  justify-self: flex-end;
+  cursor: pointer;
 }
 
 @media all and (max-width: 400px) {
@@ -20,7 +28,7 @@
     width: 125px;
   }
   
-  .header-options a {
+  .header-options a, .header-options button {
     font-size: 15px;
   }
 }

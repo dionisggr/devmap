@@ -26,50 +26,60 @@ class App extends React.Component {
     this.setState(newState);
   };
 
+  setIdleTimer = () =>{
+    let reset = setInterval(() => {
+      api.refreshToken();
+    }, 600000);
+    let stop = setTimeout(() => {
+      clearInterval(reset);
+      window.localStorage.removeItem('authToken');
+    }, 660000);
+    document.addEventListener('mousemove keydown', function () {
+      stop = setTimeout(() => {
+        clearInterval(reset);
+        window.localStorage.removeItem('authToken');
+      }, 660000);
+    });
+  };
+
   render = () => {
     return (
       <main className='App'>
         <ErrorBoundary>
           <Header />
         </ErrorBoundary>
+
         <ErrorBoundary>
           <Route exact path={['/', '/projects']} render={() => 
             <List items={this.state.projects} />
           }/>
-        </ErrorBoundary>
-        <ErrorBoundary>
-          <Route exact path={[
-            '/projects/:projectID',
-            '/new-project'
-          ]} render={() => 
-            <ProjectPage
-              projects={this.state.projects}
-              updateProjects={this.updateProjects}
-            />
-          }/>
-        </ErrorBoundary>
-        <ErrorBoundary>
           <Route exact path='/projects/:projectID/issues' render={() => 
             <List items={this.state.issues} />
           }/>
-        </ErrorBoundary>
-        <ErrorBoundary>
+          <Route exact path={['/projects/:projectID', '/new-project']}
+            render={() => 
+              <ProjectPage
+                projects={this.state.projects}
+                updateProjects={this.updateProjects}
+              />
+          }/>
           <Route path={[
-            '/projects/:projectID/new-issue',
+            '/projects/:projctID/new-issue',
             '/projects/:projectID/issues/:issueID'
-          ]} render={() => 
-            <IssuePage
-              issues={this.state.issues}
-              updateIssues={this.updateIssues}
-            />
+          ]}
+            render={() => 
+              <IssuePage
+                issues={this.state.issues}
+                updateIssues={this.updateIssues}
+              />
           }/>
         </ErrorBoundary>
         <ErrorBoundary>
           <Route path='/signup' component={Signup} />
-          <Route path='/login' component={Login} />
-        </ErrorBoundary>
-        <ErrorBoundary>
           <Route path='/users/:userID' component={UserPage} />
+          <Route path='/login' render={() =>
+            <Login setIdleTimer={this.setIdleTimer} />
+          } />
         </ErrorBoundary>
       </main>
     );

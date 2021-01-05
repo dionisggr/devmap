@@ -4,7 +4,10 @@ import './Error.css';
 class Error extends React.Component {
   render() {
     return (
-      <div className='error'>ERROR</div>
+      <div className='error'>
+        <h3>ERROR</h3>
+        <p>{this.props.message}</p>
+      </div>
     );
   };
 };
