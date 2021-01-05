@@ -95,6 +95,10 @@ class App extends React.Component {
         console.log(`Could not fetch data. Error: ${error.message}`);
       });
   };
+
+  componentWillUnmount() {
+    window.localStorage.removeItem('authToken');
+  };
 };
 
 export default App;
