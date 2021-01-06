@@ -1,11 +1,11 @@
+import { API_URL } from './config';
 
-
-const baseURL = 'http://localhost:8000';
+const baseURL = API_URL;
 
 function getData() {
   return Promise.all([
-    fetch(`${baseURL}/projects`),
-    fetch(`${baseURL}/issues`)
+    fetch(`${baseURL}/api/projects`),
+    fetch(`${baseURL}/api/issues`)
   ])
   .then(response => Promise.all(response.map(res => {
     if (!res.ok) throw new Error('Could not fetch data.');
@@ -16,7 +16,7 @@ function getData() {
 function addProject(newProject) {
   const token = window.localStorage.getItem('authToken');
   if (!token) Promise.reject(new Error('missing authorization'));
-  return fetch(`${baseURL}/projects`, {
+  return fetch(`${baseURL}/api/projects`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ function addProject(newProject) {
 function editProject(id, values) {
   const token = window.localStorage.getItem('authToken');
   if (!token) Promise.reject(new Error('missing authorization'));
-  return fetch(`${baseURL}/projects/${id}`, {
+  return fetch(`${baseURL}/api/projects/${id}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
@@ -43,7 +43,7 @@ function editProject(id, values) {
 
 function deleteProject(id) {
   const token = window.localStorage.getItem('authToken');
-  return fetch(`${baseURL}/projects/${id}`, {
+  return fetch(`${baseURL}/api/projects/${id}`, {
     method: 'DELETE',
     headers: {'Authorization': `Bearer ${token}`}
   });
@@ -52,7 +52,7 @@ function deleteProject(id) {
 function addIssue(newIssue) {
   const token = window.localStorage.getItem('authToken');
   if (!token) Promise.reject(new Error('missing authorization'));
-  return fetch(`${baseURL}/issues`, {
+  return fetch(`${baseURL}/api/issues`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ function addIssue(newIssue) {
 function editIssue(id, values) {
   const token = window.localStorage.getItem('authToken');
   if (!token) Promise.reject(new Error('missing authorization'));
-  return fetch(`${baseURL}/issues/${id}`, {
+  return fetch(`${baseURL}/api/issues/${id}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
@@ -79,16 +79,28 @@ function editIssue(id, values) {
 
 function deleteIssue(id) {
   const token = window.localStorage.getItem('authToken');
-  return fetch(`${baseURL}/issues/${id}`, {
+  return fetch(`${baseURL}/api/issues/${id}`, {
     method: 'DELETE',
     headers: {'Authorization': `Bearer ${token}`}
   });
 };
 
-function addUser(newUser) {
+function findUsername(username) {
   const token = window.localStorage.getItem('authToken');
   if (!token) Promise.reject(new Error('missing authorization'));
-  return fetch(`${baseURL}/users`, {
+  return fetch(`${baseURL}/api/users`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+    body: JSON.stringify({ username })
+  })
+  .then(res => res.json());
+};
+
+function addUser(newUser) {
+  return fetch(`${baseURL}/api/users`, {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(newUser)
@@ -99,7 +111,7 @@ function addUser(newUser) {
 function editUser(id, values) {
   const token = window.localStorage.getItem('authToken');
   if (!token) Promise.reject(new Error('missing authorization'));
-  return fetch(`${baseURL}/users/${id}`, {
+  return fetch(`${baseURL}/api/users/${id}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
@@ -112,7 +124,7 @@ function editUser(id, values) {
 
 function deleteUser(id) {
   const token = window.localStorage.getItem('authToken');
-  return fetch(`${baseURL}/users/${id}`, {
+  return fetch(`${baseURL}/api/users/${id}`, {
     method: 'DELETE',
     headers: {'Authorization': `Bearer ${token}`}
   });
@@ -120,7 +132,7 @@ function deleteUser(id) {
 
 function getUserById(id) {
   const token = window.localStorage.getItem('authToken');
-  return fetch(`${baseURL}/users/${id}`, {
+  return fetch(`${baseURL}/api/users/${id}`, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
@@ -157,6 +169,7 @@ const api = {
   addIssue,
   editIssue,
   deleteIssue,
+  findUsername,
   addUser,
   editUser,
   deleteUser,

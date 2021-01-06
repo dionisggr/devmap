@@ -1,6 +1,8 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import jwt_decode from 'jwt-decode';
 import PropTypes from 'prop-types';
+import { API_KEY } from '../../../config';
 import api from '../../../api';
 import './ProjectPage.css';
 
@@ -69,6 +71,9 @@ class ProjectPage extends React.Component {
   };
 
   render() {
+    const token = window.localStorage.getItem('authToken');
+    const admin = token === API_KEY;
+    const username = (token && !admin) ? jwt_decode(token).sub : null;
     const projectID = this.props.match.params.projectID;
     let project = this.props.projects.find(project => project.id === projectID) || {};
     return (
@@ -100,9 +105,15 @@ class ProjectPage extends React.Component {
             : null
         }
         <div className='project-buttons'>
-          <button type='submit'>Save</button>
-          <button type='button' onClick={this.props.history.goBack}>Cancel</button>
-          <button type='button' onClick={this.handleDelete}>Delete</button>
+          {
+            (token && (admin || username === project.owner))
+              ? <>
+                  <button type='submit'>Save</button>
+                  <button type='button' onClick={this.props.history.goBack}>Cancel</button>
+                  <button type='button' onClick={this.handleDelete}>Delete</button>
+                </>
+              : <button type='button' onClick={this.props.history.goBack}>Back</button>
+          }
         </div>
       </form>
     );

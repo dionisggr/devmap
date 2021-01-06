@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import Error from '../Errors/Error';
 import api from '../../api';
 import './UserPage.css';
 
@@ -8,6 +9,8 @@ class UserPage extends React.Component {
 
   render() {
     const user = this.state.user;
+    const permission = window.localStorage.getItem('authToken') && user.role === 'Admin';
+    if (!permission) <Error message='Unauthorized access.'/>
     return (
       <form className='user-page'>
         <h3>Profile</h3>

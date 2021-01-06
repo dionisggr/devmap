@@ -1,6 +1,8 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import jwt_decode from 'jwt-decode';
 import PropTypes from 'prop-types';
+import { API_KEY } from '../../../config';
 import api from '../../../api';
 import './IssuePage.css';
 
@@ -77,6 +79,10 @@ class IssuePage extends React.Component {
   };
 
   render() {
+    const token = window.localStorage.getItem('authToken');
+    const admin = token === API_KEY;
+    console.log(admin);
+    const username = (token && !admin) ? jwt_decode(token).sub : null;
     const issueID = this.props.match.params.issueID;
     const issue = this.props.issues.find(issue => issue.id === issueID) || {};
     return (
@@ -108,9 +114,15 @@ class IssuePage extends React.Component {
         <label htmlFor='github'>GitHub:
         <input type='text' name='github' defaultValue={issue.github}/></label>
         <div className='issue-buttons'>
-          <button type='submit'>Save</button>
-          <button type='button' onClick={this.props.history.goBack}>Cancel</button>
-          <button type='button' onClick={this.handleDelete}>Delete</button>
+          {
+            (token && (admin || username === issue.owner))
+              ? <>
+                  <button type='submit'>Save</button>
+                  <button type='button' onClick={this.props.history.goBack}>Cancel</button>
+                  <button type='button' onClick={this.handleDelete}>Delete</button>
+                </>
+              : <button type='button' onClick={this.props.history.goBack}>Back</button>
+          }
         </div>
       </form>
     );
