@@ -18,7 +18,12 @@ class Login extends React.Component {
           this.props.setIdleTimer();
           this.props.history.push('/');
         } else {
-          this.setState({error: res.error})
+          const field = res.error.split(': ')[1];
+          document.querySelectorAll('span').forEach(span => {
+            span.style.display = 'none';
+          });
+          document.getElementById(field).focus();
+          document.getElementById(`${field}Invalid`).style.display = 'inline-block';
         };
       });
   }
@@ -31,8 +36,10 @@ class Login extends React.Component {
         <h3>Login:</h3>
         <label htmlFor='username'>Username:</label>
         <input type='text' name='username' id='username' />
+        <span style={{display: 'none'}} id='usernameInvalid'>Invalid username!</span>
         <label htmlFor='password'>Password:</label>
         <input type='text' name='password' id='password' />
+        <span style={{display: 'none'}} id='passwordInvalid'>Invalid password!</span>
         <div className='login-buttons'>
           <button type='submit'>Login</button>
           <button

@@ -7,6 +7,8 @@ import api from '../../../api';
 import './ProjectPage.css';
 
 class ProjectPage extends React.Component {
+  state = { collaborators: [] }
+
   static defaultProps = { projects: [] };
 
   static propTypes = {
@@ -75,6 +77,7 @@ class ProjectPage extends React.Component {
     const admin = token === API_KEY;
     const username = (token && !admin) ? jwt_decode(token).sub : null;
     const projectID = this.props.match.params.projectID;
+    const collaborators = this.state.collaborators.map(collaborator => collaborator.username).join(', ');
     let project = this.props.projects.find(project => project.id === projectID) || {};
     return (
       <form onSubmit={this.handleSave} className='project-page'>
@@ -96,7 +99,7 @@ class ProjectPage extends React.Component {
         <label htmlFor='collaboration'>Collaboration:
         <input type='text' name='collaboration' id='collaboration' defaultValue={project.collaboration}/></label>
         <label htmlFor='collaborators'>Collaborators:
-        <input type='text' name='collaborators' id='collaborators' defaultValue={project.collaborators}/></label>
+        <input type='text' name='collaborators' id='collaborators' defaultValue={collaborators}/></label>
         <label htmlFor='github'>GitHub:
         <input type='text' name='github' id='github' defaultValue={project.github}/></label>
         {
@@ -117,6 +120,12 @@ class ProjectPage extends React.Component {
         </div>
       </form>
     );
+  };
+
+  componentDidMount() {
+    const projectID = this.props.match.params.projectID;
+    api.getProjectCollaborators(projectID)
+      .then(collaborators => this.setState({ collaborators }))
   };
 };
 

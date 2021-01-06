@@ -3,10 +3,13 @@ import { withRouter } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 import PropTypes from 'prop-types';
 import { API_KEY } from '../../../config';
+import Error from '../../Errors/Error';
 import api from '../../../api';
 import './IssuePage.css';
 
 class IssuePage extends React.Component {
+  state = { collaborators: [] }
+
   static defaultProps = { issues: [] };
 
   static propTypes = {
@@ -83,6 +86,7 @@ class IssuePage extends React.Component {
     const admin = token === API_KEY;
     console.log(admin);
     const username = (token && !admin) ? jwt_decode(token).sub : null;
+    const collaborators = this.state.collaborators.map(collaborator => collaborator.username).join(', ');
     const issueID = this.props.match.params.issueID;
     const issue = this.props.issues.find(issue => issue.id === issueID) || {};
     return (
@@ -110,7 +114,7 @@ class IssuePage extends React.Component {
         <label htmlFor='collaboration'>Collaboration:
         <input type='text' name='collaboration' defaultValue={issue.collaboration}/></label>
         <label htmlFor='collaborators'>Collaborators:
-        <input type='text' name='collaborators' defaultValue={issue.collaborators}/></label>
+        <input type='text' name='collaborators' defaultValue={collaborators}/></label>
         <label htmlFor='github'>GitHub:
         <input type='text' name='github' defaultValue={issue.github}/></label>
         <div className='issue-buttons'>
@@ -126,6 +130,13 @@ class IssuePage extends React.Component {
         </div>
       </form>
     );
+  };
+
+  componentDidMount() {
+    const issueID = this.props.match.params.issueID;
+    api.getIssueCollaborators(issueID)
+      .then(collaborators => this.setState({ collaborators }))
+      .catch(error => console.log(error));
   };
 };
 
