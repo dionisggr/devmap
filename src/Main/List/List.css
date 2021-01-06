@@ -4,10 +4,8 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 100%;
-  /* margin: 25px 0; */
+  height: fit-content;
   border-radius: 1px;
-  /* padding-top: 20px; */
 }
 
 .create {
@@ -29,6 +27,38 @@ main h3 {
   color: white;
   text-shadow: 3px 3px rgba(128, 0, 128, 0.637);
   margin-bottom: 0;
+}
+
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2em;
+  background-color: rgb(8, 255, 8);
+  border: none;
+  min-width: 100px;
+  height: 1.8em;
+  outline: none;
+  font-family:'Courier New', Courier, monospace;
+  font-weight: bolder;
+  font-size: 20px;
+  color: rgb(95, 0, 95);
+  border-radius: 3px;
+  margin: 0 20px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: rgba(8, 255, 8, 0.76);
+  border-color: rgba(8, 255, 8, 0.76);
+}
+
+button:active, button:active {
+  transform: scale(0.92);
+}
+
+button {
+  margin-top: 25px;
 }
 
 @media all and (max-width: 400px) {

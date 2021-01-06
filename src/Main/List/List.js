@@ -47,6 +47,14 @@ class List extends React.Component {
           })
         }
         </div>
+        {
+          (projectID)
+            ? <button type='button'
+                onClick={() => {
+                  this.props.history.push(`/projects/${projectID}`)}
+              }>Back</button>
+            : null
+        }
       </>
     );
   };
