@@ -1,0 +1,66 @@
+.issue-page {
+  display: flex;
+  flex-direction: column;
+  width: 65%;
+  color: white;
+}
+
+.issue-page h3 {
+  text-align: center;
+  margin-top: 15%;
+}
+
+.issue-page label {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  box-sizing: border-box;
+  display: flex;
+  margin-top: 25px;
+  width: 100%;
+}
+
+.issue-page input {
+  min-width: 50%;
+}
+
+.issue-buttons {
+  display: flex;
+  justify-content: center;
+  height: 2em;
+  margin: 25px 0 100px 0;
+}
+
+.issue-buttons button, .issue-page button {
+  background-color: rgb(8, 255, 8);
+  border: none;
+  min-width: 100px;
+  height: 1.8em;
+  outline: none;
+  font-family:'Courier New', Courier, monospace;
+  font-weight: bolder;
+  font-size: 20px;
+  color: rgb(95, 0, 95);
+  border-radius: 3px;
+  margin: 0 20px;
+  cursor: pointer;
+}
+
+.issue-page button:hover {
+  background-color: rgba(8, 255, 8, 0.76);
+  border-color: rgba(8, 255, 8, 0.76);
+}
+
+.issue-buttons button:active, .issue-page button:active {
+  transform: scale(0.92);
+}
+
+.issue-page button {
+  margin-top: 25px;
+}
+
+@media all and (max-width: 400px) {
+  .issue-buttons button {
+    margin: 0 10px;
+  }
+}

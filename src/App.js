@@ -6,7 +6,11 @@ import Signup from './Header/Signup';
 import Login from './Header/Login';
 import ProjectPage from './Main/List/Items/ProjectPage';
 import IssuePage from './Main/List/Items/IssuePage';
+import ProjectEdit from './Main/List/Items/ProjectEdit';
+import IssueEdit from './Main/List/Items/IssueEdit';
 import UserPage from './Main/Users/UserPage';
+import UserEdit from './Main/Users/UserEdit';
+import UserList from './Admin/UserList';
 import ErrorBoundary from './Main/Errors/ErrorBoundary';
 import api from './api';
 import './App.css';
@@ -63,19 +67,28 @@ class App extends React.Component {
                 updateProjects={this.updateProjects}
               />
           }/>
-          <Route path={[
-            '/projects/:projctID/new-issue',
-            '/projects/:projectID/issues/:issueID'
-          ]}
-            render={() => 
-              <IssuePage
-                issues={this.state.issues}
-                updateIssues={this.updateIssues}
+          <Route exact path='/edit/projects/:projectID' render={() => 
+              <ProjectEdit
+                projects={this.state.projects}
+                updateProjects={this.updateProjects}
               />
+          }/>
+          <Route path={[
+            '/projects/:projectID/new-issue',
+            '/projects/:projectID/issues/:issueID'
+          ]} render={() => 
+              <IssuePage issues={this.state.issues} />
+          }/>
+          <Route path='/edit/issues/:issueID' render={() => 
+              <IssueEdit issues={this.state.issues} />
           }/>
         </ErrorBoundary>
         <ErrorBoundary>
-          <Route path='/users/:userID' component={UserPage} />
+          <Route exact path='/users' component={UserList} />
+          <Route exact path='/users/:userID' component={UserPage} />
+          <Route path='/edit/users/:userID' component={UserEdit} />
+        </ErrorBoundary>
+        <ErrorBoundary>
           <Route path='/signup' render={() => 
             <Signup setIdleTimer={this.setIdleTimer}/>
           } />

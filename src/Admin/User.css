@@ -1,0 +1,40 @@
+.user {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: calc(100% - 50px);
+  margin: 5px 0;
+  padding: 25px;
+  border: solid;
+  border-color: white;
+  border-width: 0.1px;
+  border-radius: 4px;
+  color: white;
+  background-color: rgba(46, 45, 45, 0.699);
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.user label {
+  text-align: center;
+  width: 100%;
+  cursor: pointer;
+  margin: 5px 0;
+}
+
+.user:hover {
+  transform: scale(1.008);
+  cursor: pointer;
+  border-color: rgba(212, 133, 212, 0.582);
+}
+
+div {
+  display: flex;
+  flex-direction: column;
+}
+
+@media all and (max-width: 400px) {
+  .user {
+    width: calc(90% - 50px);
+  }
+}

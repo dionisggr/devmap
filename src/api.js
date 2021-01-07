@@ -109,6 +109,18 @@ function findUsername(username) {
   .then(res => res.json());
 };
 
+function getUsers() {
+  const token = window.localStorage.getItem('authToken');
+  if (!token) Promise.reject(new Error('missing authorization'));
+  return fetch(`${baseURL}/api/users`, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    }
+  })
+  .then(res => res.json());
+}
+
 function addUser(newUser) {
   return fetch(`${baseURL}/api/users`, {
     method: 'POST',
@@ -182,6 +194,7 @@ const api = {
   editIssue,
   deleteIssue,
   findUsername,
+  getUsers,
   addUser,
   editUser,
   deleteUser,

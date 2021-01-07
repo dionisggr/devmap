@@ -4,3 +4,7 @@
   align-items: center;
   color: white;
 }
+
+.user-page label {
+  align-self: flex-end;
+}
