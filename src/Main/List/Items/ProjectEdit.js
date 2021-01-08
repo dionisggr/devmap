@@ -26,10 +26,10 @@ class ProjectPage extends React.Component {
       tools: evt.target.tools.value,
       phase: evt.target.phase.value,
       status: evt.target.status.value,
-      start_date: evt.target.startDate.value,
-      owner: evt.target.owner.value,
+      start_date: new Date(evt.target.startDate.value).toISOString(),
       collaboration: evt.target.collaboration.value,
-      github: evt.target.github.value
+      github: evt.target.github.value,
+      owner: document.querySelector('label').innerText.split(': ')[1]
     };
     if (!projectID) {
       api.addProject(values)
@@ -74,14 +74,20 @@ class ProjectPage extends React.Component {
 
   render() {
     const token = window.localStorage.getItem('authToken');
+    if (!token) this.props.history.push('/signup')
     const admin = token === API_KEY;
-    const username = (token && !admin) ? jwt_decode(token).sub : null;
+    const username = (token && !admin) ? jwt_decode(token).sub : 'dionisggr';
     const projectID = this.props.match.params.projectID;
-    const collaborators = this.state.collaborators.map(collaborator => collaborator.username).join(', ');
     let project = this.props.projects.find(project => project.id === projectID) || {};
+    const collaborators = 
+      (!this.state.collaborators.error)
+        ? this.state.collaborators.map(collaborator => collaborator.username).join(', ')
+        : null;
+    const startDate = (!projectID) ? null : new Date(project.startDate).toDateString().slice(3);
     return (
       <form onSubmit={this.handleSave} className='project-page'>
         <h3>{project.name || 'New Project'}</h3>
+        <label id='project-owner'>Owner: {username}</label>
         <label htmlFor='name'>Name:
         <input type='text' name='name' id='name' defaultValue={project.name}/></label>
         <label htmlFor='description'>Description:
@@ -93,9 +99,7 @@ class ProjectPage extends React.Component {
         <label htmlFor='status'>Status:
         <input type='text' name='status' id='status' defaultValue={project.status}/></label>
         <label htmlFor='startDate'>Start Date:
-        <input type='text' name='startDate' id='startDate' defaultValue={project.startDate}/></label>
-        <label htmlFor='owner'>Owner:
-        <input type='text' name='owner' id='owner' defaultValue={project.owner}/></label>
+        <input type='text' name='startDate' id='startDate' defaultValue={startDate}/></label>
         <label htmlFor='collaboration'>Collaboration:
         <input type='text' name='collaboration' id='collaboration' defaultValue={project.collaboration}/></label>
         <label htmlFor='collaborators'>Collaborators:
@@ -124,8 +128,10 @@ class ProjectPage extends React.Component {
 
   componentDidMount() {
     const projectID = this.props.match.params.projectID;
-    api.getProjectCollaborators(projectID)
-      .then(collaborators => this.setState({ collaborators }))
+    if (projectID) {  
+      api.getProjectCollaborators(projectID)
+        .then(collaborators => this.setState({ collaborators }))
+    };
   };
 };
 

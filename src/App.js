@@ -16,7 +16,7 @@ import api from './api';
 import './App.css';
 
 class App extends React.Component {
-  state = { projects: [], issues: [] };
+  state = { projects: [], issues: [], user: {} };
 
   updateProjects = (projects) => {
     const newState = {...this.state};
@@ -27,6 +27,12 @@ class App extends React.Component {
   updateIssues = (issues) => {
     const newState = {...this.state};
     newState.issues = issues;
+    this.setState(newState);
+  };
+
+  updateUser = (user) => {
+    const newState = {...this.state};
+    newState.user = user;
     this.setState(newState);
   };
 
@@ -60,14 +66,14 @@ class App extends React.Component {
           <Route exact path='/projects/:projectID/issues' render={() => 
             <List items={this.state.issues} />
           }/>
-          <Route exact path={['/projects/:projectID', '/new-project']}
-            render={() => 
+          <Route exact path='/projects/:projectID' render={() => 
               <ProjectPage
                 projects={this.state.projects}
                 updateProjects={this.updateProjects}
               />
           }/>
-          <Route exact path='/edit/projects/:projectID' render={() => 
+          <Route exact path={['/edit/projects/:projectID', '/new-project']}
+            render={() => 
               <ProjectEdit
                 projects={this.state.projects}
                 updateProjects={this.updateProjects}
@@ -80,13 +86,20 @@ class App extends React.Component {
               <IssuePage issues={this.state.issues} />
           }/>
           <Route path='/edit/issues/:issueID' render={() => 
-              <IssueEdit issues={this.state.issues} />
+              <IssueEdit
+                issues={this.state.issues}
+                updateIssues={this.updateIssues}
+              />
           }/>
         </ErrorBoundary>
         <ErrorBoundary>
           <Route exact path='/users' component={UserList} />
-          <Route exact path='/users/:userID' component={UserPage} />
-          <Route path='/edit/users/:userID' component={UserEdit} />
+          <Route exact path='/users/:userID' render={() => 
+            <UserPage users={this.state.users} />
+          } />
+          <Route path='/edit/users/:userID' render={() =>
+            <UserEdit users={this.state.users} />
+          } />
         </ErrorBoundary>
         <ErrorBoundary>
           <Route path='/signup' render={() => 

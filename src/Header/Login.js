@@ -4,8 +4,6 @@ import api from '../api';
 import './Login.css';
 
 class Login extends React.Component {
-  state = { error: false };
-
   login = (evt) => {
     evt.preventDefault();
     const username = evt.target.username.value;

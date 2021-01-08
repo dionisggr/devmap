@@ -18,7 +18,7 @@ class UserPage extends React.Component {
       lastName: evt.target.lastName.value,
       email: evt.target.email.value, 
       tools: evt.target.tools.value,
-      startDate: evt.target.startDate.value,
+      startDate: new Date(evt.target.startDate.value).toDateString().slice(3),
       github: evt.target.github.value,
     };
     api.editUser(userID, user)
@@ -32,10 +32,10 @@ class UserPage extends React.Component {
       .then(() => {
         const token = window.localStorage.getItem('authToken');
         if (token === API_KEY) {
-          this.props.history.goBack();
+          this.props.history.push('/users');
         } else {
           window.localStorage.removeItem('authToken');
-          this.props.history.goBack();
+          this.props.history.push('/users');
         };
       })
       .catch(error => console.log({ error }));

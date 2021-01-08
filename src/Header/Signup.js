@@ -26,6 +26,7 @@ class Signup extends React.Component {
           document.querySelectorAll('span').forEach(span => {
             span.style.display = 'none';
           });
+          console.log(res.error);
           document.getElementById(field).focus();
           document.getElementById(`${field}Taken`).style.display = 'inline-block';
         };

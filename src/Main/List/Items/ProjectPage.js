@@ -21,8 +21,12 @@ class ProjectPage extends React.Component {
     const admin = token === API_KEY;
     const username = (token && !admin) ? jwt_decode(token).sub : null;
     const projectID = this.props.match.params.projectID;
-    const collaborators = this.state.collaborators.map(collaborator => collaborator.username).join(', ');
+    const collaborators = 
+      (this.state.collaborators)
+        ? this.state.collaborators.map(collaborator => collaborator.username).join(', ')
+        : null;
     let project = this.props.projects.find(project => project.id === projectID) || {};
+    const startDate = new Date(project.startDate).toDateString().slice(3);
     return (
       <form className='project-page'>
         <h3>{project.name || 'New Project'}</h3>
@@ -31,9 +35,9 @@ class ProjectPage extends React.Component {
         <label>Languages/Tools: {project.tools}</label>
         <label>Phase: {project.phase}</label>
         <label>Status: {project.status}</label>
-        <label>Start Date: {project.startDate}</label>
+        <label>Start Date: {startDate}</label>
         <label>Owner: {project.owner}</label>
-        <label>Collaboration: {project.collaboration.toString()}</label>
+        <label>Collaboration: {(project.collaboration || '').toString()}</label>
         <label>Collaborators: {collaborators}</label>
         <label>GitHub: {project.github}</label>
         {
@@ -46,7 +50,7 @@ class ProjectPage extends React.Component {
             (token && (admin || username === project.owner))
               ? <>
                   <button type='button' onClick={() => this.props.history.push(`/edit/projects/${projectID}`)}>Edit</button>
-                  <button type='button' onClick={this.props.history.goBack}>Cancel</button>
+                  <button type='button' onClick={() => this.props.history.push('/')}>Cancel</button>
                 </>
               : <button type='button' onClick={this.props.history.goBack}>Back</button>
           }
@@ -57,8 +61,10 @@ class ProjectPage extends React.Component {
 
   componentDidMount() {
     const projectID = this.props.match.params.projectID;
-    api.getProjectCollaborators(projectID)
-      .then(collaborators => this.setState({ collaborators }))
+    if (projectID) {  
+      api.getProjectCollaborators(projectID)
+        .then(collaborators => this.setState({ collaborators }))
+    };
   };
 };
 

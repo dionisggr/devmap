@@ -23,6 +23,8 @@ class IssuePage extends React.Component {
     const issueID = this.props.match.params.issueID;
     const collaborators = this.state.collaborators.map(collaborator => collaborator.username).join(', ');
     let issue = this.props.issues.find(issue => issue.id === issueID) || {};
+    const collaboration = (issue.collaboration) ? issue.collaboration.toString() : null;
+    const startDate = new Date(issue.startDate).toDateString().slice(3);
     return (
       <form onSubmit={this.handleSave} className='issue-page'>
         <h3>{issue.name || 'New Issue'}</h3>
@@ -31,9 +33,9 @@ class IssuePage extends React.Component {
         <label>Languages/Tools: {issue.tools}</label>
         <label>Phase: {issue.phase}</label>
         <label>Status: {issue.status}</label>
-        <label>Start Date: {issue.startDate}</label>
+        <label>Start Date: {startDate}</label>
         <label>Owner: {issue.owner}</label>
-        <label>Collaboration: {issue.collaboration.toString()}</label>
+        <label>Collaboration: {collaboration}</label>
         <label>Collaborators: {collaborators}</label>
         <label>GitHub: {issue.github}</label>
         {

@@ -83,11 +83,11 @@ class IssueEdit extends React.Component {
   render() {
     const token = window.localStorage.getItem('authToken');
     const admin = token === API_KEY;
-    console.log(admin);
     const username = (token && !admin) ? jwt_decode(token).sub : null;
     const collaborators = this.state.collaborators.map(collaborator => collaborator.username).join(', ');
     const issueID = this.props.match.params.issueID;
     const issue = this.props.issues.find(issue => issue.id === issueID) || {};
+    const startDate = new Date(issue.startDate).toDateString().slice(3);
     return (
       <form 
         className='issue-page'
@@ -107,7 +107,7 @@ class IssueEdit extends React.Component {
         <label htmlFor='status'>Status:
         <input type='text' name='status' defaultValue={issue.status}/></label>
         <label htmlFor='start-date'>Start Date:
-        <input type='text' name='startDate' defaultValue={issue.startDate}/></label>
+        <input type='text' name='startDate' defaultValue={startDate}/></label>
         <label htmlFor='owner'>Owner:
         <input type='text' name='owner' defaultValue={issue.owner}/></label>
         <label htmlFor='collaboration'>Collaboration:

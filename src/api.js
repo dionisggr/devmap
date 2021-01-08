@@ -5,7 +5,7 @@ const baseURL = API_URL;
 function getData() {
   return Promise.all([
     fetch(`${baseURL}/api/projects`),
-    fetch(`${baseURL}/api/issues`)
+    fetch(`${baseURL}/api/issues`),
   ])
   .then(response => Promise.all(response.map(res => {
     if (!res.ok) throw new Error('Could not fetch data.');
@@ -98,13 +98,11 @@ function getIssueCollaborators(issueID) {
 function findUsername(username) {
   const token = window.localStorage.getItem('authToken');
   if (!token) Promise.reject(new Error('missing authorization'));
-  return fetch(`${baseURL}/api/users`, {
-    method: 'POST',
+  return fetch(`${baseURL}/api/${username}`, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     },
-    body: JSON.stringify({ username })
   })
   .then(res => res.json());
 };

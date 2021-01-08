@@ -1,18 +1,21 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import jwt_decode from 'jwt-decode';
 import { API_KEY } from '../../config';
 import Error from '../Errors/Error';
 import api from '../../api';
 import './UserPage.css';
 
 class UserPage extends React.Component {
-  state = { user: {} };
+  state = { users: [] };
 
   render() {
+    console.log(this.state.users);
     const userID = this.props.match.params.userID;
-    const user = this.state.user;
+    const user = this.state.users.find(user => user.id === userID) || {};
+    const startDate = (user.startDate) ? new Date(user.startDate).toDateString().slice(3) : null;
     const permission = window.localStorage.getItem('authToken') && user.role === 'Admin';
-    if (!permission) <Error message='Unauthorized access.'/>
+    if (!permission) <Error message='Unauthorized access.'/>;
     return (
       <form className='user-page' onSubmit={this.edit}>
         <h3>Profile</h3>
@@ -21,7 +24,7 @@ class UserPage extends React.Component {
         <label>Last Name: {user.lastName}</label> 
         <label>E-mail: {user.email}</label> 
         <label>Tools: {user.tools}</label> 
-        <label>Start Date: {user.startDate}</label> 
+        <label>Start Date: {startDate}</label> 
         <label>GitHub: {user.github}</label> 
         <div className='issue-buttons'>
           <button type='button' onClick={() => this.props.history.push(`/edit/users/${userID}`)}>Edit</button>
@@ -31,10 +34,9 @@ class UserPage extends React.Component {
     );
   };
   componentDidMount() {
-    const id = this.props.match.params.userID;
-    api.getUserById(id)
-      .then(user => this.setState({user}))
-      .catch(error => console.log(error));
+    api.getUsers()
+      .then(users => this.setState({ users }))
+      .catch(error => console.log({ error }));
   };
 };
 
