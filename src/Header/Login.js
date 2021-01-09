@@ -40,7 +40,7 @@ class Login extends React.Component {
         <input type='text' name='username' id='username' />
         <span style={{display: 'none'}} id='usernameInvalid'>Invalid username!</span>
         <label htmlFor='password'>Password:</label>
-        <input type='text' name='password' id='password' />
+        <input type='password' name='password' id='password' />
         <span style={{display: 'none'}} id='passwordInvalid'>Invalid password!</span>
         <div className='login-buttons'>
           <button type='submit'>Login</button>

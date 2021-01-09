@@ -17,18 +17,22 @@ exports[`The App Snapshot Test renders the UI as expected 1`] = `
     <div
       className="header-options"
     >
-      <a
-        href="/signup"
-        onClick={[Function]}
+      <div
+        className="buttons"
       >
-        Sign-Up
-      </a>
-      <a
-        href="/login"
-        onClick={[Function]}
-      >
-        Login
-      </a>
+        <a
+          href="/signup"
+          onClick={[Function]}
+        >
+          Sign-Up
+        </a>
+        <a
+          href="/login"
+          onClick={[Function]}
+        >
+          Login
+        </a>
+      </div>
     </div>
   </header>
   <h3>
@@ -38,6 +42,11 @@ exports[`The App Snapshot Test renders the UI as expected 1`] = `
     className="create"
     href="/new-project"
     onClick={[Function]}
+    style={
+      Object {
+        "visibility": "hidden",
+      }
+    }
   >
     New Project
   </a>

@@ -7,7 +7,7 @@ import ProjectPage from '../Main/List/Items/ProjectPage';
 import IssuePage from '../Main/List/Items/IssuePage';
 import Error from '../Main/Errors/Error';
 import UserPage from '../Main/Users/UserPage';
-import Menu from '../Main/Menu';
+import Menu from '../Header/Menu';
 
 describe('Main Section', () => {
   const list = <BrowserRouter><List /></BrowserRouter>;

@@ -7,8 +7,6 @@ import api from '../../../api';
 import './ProjectPage.css';
 
 class ProjectPage extends React.Component {
-  state = { collaborators: [] }
-
   static defaultProps = { projects: [] };
 
   static propTypes = {
@@ -79,10 +77,6 @@ class ProjectPage extends React.Component {
     const username = (token && !admin) ? jwt_decode(token).sub : 'dionisggr';
     const projectID = this.props.match.params.projectID;
     let project = this.props.projects.find(project => project.id === projectID) || {};
-    const collaborators = 
-      (!this.state.collaborators.error)
-        ? this.state.collaborators.map(collaborator => collaborator.username).join(', ')
-        : null;
     const startDate = (!projectID) ? null : new Date(project.startDate).toDateString().slice(4);
     return (
       <form onSubmit={this.handleSave} className='project-page'>
@@ -115,8 +109,6 @@ class ProjectPage extends React.Component {
         <input type='text' name='startDate' id='startDate' defaultValue={startDate}/></label>
         <label htmlFor='collaboration'>Collaboration:
         <input type='checkbox' name='collaboration' id='collaboration' defaultChecked /></label>
-        <label htmlFor='collaborators'>Collaborators:
-        <input type='text' name='collaborators' id='collaborators' defaultValue={collaborators}/></label>
         <label htmlFor='github'>GitHub:
         <input type='text' name='github' id='github' defaultValue={project.github}/></label>
         {
@@ -132,19 +124,11 @@ class ProjectPage extends React.Component {
                   <button type='button' onClick={this.handleDelete}>Delete</button>
                   <button type='button' onClick={this.props.history.goBack}>Cancel</button>
                 </>
-              : <button type='button' onClick={this.props.history.goBack}>Back</button>
+              : <button type='button' onClick={() => this.props.history.push('/projects')}>Back</button>
           }
         </div>
       </form>
     );
-  };
-
-  componentDidMount() {
-    const projectID = this.props.match.params.projectID;
-    if (projectID) {  
-      api.getProjectCollaborators(projectID)
-        .then(collaborators => this.setState({ collaborators }))
-    };
   };
 };
 

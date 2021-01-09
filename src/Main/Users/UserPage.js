@@ -8,7 +8,6 @@ class UserPage extends React.Component {
   state = { users: [] };
 
   render() {
-    console.log(this.state.users);
     const userID = this.props.match.params.userID;
     const user = this.state.users.find(user => user.id === userID) || {};
     const startDate = (user.startDate) ? new Date(user.startDate).toDateString().slice(4) : null;

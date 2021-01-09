@@ -49,11 +49,6 @@ function deleteProject(id) {
   });
 };
 
-function getProjectCollaborators(projectID) {
-  return fetch(`${baseURL}/api/projects/${projectID}/collaborators`)
-    .then(res => res.json());
-};
-
 function addIssue(newIssue) {
   const token = window.localStorage.getItem('authToken');
   if (!token) Promise.reject(new Error('missing authorization'));
@@ -88,11 +83,6 @@ function deleteIssue(id) {
     method: 'DELETE',
     headers: {'Authorization': `Bearer ${token}`}
   });
-};
-
-function getIssueCollaborators(issueID) {
-  return fetch(`${baseURL}/api/issues/${issueID}/collaborators`)
-    .then(res => res.json());
 };
 
 function findUsername(username) {
@@ -193,8 +183,6 @@ const api = {
   addProject,
   editProject,
   deleteProject,
-  getProjectCollaborators,
-  getIssueCollaborators,
   addIssue,
   editIssue,
   deleteIssue,

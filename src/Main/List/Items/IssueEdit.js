@@ -7,12 +7,9 @@ import api from '../../../api';
 import './IssueEdit.js';
 
 class IssueEdit extends React.Component {
-  state = { collaborators: [], usernames: [] }
-
-  static defaultProps = { usernames: [] };
+  static defaultProps = { state: [] };
 
   static propTypes = {
-    usernames:  PropTypes.array.isRequired,
     updateIssues: PropTypes.func.isRequired
   };
   
@@ -78,21 +75,6 @@ class IssueEdit extends React.Component {
       .catch(error => console.log(error));
   };
 
-  selectCollaborator = (evt) => {
-    const newState = {...this.state}
-    newState.collaborators.push(evt.target.text);
-    this.setState(newState);
-  };
-
-  deleteCollaborator = (evt) => {
-    const span = evt.target.previousSibling;
-    span.remove();
-    evt.target.remove()
-    const newState = {...this.state}
-    newState.collaborators.filter(collaborator => collaborator !== span.innerHTML);
-    this.setState(newState);
-  };
-
   render() {
     const token = window.localStorage.getItem('authToken');
     const admin = token === API_KEY;
@@ -100,14 +82,8 @@ class IssueEdit extends React.Component {
     const issueID = this.props.match.params.issueID;
     const issue = this.props.state.issues.find(issue => issue.id === issueID) || {};
     const startDate = (issue.startDate) ? new Date(issue.startDate).toDateString().slice(4) : null;
-    const collaborators = 
-      (this.state.collaborators)
-        ? this.state.collaborators.map(collaborator => collaborator.username)
-        : [];
-    const usernameOptions = this.props.usernames.filter(username => !(collaborators.includes(username)))
     const project = this.props.state.projects.find(project => project.id === this.props.match.params.projectID);
     const projectName = (project) ? project.name : null;
-    console.log(collaborators, this.props.usernames);
     return (
       <form 
         className='issue-page'
@@ -141,22 +117,6 @@ class IssueEdit extends React.Component {
         </label>
         <label htmlFor='start-date'>Start Date:
         <input type='text' name='startDate' defaultValue={startDate}/></label>
-        <label htmlFor='collaborators'>Collaborators:</label>
-        <div id='collaborators'>{collaborators.map(collaborator => 
-          <>
-            <label>{collaborator}</label>
-            <button type='button' className='delete-collaborator' onClick={this.deleteCollaborator}>X</button>
-          </>
-        )}</div>
-        <select
-          name='usernameOptions'
-          id='usernameOptions'
-          onChange={this.selectCollaborator}
-        >
-          {
-            usernameOptions.map(username => <option>{username}</option>)
-          }
-        </select>
         <label htmlFor='collaboration'>Collaboration:
         <input type='checkbox' name='collaboration' id='collaboration' defaultChecked /></label>
         <label htmlFor='github'>GitHub:
@@ -169,20 +129,11 @@ class IssueEdit extends React.Component {
                   <button type='button' onClick={this.handleDelete}>Delete</button>
                   <button type='button' onClick={this.props.history.goBack}>Cancel</button>
                 </>
-              : <button type='button' onClick={this.props.history.goBack}>Back</button>
+              : <button type='button' onClick={() => this.props.history.push(`/projects/${project.id}`)}>Back</button>
           }
         </div>
       </form>
     );
-  };
-
-  componentDidMount() {
-    const issueID = this.props.match.params.issueID;
-    if (issueID) {
-      api.getIssueCollaborators(issueID)
-      .then(collaborators => this.setState({ collaborators }))
-      .catch(error => console.log(error));
-    };
   };
 };
 

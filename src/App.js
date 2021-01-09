@@ -18,8 +18,7 @@ import './App.css';
 
 class App extends React.Component {
   state = { 
-    projects: [], issues: [],
-    user: {}, usernames: []
+    projects: [], issues: [], user: {}
   };
 
   updateProjects = (projects) => {

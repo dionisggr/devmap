@@ -14,18 +14,22 @@ exports[`Header Section The Header renders the UI as expected 1`] = `
   <div
     className="header-options"
   >
-    <a
-      href="/signup"
-      onClick={[Function]}
+    <div
+      className="buttons"
     >
-      Sign-Up
-    </a>
-    <a
-      href="/login"
-      onClick={[Function]}
-    >
-      Login
-    </a>
+      <a
+        href="/signup"
+        onClick={[Function]}
+      >
+        Sign-Up
+      </a>
+      <a
+        href="/login"
+        onClick={[Function]}
+      >
+        Login
+      </a>
+    </div>
   </div>
 </header>
 `;
@@ -33,6 +37,7 @@ exports[`Header Section The Header renders the UI as expected 1`] = `
 exports[`Header Section The Login page renders the UI as expected 1`] = `
 <form
   className="login"
+  onSubmit={[Function]}
 >
   <h3>
     Login:
@@ -47,6 +52,16 @@ exports[`Header Section The Login page renders the UI as expected 1`] = `
     name="username"
     type="text"
   />
+  <span
+    id="usernameInvalid"
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+  >
+    Invalid username!
+  </span>
   <label
     htmlFor="password"
   >
@@ -55,8 +70,18 @@ exports[`Header Section The Login page renders the UI as expected 1`] = `
   <input
     id="password"
     name="password"
-    type="text"
+    type="password"
   />
+  <span
+    id="passwordInvalid"
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+  >
+    Invalid password!
+  </span>
   <div
     className="login-buttons"
   >
@@ -78,6 +103,7 @@ exports[`Header Section The Login page renders the UI as expected 1`] = `
 exports[`Header Section The Sign-Up page renders the UI as expected 1`] = `
 <form
   className="signup"
+  onSubmit={[Function]}
 >
   <h3>
     Sign-up for an account:
@@ -92,6 +118,36 @@ exports[`Header Section The Sign-Up page renders the UI as expected 1`] = `
     name="username"
     type="text"
   />
+  <span
+    id="usernameTaken"
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+  >
+    Username taken!
+  </span>
+  <label
+    htmlFor="firstName"
+  >
+    First Name:
+  </label>
+  <input
+    id="firstName"
+    name="firstName"
+    type="text"
+  />
+  <label
+    htmlFor="lastName"
+  >
+    Last Name:
+  </label>
+  <input
+    id="lastName"
+    name="lastName"
+    type="text"
+  />
   <label
     htmlFor="email"
   >
@@ -102,6 +158,16 @@ exports[`Header Section The Sign-Up page renders the UI as expected 1`] = `
     name="email"
     type="text"
   />
+  <span
+    id="emailTaken"
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+  >
+    E-mail taken!
+  </span>
   <label
     htmlFor="password"
   >
@@ -110,7 +176,7 @@ exports[`Header Section The Sign-Up page renders the UI as expected 1`] = `
   <input
     id="password"
     name="password"
-    type="text"
+    type="password"
   />
   <label
     htmlFor="repeatPassword"
@@ -120,6 +186,36 @@ exports[`Header Section The Sign-Up page renders the UI as expected 1`] = `
   <input
     id="repeatPassword"
     name="repeatPassword"
+    type="password"
+  />
+  <span
+    id="unmatchPassword"
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+  >
+    Passwords don't match!
+  </span>
+  <label
+    htmlFor="tools"
+  >
+    Tools:
+  </label>
+  <input
+    id="tools"
+    name="tools"
+    type="text"
+  />
+  <label
+    htmlFor="github"
+  >
+    GitHub:
+  </label>
+  <input
+    id="github"
+    name="github"
     type="text"
   />
   <div
