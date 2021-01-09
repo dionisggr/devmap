@@ -40,7 +40,7 @@ class List extends React.Component {
         {
           items.map(item => {
             return (
-            <ErrorBoundary>
+            <ErrorBoundary key={item.id}>
               <Item key={item.id} item={item} />
             </ErrorBoundary>
             );

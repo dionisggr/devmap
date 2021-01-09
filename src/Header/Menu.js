@@ -1,59 +1,44 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import jwt_decode from 'jwt-decode';
-import { API_KEY } from '../config';
-import api from '../api';
+import UserContext from '../context/UserContext';
 import './Menu.css';
 
 class Menu extends React.Component {
-  state = { userID: null };
+  static contextType = UserContext;
 
   render() {
-    console.log(this.state.userID);
     const token = window.localStorage.getItem('authToken');
-    const username =
-      (token)
-        ? (token === API_KEY)
-          ? 'dionisggr'
-          : jwt_decode(token).sub
-        : null
+    const id = (this.context) ? this.context.id : null;
+    const username = (token) ? (this.context.username) : null;
+    const admin = username === 'dionisggr';
     return (
       <div className='header-options'>
-        {(token) ? <h4>Welcome, {username}</h4> : null}
-        {
-          (!token)
-            ? <div className='buttons'>
-                <Link to='/signup'>Sign-Up</Link>
-                <Link to='/login'>Login</Link>
-              </div>
-            : <div className='buttons'>
-                <Link to={`/users/${this.state.userID}`}>Account</Link>
-                <button
-                  onClick={() => {
-                    window.localStorage.removeItem('authToken');
-                    this.props.history.push('/');
-                  }}
-                >Log Out</button>
-              </div>
-        }
+        {(username) ? <h4>Welcome, {username}.</h4> : null}
+        <div className='buttons'>
+          {
+            (!token)
+              ? <>
+                  <Link to='/signup'>Sign-Up</Link>
+                  <Link to='/login'>Login</Link>
+                </>
+              : <>
+                  {
+                    (admin)
+                      ? <Link to={`/users`}>Users</Link>
+                      : <Link to={`/users/${id}`}>Account</Link>
+                  }    
+                  <button
+                    onClick={() => {
+                      window.localStorage.removeItem('authToken');
+                      this.props.history.push('/');
+                    }}
+                  >Log Out</button>
+                </>
+          }
+        </div>
       </div>
     );
   };
-
-  // componentDidMount() {
-  //   const token = window.localStorage.getItem('authToken');
-  //   const username =
-  //     (token)
-  //       ? (token === API_KEY)
-  //         ? 'dionisggr'
-  //         : jwt_decode(token).sub
-  //       : null
-  //   if (username) {
-  //     api.findUsername(username)
-  //       .then(user => this.setState({ userID: user.user_id }))
-  //       .catch(error => console.log({ error }));
-  //   };
-  // };
 };
 
 export default withRouter(Menu);

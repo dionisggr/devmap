@@ -19,7 +19,7 @@ class IssueEdit extends React.Component {
   handleSave = (evt) => {
     evt.preventDefault();
     const issueID = this.props.match.params.issueID;
-    let issues = [...this.props.issues];
+    let issues = [...this.props.state.issues];
     const values = {
       project_id: evt.target.projectID.value,
       name: evt.target.name.value,
@@ -29,7 +29,7 @@ class IssueEdit extends React.Component {
       status: evt.target.status.value,
       start_date: evt.target.startDate.value,
       owner: evt.target.owner.value,
-      collaboration: evt.target.collaboration.value,
+      collaboration: evt.target.collaboration.checked,
       github: evt.target.github.value
     };
     if (!issueID) {
@@ -42,9 +42,7 @@ class IssueEdit extends React.Component {
           delete issue.start_date;
           delete issue.project_id;
           issues.push(issue);
-          console.log(this.props.issues);
           this.props.updateIssues(issues);
-          console.log(this.props.issues);
           this.props.history.push(`/projects/${issue.projectID}/issues`);
         })
         .catch(error => console.log(error));
@@ -71,8 +69,8 @@ class IssueEdit extends React.Component {
     const issueID = this.props.match.params.issueID;
     api.deleteIssue(issueID)
       .then(() => {
-        const issue = this.props.issues.find(issue => issue.id === issueID) || {};
-        let issues = [...this.props.issues];
+        const issue = this.props.state.issues.find(issue => issue.id === issueID) || {};
+        let issues = [...this.props.state.issues];
         issues = issues.filter(issue => issue.id !== this.props.match.params.issueID);
         this.props.updateIssues(issues);
         this.props.history.push(`/projects/${issue.projectID}/issues`);
@@ -84,36 +82,52 @@ class IssueEdit extends React.Component {
     const token = window.localStorage.getItem('authToken');
     const admin = token === API_KEY;
     const username = (token && !admin) ? jwt_decode(token).sub : null;
-    const collaborators = this.state.collaborators.map(collaborator => collaborator.username).join(', ');
     const issueID = this.props.match.params.issueID;
-    const issue = this.props.issues.find(issue => issue.id === issueID) || {};
-    const startDate = new Date(issue.startDate).toDateString().slice(3);
+    const issue = this.props.state.issues.find(issue => issue.id === issueID) || {};
+    const startDate = (issue.startDate) ? new Date(issue.startDate).toDateString().slice(4) : null;
+    const collaborators = 
+      (this.state.collaborators)
+        ? this.state.collaborators.map(collaborator => collaborator.username).join(', ')
+        : null;
+    const project = this.props.state.projects.find(project => project.id === this.props.match.params.projectID);
+    const projectName = (project) ? project.name : null;
     return (
       <form 
         className='issue-page'
         onSubmit={this.handleSave}
       >
         <h3>{issue.name || 'New Issue'}</h3>
+        <label htmlFor='owner'>Owner: {issue.owner || username}</label>
+        <label htmlFor='projectID'>Project ID: {projectName}</label>
         <label htmlFor='name'>Name:
         <input type='text' name='name' id='name' defaultValue={issue.name}/></label>
         <label htmlFor='description'>Description:
         <input type='text' name='description' defaultValue={issue.description}/></label>
-        <label htmlFor='projectID'>Project ID:
-        <input type='text' name='projectID' defaultValue={issue.projectID}/></label>
         <label htmlFor='tools'>Languages/Tools:
         <input type='text' name='tools' defaultValue={issue.tools}/></label>
         <label htmlFor='phase'>Phase:
-        <input type='text' name='phase' defaultValue={issue.phase}/></label>
+          <select name='phase' id='phase'>
+            <option>Planning</option>
+            <option>Design</option>
+            <option>Development</option>
+            <option>Testing</option>
+            <option>Ready</option>
+          </select>
+        </label>
         <label htmlFor='status'>Status:
-        <input type='text' name='status' defaultValue={issue.status}/></label>
+          <select name='status' id='status'>
+            <option>Pending</option>
+            <option>Delayed</option>
+            <option>In-Progress</option>
+            <option>Help</option>
+          </select>
+        </label>
         <label htmlFor='start-date'>Start Date:
         <input type='text' name='startDate' defaultValue={startDate}/></label>
-        <label htmlFor='owner'>Owner:
-        <input type='text' name='owner' defaultValue={issue.owner}/></label>
-        <label htmlFor='collaboration'>Collaboration:
-        <input type='text' name='collaboration' defaultValue={issue.collaboration}/></label>
-        <label htmlFor='collaborators'>Collaborators:
+        <label htmlFor='collaborators'>Collaboration:
         <input type='text' name='collaborators' defaultValue={collaborators}/></label>
+        <label htmlFor='collaboration'>Collaboration:
+        <input type='checkbox' name='collaboration' id='collaboration' defaultChecked /></label>
         <label htmlFor='github'>GitHub:
         <input type='text' name='github' defaultValue={issue.github}/></label>
         <div className='issue-buttons'>
@@ -121,8 +135,8 @@ class IssueEdit extends React.Component {
             (token && (admin || username === issue.owner))
               ? <>
                   <button type='submit'>Save</button>
-                  <button type='button' onClick={this.props.history.goBack}>Cancel</button>
                   <button type='button' onClick={this.handleDelete}>Delete</button>
+                  <button type='button' onClick={this.props.history.goBack}>Cancel</button>
                 </>
               : <button type='button' onClick={this.props.history.goBack}>Back</button>
           }
@@ -133,9 +147,11 @@ class IssueEdit extends React.Component {
 
   componentDidMount() {
     const issueID = this.props.match.params.issueID;
-    api.getIssueCollaborators(issueID)
+    if (issueID) {
+      api.getIssueCollaborators(issueID)
       .then(collaborators => this.setState({ collaborators }))
       .catch(error => console.log(error));
+    };
   };
 };
 

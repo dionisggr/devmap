@@ -43,6 +43,7 @@ class UserPage extends React.Component {
 
   render() {
     const user = this.state.user;
+    const startDate = (user.startDate) ? new Date(user.startDate).toDateString().slice(4) : null;
     const permission = window.localStorage.getItem('authToken') && user.role === 'Admin';
     if (!permission) <Error message='Unauthorized access.'/>
     return (
@@ -64,15 +65,15 @@ class UserPage extends React.Component {
           <input type='text' name='tools' id='tools' defaultValue={user.tools} />
         </label>
         <label htmlFor='startDate'>Start Date:
-          <input type='text' name='startDate' id='startDate' defaultValue={user.startDate} />
+          <input type='text' name='startDate' id='startDate' defaultValue={startDate} />
         </label>
         <label htmlFor='github'>GitHub:
           <input type='text' name='github' id='github' defaultValue={user.github} />
         </label>
         <div className='issue-buttons'>
           <button type='submit'>Save</button>
-          <button type='button' onClick={() => this.props.history.push('/users')}>Cancel</button>
           <button type='button' onClick={this.delete}>Delete</button>
+          <button type='button' onClick={() => this.props.history.push('/users')}>Cancel</button>
         </div>
       </form>
     );

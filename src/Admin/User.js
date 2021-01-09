@@ -7,7 +7,7 @@ class User extends React.Component {
   render() {
     let { 
       id, username, firstName, lastName,
-      email, tools, startDate, role, github
+      email, startDate, role
     } = this.props.user;
     startDate = startDate.slice(4, 16);
     return (

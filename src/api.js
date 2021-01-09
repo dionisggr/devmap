@@ -102,7 +102,7 @@ function findUsername(username) {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
-    },
+    }
   })
   .then(res => res.json());
 };
@@ -173,9 +173,7 @@ function login(attempt) {
 function refreshToken() {
   const token = window.localStorage.getItem('authToken');
   return fetch(`${baseURL}/refresh`, {
-    method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     },
   }).then(res => res.json());

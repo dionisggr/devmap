@@ -1,6 +1,5 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import Login from './Login';
 import api from '../api';
 import './Signup.css';
 

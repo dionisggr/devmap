@@ -1,7 +1,5 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import jwt_decode from 'jwt-decode';
-import { API_KEY } from '../../config';
 import Error from '../Errors/Error';
 import api from '../../api';
 import './UserPage.css';
@@ -13,7 +11,7 @@ class UserPage extends React.Component {
     console.log(this.state.users);
     const userID = this.props.match.params.userID;
     const user = this.state.users.find(user => user.id === userID) || {};
-    const startDate = (user.startDate) ? new Date(user.startDate).toDateString().slice(3) : null;
+    const startDate = (user.startDate) ? new Date(user.startDate).toDateString().slice(4) : null;
     const permission = window.localStorage.getItem('authToken') && user.role === 'Admin';
     if (!permission) <Error message='Unauthorized access.'/>;
     return (

@@ -26,7 +26,7 @@ class ProjectPage extends React.Component {
         ? this.state.collaborators.map(collaborator => collaborator.username).join(', ')
         : null;
     let project = this.props.projects.find(project => project.id === projectID) || {};
-    const startDate = new Date(project.startDate).toDateString().slice(3);
+    const startDate = new Date(project.startDate).toDateString().slice(4);
     return (
       <form className='project-page'>
         <h3>{project.name || 'New Project'}</h3>
@@ -37,7 +37,7 @@ class ProjectPage extends React.Component {
         <label>Status: {project.status}</label>
         <label>Start Date: {startDate}</label>
         <label>Owner: {project.owner}</label>
-        <label>Collaboration: {(project.collaboration || '').toString()}</label>
+        <label>Collaboration: {(project.collaboration).toString()}</label>
         <label>Collaborators: {collaborators}</label>
         <label>GitHub: {project.github}</label>
         {
@@ -52,8 +52,9 @@ class ProjectPage extends React.Component {
                   <button type='button' onClick={() => this.props.history.push(`/edit/projects/${projectID}`)}>Edit</button>
                   <button type='button' onClick={() => this.props.history.push('/')}>Cancel</button>
                 </>
-              : <button type='button' onClick={this.props.history.goBack}>Back</button>
+              : null
           }
+          <button type='button' onClick={this.props.history.goBack}>Back</button>
         </div>
       </form>
     );

@@ -12,6 +12,7 @@ import UserPage from './Main/Users/UserPage';
 import UserEdit from './Main/Users/UserEdit';
 import UserList from './Admin/UserList';
 import ErrorBoundary from './Main/Errors/ErrorBoundary';
+import UserContext from './context/UserContext';
 import api from './api';
 import './App.css';
 
@@ -41,23 +42,24 @@ class App extends React.Component {
       api.refreshToken();
     }, 600000);
     let stop = setTimeout(() => {
-      clearInterval(reset);
-      window.localStorage.removeItem('authToken');
-    }, 660000);
+      clearInterval(reset)
+    }, 550000);
     document.addEventListener('mousemove keydown', function () {
+      clearTimeout(stop);
       stop = setTimeout(() => {
-        clearInterval(reset);
-        window.localStorage.removeItem('authToken');
-      }, 660000);
+        clearTimeout(reset)
+      }, 550000);
     });
   };
 
   render = () => {
     return (
       <main className='App'>
-        <ErrorBoundary>
-          <Header />
-        </ErrorBoundary>
+        <UserContext.Provider value={this.state.user}>
+          <ErrorBoundary>
+            <Header />
+          </ErrorBoundary>
+        </UserContext.Provider>
 
         <ErrorBoundary>
           <Route exact path={['/', '/projects']} render={() => 
@@ -79,15 +81,15 @@ class App extends React.Component {
                 updateProjects={this.updateProjects}
               />
           }/>
-          <Route path={[
-            '/projects/:projectID/new-issue',
-            '/projects/:projectID/issues/:issueID'
-          ]} render={() => 
-              <IssuePage issues={this.state.issues} />
+          <Route path='/projects/:projectID/issues/:issueID' render={() => 
+              <IssuePage state={this.state} />
           }/>
-          <Route path='/edit/issues/:issueID' render={() => 
+          <Route exact path={
+            ['/projects/:projectID/new-issue','/edit/projects/:projectID/issues/:issueID']
+          }
+            render={() => 
               <IssueEdit
-                issues={this.state.issues}
+                state={this.state}
                 updateIssues={this.updateIssues}
               />
           }/>
@@ -95,10 +97,10 @@ class App extends React.Component {
         <ErrorBoundary>
           <Route exact path='/users' component={UserList} />
           <Route exact path='/users/:userID' render={() => 
-            <UserPage users={this.state.users} />
+            <UserPage />
           } />
           <Route path='/edit/users/:userID' render={() =>
-            <UserEdit users={this.state.users} />
+            <UserEdit />
           } />
         </ErrorBoundary>
         <ErrorBoundary>
@@ -106,7 +108,10 @@ class App extends React.Component {
             <Signup setIdleTimer={this.setIdleTimer}/>
           } />
           <Route path='/login' render={() =>
-            <Login setIdleTimer={this.setIdleTimer} />
+            <Login
+              setIdleTimer={this.setIdleTimer}
+              updateUser={this.updateUser}
+            />
           } />
         </ErrorBoundary>
       </main>

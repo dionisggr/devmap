@@ -27,10 +27,11 @@ class ProjectPage extends React.Component {
       phase: evt.target.phase.value,
       status: evt.target.status.value,
       start_date: new Date(evt.target.startDate.value).toISOString(),
-      collaboration: evt.target.collaboration.value,
+      collaboration: evt.target.collaboration.checked,
       github: evt.target.github.value,
       owner: document.querySelector('label').innerText.split(': ')[1]
     };
+    console.log(values.collaboration);
     if (!projectID) {
       api.addProject(values)
         .then(project => {
@@ -83,7 +84,7 @@ class ProjectPage extends React.Component {
       (!this.state.collaborators.error)
         ? this.state.collaborators.map(collaborator => collaborator.username).join(', ')
         : null;
-    const startDate = (!projectID) ? null : new Date(project.startDate).toDateString().slice(3);
+    const startDate = (!projectID) ? null : new Date(project.startDate).toDateString().slice(4);
     return (
       <form onSubmit={this.handleSave} className='project-page'>
         <h3>{project.name || 'New Project'}</h3>
@@ -95,13 +96,26 @@ class ProjectPage extends React.Component {
         <label htmlFor='tools'>Languages/Tools:
         <input type='text' name='tools' id='tools' defaultValue={project.tools}/></label>
         <label htmlFor='phase'>Phase:
-        <input type='text' name='phase' id='phase' defaultValue={project.phase}/></label>
+          <select name='phase' id='phase'>
+            <option>Planning</option>
+            <option>Design</option>
+            <option>Development</option>
+            <option>Testing</option>
+            <option>Ready</option>
+          </select>
+        </label>
         <label htmlFor='status'>Status:
-        <input type='text' name='status' id='status' defaultValue={project.status}/></label>
+          <select name='status' id='status'>
+            <option>Pending</option>
+            <option>Delayed</option>
+            <option>In-Progress</option>
+            <option>Help</option>
+          </select>
+        </label>
         <label htmlFor='startDate'>Start Date:
         <input type='text' name='startDate' id='startDate' defaultValue={startDate}/></label>
         <label htmlFor='collaboration'>Collaboration:
-        <input type='text' name='collaboration' id='collaboration' defaultValue={project.collaboration}/></label>
+        <input type='checkbox' name='collaboration' id='collaboration' defaultChecked /></label>
         <label htmlFor='collaborators'>Collaborators:
         <input type='text' name='collaborators' id='collaborators' defaultValue={collaborators}/></label>
         <label htmlFor='github'>GitHub:
@@ -116,8 +130,8 @@ class ProjectPage extends React.Component {
             (token && (admin || username === project.owner))
               ? <>
                   <button type='submit'>Save</button>
-                  <button type='button' onClick={this.props.history.goBack}>Cancel</button>
                   <button type='button' onClick={this.handleDelete}>Delete</button>
+                  <button type='button' onClick={this.props.history.goBack}>Cancel</button>
                 </>
               : <button type='button' onClick={this.props.history.goBack}>Back</button>
           }

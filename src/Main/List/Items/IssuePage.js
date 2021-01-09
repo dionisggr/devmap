@@ -21,37 +21,39 @@ class IssuePage extends React.Component {
     const admin = token === API_KEY;
     const username = (token && !admin) ? jwt_decode(token).sub : null;
     const issueID = this.props.match.params.issueID;
-    const collaborators = this.state.collaborators.map(collaborator => collaborator.username).join(', ');
-    let issue = this.props.issues.find(issue => issue.id === issueID) || {};
-    const collaboration = (issue.collaboration) ? issue.collaboration.toString() : null;
-    const startDate = new Date(issue.startDate).toDateString().slice(3);
+    let issue = this.props.state.issues.find(issue => issue.id === issueID) || {};
+    const collaborators = 
+      (this.state.collaborators)
+        ? this.state.collaborators.map(collaborator => collaborator.username).join(', ')
+        : null;
+    const startDate = new Date(issue.startDate).toDateString().slice(4);
+    const project = this.props.state.projects.find(project => project.id === this.props.match.params.projectID);
+    const projectName = (project) ? project.name : null;
     return (
       <form onSubmit={this.handleSave} className='issue-page'>
         <h3>{issue.name || 'New Issue'}</h3>
+        <label>Project: {projectName}</label>
         <label>Name: {issue.name}</label>
         <label>Description: {issue.description}</label>
+        <label>Owner: {issue.owner}</label>
         <label>Languages/Tools: {issue.tools}</label>
         <label>Phase: {issue.phase}</label>
         <label>Status: {issue.status}</label>
         <label>Start Date: {startDate}</label>
-        <label>Owner: {issue.owner}</label>
-        <label>Collaboration: {collaboration}</label>
+        <label>Collaboration: {issue.collaboration.toString()}</label>
         <label>Collaborators: {collaborators}</label>
         <label>GitHub: {issue.github}</label>
-        {
-          (issueID)
-            ? <button type='button' onClick={() => this.props.history.push(`/issues/${issueID}/issues`)}>Issues</button>
-            : null
-        }
         <div className='issue-buttons'>
         {
             (token && (admin || username === issue.owner))
               ? <>
-                  <button type='button' onClick={() => this.props.history.push(`/edit/issues/${issueID}`)}>Edit</button>
-                  <button type='button' onClick={this.props.history.goBack}>Cancel</button>
+                  <button type='button' onClick={() => {
+                    return this.props.history.push(`/edit/projects/${issue.projectID}/issues/${issueID}`)
+                  }}>Edit</button>
                 </>
-              : <button type='button' onClick={this.props.history.goBack}>Back</button>
+              : null
           }
+          <button type='button' onClick={this.props.history.goBack}>Back</button>
         </div>
       </form>
     );
@@ -59,8 +61,10 @@ class IssuePage extends React.Component {
 
   componentDidMount() {
     const issueID = this.props.match.params.issueID;
-    api.getIssueCollaborators(issueID)
-      .then(collaborators => this.setState({ collaborators }))
+    if (issueID) {
+      api.getIssueCollaborators(issueID)
+        .then(collaborators => this.setState({ collaborators }))
+    };
   };
 };
 
