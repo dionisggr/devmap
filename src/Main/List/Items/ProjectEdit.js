@@ -31,7 +31,6 @@ class ProjectPage extends React.Component {
       github: evt.target.github.value,
       owner: document.querySelector('label').innerText.split(': ')[1]
     };
-    console.log(values.collaboration);
     if (!projectID) {
       api.addProject(values)
         .then(project => {

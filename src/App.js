@@ -17,7 +17,10 @@ import api from './api';
 import './App.css';
 
 class App extends React.Component {
-  state = { projects: [], issues: [], user: {} };
+  state = { 
+    projects: [], issues: [],
+    user: {}, usernames: []
+  };
 
   updateProjects = (projects) => {
     const newState = {...this.state};
@@ -31,9 +34,10 @@ class App extends React.Component {
     this.setState(newState);
   };
 
-  updateUser = (user) => {
-    const newState = {...this.state};
-    newState.user = user;
+  updateUserInfo = (userInfo) => {
+    const { usernames , user } = userInfo;
+    let newState = {...this.state};
+    newState = {...newState, usernames, user};
     this.setState(newState);
   };
 
@@ -78,6 +82,7 @@ class App extends React.Component {
             render={() => 
               <ProjectEdit
                 projects={this.state.projects}
+                usernames={this.state.usernames}
                 updateProjects={this.updateProjects}
               />
           }/>
@@ -90,6 +95,7 @@ class App extends React.Component {
             render={() => 
               <IssueEdit
                 state={this.state}
+                usernames={this.state.usernames}
                 updateIssues={this.updateIssues}
               />
           }/>
@@ -110,7 +116,7 @@ class App extends React.Component {
           <Route path='/login' render={() =>
             <Login
               setIdleTimer={this.setIdleTimer}
-              updateUser={this.updateUser}
+              updateUserInfo={this.updateUserInfo}
             />
           } />
         </ErrorBoundary>

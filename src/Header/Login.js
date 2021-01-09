@@ -13,9 +13,12 @@ class Login extends React.Component {
         const authToken = res.apiKey || res.authToken;
         if (authToken) {
           window.localStorage.setItem('authToken', authToken);
-          this.props.setIdleTimer();
-          this.props.updateUser(res.user);
-          this.props.history.push('/');
+          api.getUsernames()
+            .then(usernames => {
+              this.props.setIdleTimer();
+              this.props.updateUserInfo({usernames, user: res.user});
+            })
+            .catch(error => console.log({ error }));
         } else {
           const field = res.error.split(': ')[1];
           document.querySelectorAll('span').forEach(span => {
