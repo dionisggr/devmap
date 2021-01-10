@@ -12,7 +12,7 @@
 
 .create {
   align-self: flex-end;
-  margin-right: 10px;
+  margin-right: 18%;
   padding: 10px;
   text-decoration: none;
   background-color: rgb(8, 255, 8);
@@ -60,6 +60,10 @@ button:active, button:active {
 @media all and (max-width: 400px) {
   .item-list {
     width: 100%;
+  }
+
+  .create {
+    margin-right: 7%;
   }
   
   main h3 {
