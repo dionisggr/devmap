@@ -2,12 +2,12 @@
 A simple meeting point for software developers to collaborate on other projects
 
 ### App information / User Flow & Stories:
-&nbsp;&nbsp;&nbsp; https://gist.github.com/dionisggr/db742da0147f37886fb47590ef15fba6
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; https://gist.github.com/dionisggr/db742da0147f37886fb47590ef15fba6
 
 ### Kanban board: https://github.com/dionisggr/devmap/projects/1
 
 ### Languages/Tools:
-&nbsp;&nbsp;&nbsp;HTML5, CSS3, Javascript, React, Mocha, Chai, API fetch
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HTML5, CSS3, Javascript, React, Mocha, Chai, API fetch
 
 ---
 ### DESCRIPTION
