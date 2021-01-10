@@ -18,8 +18,7 @@ import './App.css';
 
 class App extends React.Component {
   state = { 
-    projects: [], issues: [],
-    user: {}, usernames: []
+    projects: [], issues: [], user: {}
   };
 
   updateProjects = (projects) => {
@@ -72,16 +71,15 @@ class App extends React.Component {
             <List items={this.state.issues} />
           }/>
           <Route exact path='/projects/:projectID' render={() => 
-              <ProjectPage
-                projects={this.state.projects}
-                updateProjects={this.updateProjects}
-              />
+            <ProjectPage
+              projects={this.state.projects}
+              updateProjects={this.updateProjects}
+            />
           }/>
           <Route exact path={['/edit/projects/:projectID', '/new-project']}
             render={() => 
               <ProjectEdit
                 projects={this.state.projects}
-                usernames={this.state.usernames}
                 updateProjects={this.updateProjects}
               />
           }/>
@@ -94,19 +92,14 @@ class App extends React.Component {
             render={() => 
               <IssueEdit
                 state={this.state}
-                usernames={this.state.usernames}
                 updateIssues={this.updateIssues}
               />
           }/>
         </ErrorBoundary>
         <ErrorBoundary>
           <Route exact path='/users' component={UserList} />
-          <Route exact path='/users/:userID' render={() => 
-            <UserPage />
-          } />
-          <Route path='/edit/users/:userID' render={() =>
-            <UserEdit />
-          } />
+          <Route exact path='/users/:userID' component={UserPage} />
+          <Route path='/edit/users/:userID' component={UserEdit} />
         </ErrorBoundary>
         <ErrorBoundary>
           <Route path='/signup' render={() => 

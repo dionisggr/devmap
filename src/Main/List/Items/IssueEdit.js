@@ -7,11 +7,11 @@ import api from '../../../api';
 import './IssueEdit.js';
 
 class IssueEdit extends React.Component {
-  static defaultProps = { usernames: [] };
+  static defaultProps = { state: [] };
 
   static propTypes = {
-    usernames:  PropTypes.array.isRequired,
-    updateIssues: PropTypes.func.isRequired
+    state:  PropTypes.object.isRequired,
+    updateIssues: PropTypes.func
   };
   
   handleSave = (evt) => {

@@ -1,9 +1,15 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import api from '../api';
 import './Login.css';
 
 class Login extends React.Component {
+  static propTypes = {
+    setIdleTimer: PropTypes.func,
+    updateUser: PropTypes.func
+  };
+
   login = (evt) => {
     evt.preventDefault();
     const username = evt.target.username.value;

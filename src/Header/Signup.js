@@ -1,9 +1,12 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import api from '../api';
 import './Signup.css';
 
 class Signup extends React.Component {
+  static propTypes = { setIdleTimer: PropTypes.func.isRequired };
+
   signup = (evt) => {
     evt.preventDefault();
     const user = {

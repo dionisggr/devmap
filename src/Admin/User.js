@@ -1,9 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import api from '../api';
 import './User.css';
 
 class User extends React.Component {
+  static defaultProps = { user: {} };
+
+  static propTypes = { user: PropTypes.object.isRequired };
+  
   render() {
     let { 
       id, username, firstName, lastName,

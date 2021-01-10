@@ -3,16 +3,12 @@ import { withRouter } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 import PropTypes from 'prop-types';
 import { API_KEY } from '../../../config';
-import api from '../../../api';
 import './IssuePage.css';
 
 class IssuePage extends React.Component {
   static defaultProps = { state: {} };
 
-  static propTypes = {
-    issues: PropTypes.array.isRequired,
-    updateIssues: PropTypes.func
-  };
+  static propTypes = {state: PropTypes.object.isRequired};
 
   render() {
     const token = window.localStorage.getItem('authToken');
