@@ -2,11 +2,12 @@
 A simple meeting point for software developers to collaborate on other projects
 
 ### App information / User Flow & Stories:
-https://gist.github.com/dionisggr/db742da0147f37886fb47590ef15fba6
+&nbsp;&nbsp;&nbsp; https://gist.github.com/dionisggr/db742da0147f37886fb47590ef15fba6
 
 ### Kanban board: https://github.com/dionisggr/devmap/projects/1
 
-**Languages/Tools:** HTML5, CSS3, Javascript, React, Mocha, Chai, API fetch
+### Languages/Tools: HTML5, CSS3, Javascript, React, Mocha, Chai, API fetch
+
 ---
 ### DESCRIPTION
 This (still in-progress) app allows software development teams to manage life-cycles, monitor deadlines, and update details specific details for software development projects, features and bugs. In future scope, it pretends to add project discussion forum, team collaboration and fine detail management for projects and issues for further customization.
