@@ -1,5 +1,5 @@
 const config = {
-  API_URL: 'http://localhost:8000',
+  API_URL: 'https://afternoon-dawn-05389.herokuapp.com',
   API_KEY: 'my-secret-key'
 };
 
