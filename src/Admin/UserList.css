@@ -1,6 +1,8 @@
 .user-list {
-  width: 80%;
+  /* width: 80%; */
   margin-top: 50px;
+  margin: 0;
+  padding: 0;
 }
 
 button {

@@ -1,12 +1,16 @@
 .header-options {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
-  align-self: flex-end;
+  align-self: center;
+  align-items: center;
   width: 250px;
+  width: 50%;
+  height: 50px;
   margin-bottom: 10px;
 }
 
-.header-options a, .header-options button {
+.header-options a, .header-options a {
   color: white;
   text-decoration: none;
   font-size: 25px;
@@ -14,7 +18,7 @@
   font-family: 'Courier New', Courier, monospace;
 }
 
-.header-options button {
+.header-options a {
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -24,7 +28,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  align-items: flex-end;
+  align-items: center;
   width: 110%;
   margin: 0;
 }
@@ -33,14 +37,38 @@
   font-size: 1.9vh;
 }
 
+.loggedIn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100px;
+}
+
+.loggedIn button {
+  margin-bottom: 50px;
+  margin-left: 25px;
+  border: solid;
+  color: white;
+}
+
+#users-button, #account-button {
+  margin-right: 15px;
+}
+
 @media all and (max-width: 400px) {
   .header-options {
+    align-self: flex-end;
     box-sizing: border-box;
-    width: 125px;
+    height: 50px;
+    width: 65%;
   }
   
-  .header-options a, .header-options button {
+  .header-options a, .header-options a {
     font-size: 15px;
     margin: 0;
+  }
+
+  .buttons {
+    align-items: flex-end;
   }
 }

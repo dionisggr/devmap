@@ -21,19 +21,20 @@ class Menu extends React.Component {
                   <Link to='/signup'>Sign-Up</Link>
                   <Link to='/login'>Login</Link>
                 </>
-              : <>
+              : <div className='loggedIn'>
                   {
                     (admin)
-                      ? <Link to={`/users`}>Users</Link>
-                      : <Link to={`/users/${id}`}>Account</Link>
+                      ? <Link id='users-button' to={`/users`}>Users</Link>
+                      : <Link id='account-button' to={`/users/${id}`}>Account</Link>
                   }    
-                  <button
+                  <Link
+                    id='logout-button'
                     onClick={() => {
                       window.localStorage.removeItem('authToken');
                       this.props.history.push('/');
                     }}
-                  >Log Out</button>
-                </>
+                  >Log Out</Link>
+                </div>
           }
         </div>
       </div>

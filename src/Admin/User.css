@@ -1,8 +1,8 @@
 .user {
   display: flex;
   align-items: center;
+  align-self: center;
   justify-content: space-between;
-  width: calc(100% - 50px);
   margin: 5px 0;
   padding: 25px;
   border: solid;
