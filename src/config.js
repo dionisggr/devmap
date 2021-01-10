@@ -1,6 +1,6 @@
 const config = {
   API_URL: 'https://afternoon-dawn-05389.herokuapp.com',
-  API_KEY: process.env.REACT_APP_API_KEY
+  API_KEY: 'my-secret-key'
 };
 
 module.exports = config;
