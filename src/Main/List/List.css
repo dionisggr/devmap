@@ -3,7 +3,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  max-width: 800px;
+  width: 65%;
+
   height: fit-content;
   border-radius: 1px;
 }
@@ -18,7 +20,6 @@
   font-size: 18px;
   font-weight: bold;
   border-radius: 3px;
-  margin-top: 35px;
   margin-bottom: 5px;
 }
 
@@ -26,7 +27,7 @@ main h3 {
   font-size: 35px;
   color: white;
   text-shadow: 3px 3px rgba(128, 0, 128, 0.637);
-  margin-bottom: 0;
+  margin-bottom: 50px;
 }
 
 button {
@@ -36,15 +37,14 @@ button {
   height: 2em;
   background-color: rgb(8, 255, 8);
   border: none;
-  min-width: 100px;
-  height: 1.8em;
+  min-width: 120px;
   outline: none;
   font-family:'Courier New', Courier, monospace;
   font-weight: bolder;
   font-size: 20px;
   color: rgb(95, 0, 95);
   border-radius: 3px;
-  margin: 0 20px;
+  margin-bottom: 100px;
   cursor: pointer;
 }
 
@@ -57,11 +57,11 @@ button:active, button:active {
   transform: scale(0.92);
 }
 
-button {
-  margin-top: 25px;
-}
-
 @media all and (max-width: 400px) {
+  .item-list {
+    width: 100%;
+  }
+  
   main h3 {
     font-size: 28px;
     text-align: center;

@@ -4,7 +4,6 @@
   align-items: center;
   color: white;
   width: 50%;
-  margin-top: 5%;
 }
 
 .login input {
@@ -20,10 +19,10 @@
 
 .login-buttons {
   display: flex;
+  flex-direction: row;
   justify-content: space-around;
   width: 50%;
   height: 2em;
-  margin-top: 50px;
 }
 
 .login-buttons button {
@@ -37,7 +36,10 @@
   font-size: 20px;
   color: rgb(95, 0, 95);
   border-radius: 3px;
-  margin: 0 10px;
+}
+
+.login-buttons button + button {
+  margin-left: 20px;
 }
 
 .login button:hover {
@@ -60,7 +62,6 @@ span {
 @media all and (max-width: 400px) {
   .login {
     width: 100%;
-    margin-top: 10%;
   }
 
   .login h3 {
@@ -73,7 +74,7 @@ span {
     align-items: center;
     justify-content: center;
     width: 100%;
-    margin-top: 10px;
+    margin-top: 50px;
   }
 
   .login button {

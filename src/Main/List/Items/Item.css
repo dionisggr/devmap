@@ -40,5 +40,6 @@
 @media all and (max-width: 400px) {
   .item {
     width: calc(90% - 50px);
+    padding: 10px 20px 0 20px;
   }
 }

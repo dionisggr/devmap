@@ -37,13 +37,13 @@ class List extends React.Component {
             ? <Link
                 className='create'
                 to='/new-project'
-                style={{visibility: (!token) ? 'hidden' : 'visible'}}
+                style={{display: (!token) ? 'none' : 'in-line block'}}
               >New Project</Link>
             : ((username === owner) || admin)
                 ? <Link
                     className='create'
                     to={`/projects/${projectID}/new-issue`}
-                    style={{visibility: (!token) ? 'hidden' : 'visible'}}
+                    style={{display: (!token) ? 'none' : 'in-line block'}}
                   >New Issue</Link>
                 : null
         }

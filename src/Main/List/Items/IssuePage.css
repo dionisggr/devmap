@@ -1,7 +1,7 @@
 .issue-page {
   display: flex;
   flex-direction: column;
-  width: 65%;
+  width: 40%;
   color: white;
 }
 
@@ -26,9 +26,8 @@
 
 .issue-buttons {
   display: flex;
+  flex-direction: row;
   justify-content: center;
-  height: 2em;
-  margin: 25px 0 100px 0;
 }
 
 .issue-buttons button, .issue-page button {
@@ -60,6 +59,10 @@
 }
 
 @media all and (max-width: 400px) {
+  .issue-page {
+    width: 75%;
+  }
+
   .issue-buttons button {
     margin: 0 10px;
   }

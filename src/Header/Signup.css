@@ -29,6 +29,7 @@
 
 .signup-buttons {
   display: flex;
+  flex-direction: row;
   justify-content: space-around;
   max-width: 350px;
   height: 2em;
@@ -47,6 +48,10 @@
   font-size: 20px;
   color: rgb(95, 0, 95);
   border-radius: 3px;
+}
+
+.signup-buttons button + button {
+  margin-left: 25px;
 }
 
 .signup button:hover {
@@ -76,11 +81,11 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    margin-top: 10px;
+    margin-top: 35px;
   }
 
   .signup button {
-    margin: 0 10px;
+    margin: 50px 10px;
     min-height: 1.5em;
     width: 100px;
     height: 1.8em;

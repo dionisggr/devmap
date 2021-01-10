@@ -4,7 +4,7 @@ import jwt_decode from 'jwt-decode';
 import PropTypes from 'prop-types';
 import { API_KEY } from '../../../config';
 import api from '../../../api';
-import './IssueEdit.js';
+import './IssueEdit.css';
 
 class IssueEdit extends React.Component {
   static defaultProps = { state: [] };
@@ -96,7 +96,7 @@ class IssueEdit extends React.Component {
     const projectName = (project) ? project.name : null;
     return (
       <form 
-        className='issue-page'
+        className='issue-edit'
         onSubmit={this.handleSave}
       >
         <h3>{issue.name || 'New Issue'}</h3>

@@ -1,7 +1,8 @@
 .project-page {
   display: flex;
   flex-direction: column;
-  width: 65%;
+  width: 40%;
+  max-width: 500px;
   color: white;
 }
 
@@ -20,6 +21,10 @@
   width: 100%;
 }
 
+label:last-of-type {
+  margin-bottom: 25px;
+}
+
 .project-page input {
   min-width: 50%;
 }
@@ -27,15 +32,13 @@
 .project-buttons {
   display: flex;
   justify-content: center;
-  height: 2em;
-  margin: 25px 0 100px 0;
+  margin-bottom: 25px;
 }
 
 .project-buttons button, .project-page button {
   background-color: rgb(8, 255, 8);
   border: none;
   min-width: 100px;
-  height: 1.8em;
   outline: none;
   font-family:'Courier New', Courier, monospace;
   font-weight: bolder;
@@ -57,10 +60,16 @@
 
 .project-page button {
   margin-top: 25px;
+  align-self: center;
+  width: 50%;
 }
 
 @media all and (max-width: 400px) {
-  .project-buttons button {
-    margin: 10px;
+  .project-page {
+    width: 75%;
+  }
+
+  .project-page button {
+    width: 85%;
   }
 }

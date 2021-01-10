@@ -1,8 +1,8 @@
 .header-options {
   display: flex;
   justify-content: space-between;
-  /* align-self: flex-end; */
-  /* width: 250px; */
+  align-self: flex-end;
+  width: 250px;
   margin-bottom: 10px;
 }
 
@@ -12,7 +12,6 @@
   font-size: 25px;
   font-weight: bold;
   font-family: 'Courier New', Courier, monospace;
-  /* margin-left: 35px; */
 }
 
 .header-options button {
@@ -24,7 +23,14 @@
 .buttons {
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
   align-items: flex-end;
+  width: 110%;
+  margin: 0;
+}
+
+.header-options h4 {
+  font-size: 1.9vh;
 }
 
 @media all and (max-width: 400px) {
@@ -35,5 +41,6 @@
   
   .header-options a, .header-options button {
     font-size: 15px;
+    margin: 0;
   }
 }
