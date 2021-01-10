@@ -117,10 +117,14 @@ class ProjectPage extends React.Component {
         }
         <div className='project-buttons'>
           {
-            (token && (admin || username === project.owner))
+            (admin || username === project.owner || !projectID)
               ? <>
                   <button type='submit'>Save</button>
-                  <button type='button' onClick={this.handleDelete}>Delete</button>
+                  {
+                    (projectID)
+                      ? <button type='button' onClick={this.handleDelete}>Delete</button>
+                      : null
+                  }
                   <button type='button' onClick={this.props.history.goBack}>Cancel</button>
                 </>
               : <button type='button' onClick={this.props.history.goBack}>Back</button>
