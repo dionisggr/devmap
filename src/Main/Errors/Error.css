@@ -1,3 +1,7 @@
 .error {
   align-self: center;
 }
+
+h3, p {
+  color: white;
+}
