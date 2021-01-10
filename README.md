@@ -6,7 +6,8 @@ A simple meeting point for software developers to collaborate on other projects
 
 ### Kanban board: https://github.com/dionisggr/devmap/projects/1
 
-### Languages/Tools: HTML5, CSS3, Javascript, React, Mocha, Chai, API fetch
+### Languages/Tools:
+&nbsp;&nbsp;&nbsp;HTML5, CSS3, Javascript, React, Mocha, Chai, API fetch
 
 ---
 ### DESCRIPTION
