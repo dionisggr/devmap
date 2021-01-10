@@ -16,11 +16,11 @@ class ProjectPage extends React.Component {
   render() {
     const token = window.localStorage.getItem('authToken');
     const admin = token === API_KEY;
-    const username = (token && !admin) ? jwt_decode(token).sub : null;
+    const username = (token && !admin) ? jwt_decode(token).sub : 'dionisggr';
     const projectID = this.props.match.params.projectID;
     const project = 
-      (this.props.state.projects)
-        ? this.props.state.projects.find(project => project.id === this.props.match.params.projectID)
+      (this.props.projects)
+        ? this.props.projects.find(project => project.id === this.props.match.params.projectID)
         : {};
     const startDate = new Date(project.startDate).toDateString().slice(4);
     return (
@@ -45,11 +45,10 @@ class ProjectPage extends React.Component {
             (token && (admin || username === project.owner))
               ? <>
                   <button type='button' onClick={() => this.props.history.push(`/edit/projects/${projectID}`)}>Edit</button>
-                  <button type='button' onClick={() => this.props.history.push('/')}>Cancel</button>
                 </>
               : null
           }
-          <button type='button' onClick={this.props.history.goBack}>Back</button>
+          <button type='button' onClick={() => this.props.history.push('/')}>Back</button>
         </div>
       </form>
     );

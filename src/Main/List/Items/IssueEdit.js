@@ -16,17 +16,20 @@ class IssueEdit extends React.Component {
   
   handleSave = (evt) => {
     evt.preventDefault();
+    const issues = [...this.props.state.issues];
     const issueID = this.props.match.params.issueID;
-    let issues = [...this.props.state.issues];
+    const projectID = this.props.match.params.projectID;
+    const project = this.props.state.projects.find(pro => pro.id === projectID);
     const values = {
-      project_id: evt.target.projectID.value,
+      project_id: projectID,
       name: evt.target.name.value,
       description: evt.target.description.value,
       tools: evt.target.tools.value,
       phase: evt.target.phase.value,
       status: evt.target.status.value,
       start_date: evt.target.startDate.value,
-      owner: evt.target.owner.value,
+      owner: project.owner,
+      owner_id: project.owner_id,
       collaboration: evt.target.collaboration.checked,
       github: evt.target.github.value
     };
@@ -79,10 +82,10 @@ class IssueEdit extends React.Component {
   render() {
     const token = window.localStorage.getItem('authToken');
     const admin = token === API_KEY;
-    const username = (token && !admin) ? jwt_decode(token).sub : null;
+    const username = (token && !admin) ? jwt_decode(token).sub : 'dionisggr';
     const issueID = this.props.match.params.issueID;
-    const issue = 
-      (this.props.state.issues)
+     const issue =
+      (issueID)
         ? this.props.state.issues.find(issue => issue.id === issueID)
         : {};
     const startDate = (issue.startDate) ? new Date(issue.startDate).toDateString().slice(4) : null;
@@ -97,14 +100,14 @@ class IssueEdit extends React.Component {
         onSubmit={this.handleSave}
       >
         <h3>{issue.name || 'New Issue'}</h3>
-        <label htmlFor='owner'>Owner: {issue.owner || username}</label>
-        <label htmlFor='projectID'>Project ID: {projectName}</label>
-        <label htmlFor='name'>Name:
-        <input type='text' name='name' id='name' defaultValue={issue.name}/></label>
-        <label htmlFor='description'>Description:
-        <input type='text' name='description' defaultValue={issue.description}/></label>
-        <label htmlFor='tools'>Languages/Tools:
-        <input type='text' name='tools' defaultValue={issue.tools}/></label>
+        <label id='owner'>Owner: {issue.owner || username}</label>
+        <label id='projectName'>Project: {projectName}</label>
+        <label htmlFor='name'>Name:</label>
+        <input type='text' name='name' id='name' defaultValue={issue.name}/>
+        <label htmlFor='description'>Description:</label>
+        <input type='text' name='description' defaultValue={issue.description}/>
+        <label htmlFor='tools'>Languages/Tools:</label>
+        <input type='text' name='tools' defaultValue={issue.tools}/>
         <label htmlFor='phase'>Phase:
           <select name='phase' id='phase'>
             <option>Planning</option>
@@ -122,18 +125,22 @@ class IssueEdit extends React.Component {
             <option>Help</option>
           </select>
         </label>
-        <label htmlFor='start-date'>Start Date:
-        <input type='text' name='startDate' defaultValue={startDate}/></label>
-        <label htmlFor='collaboration'>Collaboration:
-        <input type='checkbox' name='collaboration' id='collaboration' defaultChecked /></label>
-        <label htmlFor='github'>GitHub:
-        <input type='text' name='github' defaultValue={issue.github}/></label>
+        <label htmlFor='start-date'>Start Date:</label>
+        <input type='text' name='startDate' defaultValue={startDate}/>
+        <label htmlFor='collaboration'>Collaboration:</label>
+        <input type='checkbox' name='collaboration' id='collaboration' defaultChecked />
+        <label htmlFor='github'>GitHub:</label>
+        <input type='text' name='github' defaultValue={issue.github}/>
         <div className='issue-buttons'>
           {
             (token && (admin || username === issue.owner))
               ? <>
                   <button type='submit'>Save</button>
-                  <button type='button' onClick={this.handleDelete}>Delete</button>
+                  {
+                    (this.props.match.params.issueID)
+                      ? <button type='button' onClick={this.handleDelete}>Delete</button>
+                      : null
+                  }
                   <button type='button' onClick={this.props.history.goBack}>Cancel</button>
                 </>
               : <button type='button' onClick={this.props.history.goBack}>Back</button>
