@@ -16,10 +16,10 @@ class IssueEdit extends React.Component {
   
   handleSave = (evt) => {
     evt.preventDefault();
-    const issues = [...this.props.state.issues];
+    let issues = [...this.props.state.issues];
     const issueID = this.props.match.params.issueID;
+    const issue = this.props.state.issues.find(issue => issue.id === issueID);
     const projectID = this.props.match.params.projectID;
-    const project = this.props.state.projects.find(pro => pro.id === projectID);
     const values = {
       project_id: projectID,
       name: evt.target.name.value,
@@ -27,9 +27,9 @@ class IssueEdit extends React.Component {
       tools: evt.target.tools.value,
       phase: evt.target.phase.value,
       status: evt.target.status.value,
-      start_date: evt.target.startDate.value,
-      owner: project.owner,
-      owner_id: project.owner_id,
+      start_date: new Date(issue.startDate).toDateString(),
+      owner: issue.owner,
+      owner_id: issue.owner_id,
       collaboration: evt.target.collaboration.checked,
       github: evt.target.github.value
     };
@@ -125,8 +125,6 @@ class IssueEdit extends React.Component {
             <option>Help</option>
           </select>
         </label>
-        <label htmlFor='start-date'>Start Date:</label>
-        <input type='text' name='startDate' defaultValue={startDate}/>
         <label htmlFor='collaboration'>Collaboration:</label>
         <input type='checkbox' name='collaboration' id='collaboration' defaultChecked />
         <label htmlFor='github'>GitHub:</label>

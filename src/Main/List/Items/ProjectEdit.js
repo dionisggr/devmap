@@ -18,13 +18,14 @@ class ProjectPage extends React.Component {
     evt.preventDefault();
     const projectID = this.props.match.params.projectID;
     let projects = [...this.props.projects];
+    const project = projects.find(project => project.id === projectID);
     const values = {
       name: evt.target.name.value,
       description: evt.target.description.value,
       tools: evt.target.tools.value,
       phase: evt.target.phase.value,
       status: evt.target.status.value,
-      start_date: new Date(evt.target.startDate.value).toISOString(),
+      start_date: new Date(project.startDate).toDateString(),
       collaboration: evt.target.collaboration.checked,
       github: evt.target.github.value,
       owner: document.querySelector('label').innerText.split(': ')[1]
@@ -105,8 +106,6 @@ class ProjectPage extends React.Component {
             <option>Help</option>
           </select>
         </label>
-        <label htmlFor='startDate'>Start Date:
-        <input type='text' name='startDate' id='startDate' defaultValue={startDate}/></label>
         <label htmlFor='collaboration'>Collaboration:
         <input type='checkbox' name='collaboration' id='collaboration' defaultChecked /></label>
         <label htmlFor='github'>GitHub:

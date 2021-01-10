@@ -103,7 +103,10 @@ class App extends React.Component {
         </ErrorBoundary>
         <ErrorBoundary>
           <Route path='/signup' render={() => 
-            <Signup setIdleTimer={this.setIdleTimer}/>
+            <Signup
+              setIdleTimer={this.setIdleTimer}
+              updateUser={this.updateUser}
+            />
           } />
           <Route path='/login' render={() =>
             <Login
