@@ -14,6 +14,7 @@ import UserEdit from './Main/Users/UserEdit';
 import UserList from './Admin/UserList';
 import ErrorBoundary from './Main/Errors/ErrorBoundary';
 import UserContext from './context/UserContext';
+import Loader from './Main/Loader';
 import api from './api';
 import './App.css';
 
@@ -56,6 +57,7 @@ class App extends React.Component {
   };
 
   render = () => {
+    while (this.state.projects.length < 1) return <><Header /><Loader /></>
     return (
       <main className='App'>
         <UserContext.Provider value={this.state.user}>
