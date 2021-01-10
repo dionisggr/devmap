@@ -10,35 +10,27 @@ class Signup extends React.Component {
       username: evt.target.username.value, firstName: evt.target.firstName.value,
       lastName: evt.target.lastName.value, email: evt.target.email.value, 
       tools: evt.target.tools.value, startDate: new Date(),
-      repeatPassword: evt.target.repeatPassword.value,
       github: evt.target.github.value, password: evt.target.password.value
     };
-    if (user.password !== user.repeatPassword) {
-      document.querySelectorAll('span').forEach(span => {
-        span.style.display = 'none';
-      });
-      document.getElementById('repeatPassword').focus();
-      document.getElementById('unmatchPassword').style.display = 'inline-block';
-    } else {
-      api.addUser(user)
-        .then(res => {
-          const authToken = res.apiKey || res.authToken;
-          if (authToken) {
-            window.localStorage.setItem('authToken', authToken);
-            this.props.setIdleTimer();
-            this.props.history.push('/');
-          } else {
-            let field = res.error.split('=')[0];
-            field = field.slice(1, field.length-1);
-            document.querySelectorAll('span').forEach(span => {
-              span.style.display = 'none';
-            });
-            document.getElementById(field).focus();
-            document.getElementById(`${field}Taken`).style.display = 'inline-block';
-          };
-        })
-        .catch(error => console.log('error', error));
-    }
+    api.addUser(user)
+      .then(res => {
+        const authToken = res.apiKey || res.authToken;
+        if (authToken) {
+          window.localStorage.setItem('authToken', authToken);
+          this.props.setIdleTimer();
+          this.props.history.push('/');
+        } else {
+          let field = res.error.split('=')[0];
+          field = field.slice(1, field.length-1);
+          document.querySelectorAll('span').forEach(span => {
+            span.style.display = 'none';
+          });
+          console.log(res.error);
+          document.getElementById(field).focus();
+          document.getElementById(`${field}Taken`).style.display = 'inline-block';
+        };
+      })
+      .catch(error => console.log('error', error));
   };
 
   render() {
@@ -58,10 +50,9 @@ class Signup extends React.Component {
         <input type='text' name='email' id='email'/>
         <span style={{display: 'none'}} id='emailTaken'>E-mail taken!</span>
         <label htmlFor='password'>Password:</label>
-        <input type='password' name='password' id='password' />
+        <input type='text' name='password' id='password' />
         <label htmlFor='repeatPassword'>Repeat password:</label>
-        <input type='password' name='repeatPassword' id='repeatPassword' />
-        <span style={{display: 'none'}} id='unmatchPassword'>Passwords don't match!</span>
+        <input type='text' name='repeatPassword' id='repeatPassword' />
         <label htmlFor='tools'>Tools:</label>
         <input type='text' name='tools' id='tools' />
         <label htmlFor='github'>GitHub:</label>

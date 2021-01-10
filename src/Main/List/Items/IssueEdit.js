@@ -7,9 +7,10 @@ import api from '../../../api';
 import './IssueEdit.js';
 
 class IssueEdit extends React.Component {
-  static defaultProps = { state: [] };
+  static defaultProps = { usernames: [] };
 
   static propTypes = {
+    usernames:  PropTypes.array.isRequired,
     updateIssues: PropTypes.func.isRequired
   };
   
@@ -80,9 +81,15 @@ class IssueEdit extends React.Component {
     const admin = token === API_KEY;
     const username = (token && !admin) ? jwt_decode(token).sub : null;
     const issueID = this.props.match.params.issueID;
-    const issue = this.props.state.issues.find(issue => issue.id === issueID) || {};
+    const issue = 
+      (this.props.state.issues)
+        ? this.props.state.issues.find(issue => issue.id === issueID)
+        : {};
     const startDate = (issue.startDate) ? new Date(issue.startDate).toDateString().slice(4) : null;
-    const project = this.props.state.projects.find(project => project.id === this.props.match.params.projectID);
+    const project = 
+      (this.props.state.projects)
+        ? this.props.state.projects.find(project => project.id === this.props.match.params.projectID)
+        : {};
     const projectName = (project) ? project.name : null;
     return (
       <form 
@@ -129,7 +136,7 @@ class IssueEdit extends React.Component {
                   <button type='button' onClick={this.handleDelete}>Delete</button>
                   <button type='button' onClick={this.props.history.goBack}>Cancel</button>
                 </>
-              : <button type='button' onClick={() => this.props.history.push(`/projects/${project.id}`)}>Back</button>
+              : <button type='button' onClick={this.props.history.goBack}>Back</button>
           }
         </div>
       </form>

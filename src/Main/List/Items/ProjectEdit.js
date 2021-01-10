@@ -124,7 +124,7 @@ class ProjectPage extends React.Component {
                   <button type='button' onClick={this.handleDelete}>Delete</button>
                   <button type='button' onClick={this.props.history.goBack}>Cancel</button>
                 </>
-              : <button type='button' onClick={() => this.props.history.push('/projects')}>Back</button>
+              : <button type='button' onClick={this.props.history.goBack}>Back</button>
           }
         </div>
       </form>

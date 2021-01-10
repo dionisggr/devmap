@@ -19,15 +19,15 @@ class IssuePage extends React.Component {
     const admin = token === API_KEY;
     const username = (token && !admin) ? jwt_decode(token).sub : null;
     const issueID = this.props.match.params.issueID;
-    let issue = 
+    const issue = 
       (this.props.state.issues)
-        ? this.props.state.issues.find(issue => issue.id === issueID) || {}
+        ? this.props.state.issues.find(issue => issue.id === issueID)
         : {};
     const startDate = new Date(issue.startDate).toDateString().slice(4);
     const project = 
-      (this.props.state.projects)
-        ? this.props.state.projects.find(project => project.id === this.props.match.params.projectID)
-        : {};
+    (this.props.state.projects)
+      ? this.props.state.projects.find(project => project.id === this.props.match.params.projectID)
+      : {};
     const projectName = (project) ? project.name : null;
     return (
       <form onSubmit={this.handleSave} className='issue-page'>
@@ -40,7 +40,7 @@ class IssuePage extends React.Component {
         <label>Phase: {issue.phase}</label>
         <label>Status: {issue.status}</label>
         <label>Start Date: {startDate}</label>
-        <label>Collaboration: {(issue.collaboration) ? issue.collaboration.toString() : null}</label>
+        <label>Collaboration: {(issue.collaboration) ? issue.collaboration.toString() :  null}</label>
         <label>GitHub: {issue.github}</label>
         <div className='issue-buttons'>
         {
@@ -52,7 +52,7 @@ class IssuePage extends React.Component {
                 </>
               : null
           }
-          <button type='button' onClick={() => this.props.history.push(`/projects/${project.id}`)}>Back</button>
+          <button type='button' onClick={this.props.history.goBack}>Back</button>
         </div>
       </form>
     );

@@ -18,7 +18,8 @@ import './App.css';
 
 class App extends React.Component {
   state = { 
-    projects: [], issues: [], user: {}
+    projects: [], issues: [],
+    user: {}, usernames: []
   };
 
   updateProjects = (projects) => {
@@ -33,10 +34,9 @@ class App extends React.Component {
     this.setState(newState);
   };
 
-  updateUserInfo = (userInfo) => {
-    const { usernames , user } = userInfo;
-    let newState = {...this.state};
-    newState = {...newState, usernames, user};
+  updateUser = (user) => {
+    const newState = {...this.state};
+    newState.user = user;
     this.setState(newState);
   };
 
@@ -115,7 +115,7 @@ class App extends React.Component {
           <Route path='/login' render={() =>
             <Login
               setIdleTimer={this.setIdleTimer}
-              updateUserInfo={this.updateUserInfo}
+              updateUser={this.updateUser}
             />
           } />
         </ErrorBoundary>

@@ -6,7 +6,7 @@ import { API_KEY } from '../../../config';
 import './ProjectPage.css';
 
 class ProjectPage extends React.Component {
-  static defaultProps = { projects: [] };
+  static defaultProps = { state: {} };
 
   static propTypes = {
     projects: PropTypes.array.isRequired,
@@ -18,7 +18,10 @@ class ProjectPage extends React.Component {
     const admin = token === API_KEY;
     const username = (token && !admin) ? jwt_decode(token).sub : null;
     const projectID = this.props.match.params.projectID;
-    let project = this.props.projects.find(project => project.id === projectID) || {};
+    const project = 
+      (this.props.state.projects)
+        ? this.props.state.projects.find(project => project.id === this.props.match.params.projectID)
+        : {};
     const startDate = new Date(project.startDate).toDateString().slice(4);
     return (
       <form className='project-page'>
@@ -30,7 +33,7 @@ class ProjectPage extends React.Component {
         <label>Status: {project.status}</label>
         <label>Start Date: {startDate}</label>
         <label>Owner: {project.owner}</label>
-        <label>Collaboration: {(project.collaboration) ? project.collaboration.toString() : null }</label>
+        <label>Collaboration: {(project.collaboration) ? project.collaboration.toString() : null}</label>
         <label>GitHub: {project.github}</label>
         {
           (projectID)
@@ -42,10 +45,11 @@ class ProjectPage extends React.Component {
             (token && (admin || username === project.owner))
               ? <>
                   <button type='button' onClick={() => this.props.history.push(`/edit/projects/${projectID}`)}>Edit</button>
+                  <button type='button' onClick={() => this.props.history.push('/')}>Cancel</button>
                 </>
               : null
           }
-          <button type='button' onClick={() => this.props.history.push('/projects')}>Back</button>
+          <button type='button' onClick={this.props.history.goBack}>Back</button>
         </div>
       </form>
     );
