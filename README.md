@@ -1,6 +1,9 @@
 # DevMap
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A simple meeting point for software developers to collaborate on other projects
 
+### Live: https://devmap.vercel.app/
+### API: https://afternoon-dawn-05389.herokuapp.com/ *(Landing Page)*
+
 ### App information / User Flow & Stories:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; https://gist.github.com/dionisggr/db742da0147f37886fb47590ef15fba6
 
