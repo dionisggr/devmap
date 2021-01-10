@@ -7,7 +7,9 @@ exports[`Main Section The Errors render the UI as expected 1`] = `
   <h3>
     ERROR
   </h3>
-  <p />
+  <p>
+    
+  </p>
 </div>
 `;
 
@@ -147,7 +149,7 @@ Array [
     onClick={[Function]}
     style={
       Object {
-        "visibility": "hidden",
+        "display": "none",
       }
     }
   >

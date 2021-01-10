@@ -70,7 +70,7 @@ exports[`Header Section The Login page renders the UI as expected 1`] = `
   <input
     id="password"
     name="password"
-    type="text"
+    type="password"
   />
   <span
     id="passwordInvalid"
@@ -119,7 +119,7 @@ exports[`Header Section The Sign-Up page renders the UI as expected 1`] = `
     type="text"
   />
   <span
-    id="usernameTaken"
+    id="usernameError"
     style={
       Object {
         "display": "none",
@@ -159,7 +159,7 @@ exports[`Header Section The Sign-Up page renders the UI as expected 1`] = `
     type="text"
   />
   <span
-    id="emailTaken"
+    id="emailError"
     style={
       Object {
         "display": "none",
@@ -176,7 +176,7 @@ exports[`Header Section The Sign-Up page renders the UI as expected 1`] = `
   <input
     id="password"
     name="password"
-    type="text"
+    type="password"
   />
   <label
     htmlFor="repeatPassword"
@@ -186,8 +186,18 @@ exports[`Header Section The Sign-Up page renders the UI as expected 1`] = `
   <input
     id="repeatPassword"
     name="repeatPassword"
-    type="text"
+    type="password"
   />
+  <span
+    id="passwordError"
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+  >
+    Passwords don't match!
+  </span>
   <label
     htmlFor="tools"
   >

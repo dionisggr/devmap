@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`The App Snapshot Test renders the UI as expected 1`] = `
-<main
-  className="App"
->
+Array [
   <header>
     <a
       className="logo"
@@ -34,24 +32,16 @@ exports[`The App Snapshot Test renders the UI as expected 1`] = `
         </a>
       </div>
     </div>
-  </header>
-  <h3>
-    Recent Projects
-  </h3>
-  <a
-    className="create"
-    href="/new-project"
-    onClick={[Function]}
-    style={
-      Object {
-        "visibility": "hidden",
-      }
-    }
-  >
-    New Project
-  </a>
+  </header>,
   <div
-    className="item-list"
-  />
-</main>
+    className="loading"
+  >
+    <h3>
+      Loading...
+    </h3>
+    <div
+      className="loader"
+    />
+  </div>,
+]
 `;
