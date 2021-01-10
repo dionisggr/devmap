@@ -1,10 +1,14 @@
 # DevMap
-A simple meeting point for software developers to collaborate on other projects
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A simple meeting point for software developers to collaborate on other projects
 
 ### App information / User Flow & Stories:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; https://gist.github.com/dionisggr/db742da0147f37886fb47590ef15fba6
 
-### Kanban board: https://github.com/dionisggr/devmap/projects/1
+### Kanban board:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://github.com/dionisggr/devmap/projects/1
+
+### Deployment Platform:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vercel
 
 ### Languages/Tools:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HTML5, CSS3, Javascript, React, Mocha, Chai, API fetch
@@ -31,7 +35,8 @@ This (still in-progress) app allows software development teams to manage life-cy
   - I want to view all user accounts/projects/issues
   - I want to be able to edit all user accounts/projects/issues
   - I want to be able to delete all accounts/projects/issues
-  
+ 
+---
 ### NAVIGATION
 Main Page: Any User able to browse a list of recent projects.
 
