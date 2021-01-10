@@ -72,7 +72,11 @@ class UserPage extends React.Component {
         </label>
         <div className='issue-buttons'>
           <button type='submit'>Save</button>
-          <button type='button' onClick={this.delete}>Delete</button>
+          {
+            (!permission)
+              ? <button type='button' onClick={this.delete}>Delete</button>
+              : null
+          }
           <button type='button' onClick={() => this.props.history.push('/users')}>Cancel</button>
         </div>
       </form>

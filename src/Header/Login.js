@@ -21,6 +21,7 @@ class Login extends React.Component {
           window.localStorage.setItem('authToken', authToken);
           this.props.setIdleTimer();
           this.props.updateUser(res.user);
+          this.props.history.goBack();
         } else {
           const field = res.error.split(': ')[1];
           document.querySelectorAll('span').forEach(span => {

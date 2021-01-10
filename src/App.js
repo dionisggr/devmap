@@ -4,6 +4,7 @@ import Header from './Header/Header';
 import List from './Main/List/List';
 import Signup from './Header/Signup';
 import Login from './Header/Login';
+import Logout from './Admin/Logout';
 import ProjectPage from './Main/List/Items/ProjectPage';
 import IssuePage from './Main/List/Items/IssuePage';
 import ProjectEdit from './Main/List/Items/ProjectEdit';
@@ -114,6 +115,7 @@ class App extends React.Component {
               updateUser={this.updateUser}
             />
           } />
+          <Route path='/logout' component={Logout} />
         </ErrorBoundary>
       </main>
     );
