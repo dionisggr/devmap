@@ -6,7 +6,7 @@ import { API_KEY } from '../../../config';
 import './ProjectPage.css';
 
 class ProjectPage extends React.Component {
-  static defaultProps = { state: {} };
+  static defaultProps = { projects: [] };
 
   static propTypes = {
     projects: PropTypes.array.isRequired,
@@ -18,11 +18,15 @@ class ProjectPage extends React.Component {
     const admin = token === API_KEY;
     const username = (token && !admin) ? jwt_decode(token).sub : 'dionisggr';
     const projectID = this.props.match.params.projectID;
-    const project = 
-      (this.props.projects)
+    let project = (this.props.projects)
         ? this.props.projects.find(project => project.id === this.props.match.params.projectID)
-        : {};
-    const startDate = new Date(project.startDate).toDateString().slice(4);
+        : null;
+    if (!project) project = {};
+    const startDate =
+      // Start date created based on existing project (and start date) or new project (and date).
+      (project)
+        ? new Date(project.startDate).toDateString().slice(4)
+        : null;
     return (
       <form className='project-page'>
         <h3>{project.name || 'New Project'}</h3>

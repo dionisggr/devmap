@@ -5,7 +5,7 @@ import './Error.css';
 class Error extends React.Component {
   static defaultProps = { message: '' }
 
-  static propTypes = PropTypes.string;
+  static propTypes = { message: PropTypes.string };
   
   render() {
     return (

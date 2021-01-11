@@ -5,7 +5,7 @@ import api from '../api';
 import './Signup.css';
 
 class Signup extends React.Component {
-  static propTypes = { setIdleTimer: PropTypes.func.isRequired };
+  static propTypes = { setIdleTimer: PropTypes.func };
 
   signup = (evt) => {
     evt.preventDefault();
