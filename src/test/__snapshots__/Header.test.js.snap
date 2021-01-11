@@ -48,6 +48,7 @@ exports[`Header Section The Login page renders the UI as expected 1`] = `
     Username:
   </label>
   <input
+    autoComplete="username"
     id="username"
     name="username"
     type="text"
@@ -68,6 +69,7 @@ exports[`Header Section The Login page renders the UI as expected 1`] = `
     Password:
   </label>
   <input
+    autoComplete="current-password"
     id="password"
     name="password"
     type="password"
@@ -114,6 +116,7 @@ exports[`Header Section The Sign-Up page renders the UI as expected 1`] = `
     Username:
   </label>
   <input
+    autoComplete="username"
     id="username"
     name="username"
     type="text"
@@ -174,6 +177,7 @@ exports[`Header Section The Sign-Up page renders the UI as expected 1`] = `
     Password:
   </label>
   <input
+    autoComplete="new-password"
     id="password"
     name="password"
     type="password"
@@ -184,6 +188,7 @@ exports[`Header Section The Sign-Up page renders the UI as expected 1`] = `
     Repeat password:
   </label>
   <input
+    autoComplete="new-password"
     id="repeatPassword"
     name="repeatPassword"
     type="password"
