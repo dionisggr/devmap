@@ -1,0 +1,17 @@
+.no-projects {
+  display: flex;
+  align-items: center;
+  font-size: 50px;
+  margin-top: 15%;
+}
+
+.no-projects .create {
+  align-self: center;
+  justify-self: center;
+}
+
+@media all and (max-width: 400px) {
+  .no-projects {
+    font-size: 35px;
+  }
+}

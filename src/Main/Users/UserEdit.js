@@ -1,6 +1,5 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { API_KEY } from '../../config';
 import Error from '../Errors/Error';
 import api from '../../api';
 import './UserPage.css';
@@ -30,13 +29,7 @@ class UserPage extends React.Component {
     const userID = this.props.match.params.userID;
     api.deleteUser(userID)
       .then(() => {
-        const token = window.localStorage.getItem('authToken');
-        if (token === API_KEY) {
-          this.props.history.push('/users');
-        } else {
-          window.localStorage.removeItem('authToken');
-          this.props.history.push('/users');
-        };
+        this.props.history.push('/users');
       })
       .catch(error => console.log({ error }));
   };
@@ -44,7 +37,7 @@ class UserPage extends React.Component {
   render() {
     const user = this.state.user;
     const startDate = (user.startDate) ? new Date(user.startDate).toDateString().slice(4) : null;
-    const permission = window.localStorage.getItem('authToken') && user.role === 'Admin';
+    const permission = window.sessionStorage.getItem('authToken') && user.role === 'Admin';
     if (!permission) <Error message='Unauthorized access.'/>
     return (
       <form className='user-page' onSubmit={this.edit}>
@@ -73,6 +66,7 @@ class UserPage extends React.Component {
         <div className='issue-buttons'>
           <button type='submit'>Save</button>
           {
+            // Show 'Delete' button only if has permission (owner or 'Admin')
             (!permission)
               ? <button type='button' onClick={this.delete}>Delete</button>
               : null
@@ -83,6 +77,7 @@ class UserPage extends React.Component {
     );
   };
   componentDidMount() {
+    // Get User for handling User Data (and displaying 'username')
     const id = this.props.match.params.userID;
     api.getUserById(id)
       .then(user => this.setState({user}))

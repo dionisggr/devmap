@@ -12,6 +12,7 @@ class Item extends React.Component {
     const { id, name, description, tools, phase, status, projectID } = this.props.item;
     return (
       <Link to={
+        // Change path depending of showing a Project or Issuel
         (projectID)
           ? `${this.props.location.pathname}/${id}`
           : `projects/${id}`} className='item'>

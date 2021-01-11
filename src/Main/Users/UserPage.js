@@ -8,11 +8,10 @@ class UserPage extends React.Component {
   state = { users: [] };
 
   render() {
-    console.log(this.state.users);
     const userID = this.props.match.params.userID;
     const user = this.state.users.find(user => user.id === userID) || {};
     const startDate = (user.startDate) ? new Date(user.startDate).toDateString().slice(4) : null;
-    const permission = window.localStorage.getItem('authToken') && user.role === 'Admin';
+    const permission = window.sessionStorage.getItem('authToken') && user.role === 'Admin';
     if (!permission) <Error message='Unauthorized access.'/>;
     return (
       <form className='user-page' onSubmit={this.edit}>

@@ -18,11 +18,14 @@ class Login extends React.Component {
       .then(res => {
         const authToken = res.apiKey || res.authToken;
         if (authToken) {
-          window.localStorage.setItem('authToken', authToken);
+          /* If 'authToken' received and successful, set active User
+            for app and begin refreshToken() timer. */
+          window.sessionStorage.setItem('authToken', authToken);
           this.props.setIdleTimer();
           this.props.updateUser(res.user);
-          // this.props.history.goBack();
         } else {
+          /* If no 'authToken', highlighth error label and 
+            focus field to fix */
           const field = res.error.split(': ')[1];
           document.querySelectorAll('span').forEach(span => {
             span.style.display = 'none';
@@ -34,8 +37,8 @@ class Login extends React.Component {
   }
 
   render() {
-    const token = window.localStorage.getItem('authToken');
-    if (token) this.props.history.goBack();
+    const token = window.sessionStorage.getItem('authToken');
+    if (token) this.props.history.push('/'); // Turn to HomePage if already logged in.
     return (
       <form className='login' onSubmit={(evt) => this.login(evt)}>
         <h3>Login:</h3>

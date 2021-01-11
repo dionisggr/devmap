@@ -11,6 +11,7 @@ class Error extends React.Component {
     return (
       <div className='error'>
         <h3>ERROR</h3>
+        {/* Different messages passed as props from error handling in components*/}
         <p>{this.props.message}</p>
       </div>
     );

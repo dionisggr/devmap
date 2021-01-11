@@ -19,20 +19,27 @@ class ProjectPage extends React.Component {
     const projectID = this.props.match.params.projectID;
     let projects = [...this.props.projects];
     const project = projects.find(project => project.id === projectID);
+    const startDate =
+      // Choose existing or new Date depending if existing or new project.
+      (project) 
+        ? new Date(project.startDate).toDateString()
+        : new Date().toDateString();
     const values = {
       name: evt.target.name.value,
       description: evt.target.description.value,
       tools: evt.target.tools.value,
       phase: evt.target.phase.value,
       status: evt.target.status.value,
-      start_date: new Date(project.startDate).toDateString(),
+      start_date: startDate,
       collaboration: evt.target.collaboration.checked,
       github: evt.target.github.value,
       owner: document.querySelector('label').innerText.split(': ')[1]
     };
+    // Split functionality, depending on Adding or Editing a project.
     if (!projectID) {
       api.addProject(values)
         .then(project => {
+          // Renaming some keys for data handling
           project.id = project.project_id.toString();
           project.startDate = project.start_date.toString();
           delete project.project_id;
@@ -41,10 +48,11 @@ class ProjectPage extends React.Component {
           this.props.updateProjects(projects);
           this.props.history.push('/');
         })
-        .catch(error => console.log(error));
+        .catch(error => console.log({error}));
     } else {
       api.editProject(projectID, values)
         .then(() => {
+          // Renaming some keys for data handling
           values.id = projectID.toString();
           values.startDate = values.start_date.toString();
           delete values.start_date;
@@ -55,7 +63,7 @@ class ProjectPage extends React.Component {
           this.props.updateProjects(projects);
           this.props.history.push('/');
         })
-        .catch(error => console.log(error));
+        .catch(error => console.log({error}));
     };
   };
 
@@ -63,22 +71,22 @@ class ProjectPage extends React.Component {
     const projectID = this.props.match.params.projectID;
     api.deleteProject(projectID)
       .then(() => {
+        // Delete project in local (App.js) project array.
         let projects = [...this.props.projects];
         projects = projects.filter(project => project.id !== this.props.match.params.projectID);
         this.props.updateProjects(projects);
         this.props.history.push('/');
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log({error}));
   };
 
   render() {
-    const token = window.localStorage.getItem('authToken');
-    if (!token) this.props.history.push('/signup')
+    const token = window.sessionStorage.getItem('authToken');
+    if (!token) this.props.history.push('/signup') // Redirect to Signup if not logged in.
     const admin = token === API_KEY;
     const username = (token && !admin) ? jwt_decode(token).sub : 'dionisggr';
     const projectID = this.props.match.params.projectID;
     let project = this.props.projects.find(project => project.id === projectID) || {};
-    const startDate = (!projectID) ? null : new Date(project.startDate).toDateString().slice(4);
     return (
       <form onSubmit={this.handleSave} className='project-page'>
         <h3>{project.name || 'New Project'}</h3>
@@ -111,12 +119,14 @@ class ProjectPage extends React.Component {
         <label htmlFor='github'>GitHub:
         <input type='text' name='github' id='github' defaultValue={project.github}/></label>
         {
+          // If not a New Project, show 'Issues' button to browse project's issues.
           (projectID)
             ? <button type='button' onClick={() => this.props.history.push(`/projects/${projectID}/issues`)}>Issues</button>
             : null
         }
         <div className='project-buttons'>
           {
+            // Show 'Edit' and 'Delete' buttons if owner or 'Admin'.
             (admin || username === project.owner || !projectID)
               ? <>
                   <button type='submit'>Save</button>

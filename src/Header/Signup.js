@@ -15,7 +15,11 @@ class Signup extends React.Component {
       tools: evt.target.tools.value, startDate: new Date(),
       github: evt.target.github.value, password: evt.target.password.value
     };
+
+    // Catch repeatPassword value without adding to user
     const repeatPassword = evt.target.repeatPassword.value;
+
+    // Password validation
     if (user.password !== repeatPassword) {
       document.querySelectorAll('span').forEach(span => {
         span.style.display = 'none';
@@ -25,13 +29,15 @@ class Signup extends React.Component {
     } else {
       api.addUser(user)
         .then(res => {
+          // Catch key and determine whether Admin or regular User
           const authToken = res.apiKey || res.authToken;
           if (authToken) {
-            window.localStorage.setItem('authToken', authToken);
+            window.sessionStorage.setItem('authToken', authToken);
             this.props.setIdleTimer();
             this.props.updateUser(res.user);
             this.props.history.push('/');
           } else {
+            // Catching field validation error from API error response
             const field = 
               res.error.includes('username')
                 ? 'username'
@@ -41,6 +47,7 @@ class Signup extends React.Component {
             document.querySelectorAll('span').forEach(span => {
               span.style.display = 'none';
             });
+            // Show Error label and focus field with error.
             document.getElementById(field).focus();
             document.getElementById(`${field}Error`).style.display = 'inline-block';
           };
@@ -49,8 +56,8 @@ class Signup extends React.Component {
   };
 
   render() {
-    const token = window.localStorage.getItem('authToken');
-    if (token) this.props.history.goBack();
+    const token = window.sessionStorage.getItem('authToken');
+    if (token) this.props.history.goBack(); // Turn back if already logged in.
     return (
       <form className='signup' onSubmit={this.signup}>
         <h3>Sign-up for an account:</h3>

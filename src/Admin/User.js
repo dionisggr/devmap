@@ -33,6 +33,7 @@ class User extends React.Component {
   };
   
   componentDidMount() {
+    // Separate fetch from main logic since only 'Admin'(1) will access.
     api.getUsers()
       .then(users => {
         this.setState({ users })

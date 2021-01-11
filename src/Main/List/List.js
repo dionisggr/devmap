@@ -14,25 +14,27 @@ class List extends React.Component {
   static propTypes = { items: PropTypes.array.isRequired };
 
   render() {
-    const token = window.localStorage.getItem('authToken');
+    const token = window.sessionStorage.getItem('authToken');
     const admin = (token) ? token === API_KEY : false; 
     const username = (token && !admin) ? jwt_decode(token).sub : 'dionisggr';
     const projectID = this.props.match.params.projectID;
-    const project =
-      (this.props.items)
-        ? this.props.items.find(project => project.id === projectID)
-        : null;
-    const owner = (project) ? project.owner : null;
     const listTitle = (projectID) ? 'Project Issues' : 'Recent Projects';
     const items = 
       (projectID)
         ? this.props.items.filter(issue => issue.projectID === projectID)
         : this.props.items
+    const project =
+      (this.props.items)
+        ? this.props.items.find(project => project.id === projectID)
+        : null;
+    const owner = (project) ? project.owner : null;
     if (!items) return <Error message='No data.'/>
     return (
       <>
         <h3>{listTitle}</h3>
         {
+          /* Show different Create/New button depending
+            if adding project or issue. */
           (!projectID)
             ? <Link
                 className='create'
@@ -49,6 +51,7 @@ class List extends React.Component {
         }
         <div className='item-list'>
         {
+          // List of items
           items.map(item => {
             return (
             <ErrorBoundary key={item.id}>
@@ -59,6 +62,8 @@ class List extends React.Component {
         }
         </div>
         {
+          /*  Show 'Back' button at Issue List for going back to project
+              Unnecessary for Project List (nothing to go back to) */
           (projectID)
             ? <button type='button'
                 onClick={() => {

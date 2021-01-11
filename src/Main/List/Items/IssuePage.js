@@ -11,7 +11,7 @@ class IssuePage extends React.Component {
   static propTypes = {state: PropTypes.object.isRequired};
 
   render() {
-    const token = window.localStorage.getItem('authToken');
+    const token = window.sessionStorage.getItem('authToken');
     const admin = token === API_KEY;
     const username = (token && !admin) ? jwt_decode(token).sub : null;
     const issueID = this.props.match.params.issueID;
@@ -40,6 +40,7 @@ class IssuePage extends React.Component {
         <label>GitHub: {issue.github}</label>
         <div className='issue-buttons'>
         {
+          // If not a New Project, show 'Issues' button to browse project's issues.
             (token && (admin || username === issue.owner))
               ? <>
                   <button type='button' onClick={() => {

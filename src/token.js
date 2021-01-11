@@ -1,10 +1,10 @@
 const token = {
   get() {
-    return window.localStorage.getItem('authToken');
+    return window.sessionStorage.getItem('authToken');
   }
   ,
   save(token) {
-    return window.localStorage.setItem('authToken', token);
+    return window.sessionStorage.setItem('authToken', token);
   }
 };
 

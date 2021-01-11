@@ -14,7 +14,7 @@ class ProjectPage extends React.Component {
   };
 
   render() {
-    const token = window.localStorage.getItem('authToken');
+    const token = window.sessionStorage.getItem('authToken');
     const admin = token === API_KEY;
     const username = (token && !admin) ? jwt_decode(token).sub : 'dionisggr';
     const projectID = this.props.match.params.projectID;
@@ -36,12 +36,14 @@ class ProjectPage extends React.Component {
         <label>Collaboration: {(project.collaboration) ? project.collaboration.toString() : null}</label>
         <label>GitHub: {project.github}</label>
         {
+          // If not a New Project, show 'Issues' button to browse project's issues.
           (projectID)
             ? <button type='button' onClick={() => this.props.history.push(`/projects/${projectID}/issues`)}>Issues</button>
             : null
         }
         <div className='project-buttons'>
           {
+            // Show 'Edit' button if owner or 'Admin'.
             (token && (admin || username === project.owner))
               ? <>
                   <button type='button' onClick={() => this.props.history.push(`/edit/projects/${projectID}`)}>Edit</button>

@@ -14,7 +14,7 @@ function getData() {
 };
 
 function addProject(newProject) {
-  const token = window.localStorage.getItem('authToken');
+  const token = window.sessionStorage.getItem('authToken');
   if (!token) Promise.reject(new Error('missing authorization'));
   return fetch(`${baseURL}/api/projects`, {
     method: 'POST',
@@ -28,7 +28,7 @@ function addProject(newProject) {
 };
 
 function editProject(id, values) {
-  const token = window.localStorage.getItem('authToken');
+  const token = window.sessionStorage.getItem('authToken');
   if (!token) Promise.reject(new Error('missing authorization'));
   return fetch(`${baseURL}/api/projects/${id}`, {
     method: 'PATCH',
@@ -42,20 +42,15 @@ function editProject(id, values) {
 };
 
 function deleteProject(id) {
-  const token = window.localStorage.getItem('authToken');
+  const token = window.sessionStorage.getItem('authToken');
   return fetch(`${baseURL}/api/projects/${id}`, {
     method: 'DELETE',
     headers: {'Authorization': `Bearer ${token}`}
   });
 };
 
-function getProjectCollaborators(projectID) {
-  return fetch(`${baseURL}/api/projects/${projectID}/collaborators`)
-    .then(res => res.json());
-};
-
 function addIssue(newIssue) {
-  const token = window.localStorage.getItem('authToken');
+  const token = window.sessionStorage.getItem('authToken');
   if (!token) Promise.reject(new Error('missing authorization'));
   return fetch(`${baseURL}/api/issues`, {
     method: 'POST',
@@ -69,7 +64,7 @@ function addIssue(newIssue) {
 };
 
 function editIssue(id, values) {
-  const token = window.localStorage.getItem('authToken');
+  const token = window.sessionStorage.getItem('authToken');
   if (!token) Promise.reject(new Error('missing authorization'));
   return fetch(`${baseURL}/api/issues/${id}`, {
     method: 'PATCH',
@@ -83,20 +78,15 @@ function editIssue(id, values) {
 };
 
 function deleteIssue(id) {
-  const token = window.localStorage.getItem('authToken');
+  const token = window.sessionStorage.getItem('authToken');
   return fetch(`${baseURL}/api/issues/${id}`, {
     method: 'DELETE',
     headers: {'Authorization': `Bearer ${token}`}
   });
 };
 
-function getIssueCollaborators(issueID) {
-  return fetch(`${baseURL}/api/issues/${issueID}/collaborators`)
-    .then(res => res.json());
-};
-
 function findUsername(username) {
-  const token = window.localStorage.getItem('authToken');
+  const token = window.sessionStorage.getItem('authToken');
   if (!token) Promise.reject(new Error('missing authorization'));
   return fetch(`${baseURL}/api/${username}`, {
     headers: {
@@ -108,7 +98,7 @@ function findUsername(username) {
 };
 
 function getUsernames() {
-  const token = window.localStorage.getItem('authToken');
+  const token = window.sessionStorage.getItem('authToken');
   if (!token) Promise.reject(new Error('missing authorization'));
   return fetch(`${baseURL}/api/usernames`, {
     headers: {'Authorization': `Bearer ${token}`}
@@ -117,7 +107,7 @@ function getUsernames() {
 };
 
 function getUsers() {
-  const token = window.localStorage.getItem('authToken');
+  const token = window.sessionStorage.getItem('authToken');
   if (!token) Promise.reject(new Error('missing authorization'));
   return fetch(`${baseURL}/api/users`, {
     headers: {
@@ -138,7 +128,7 @@ function addUser(newUser) {
 };
 
 function editUser(id, values) {
-  const token = window.localStorage.getItem('authToken');
+  const token = window.sessionStorage.getItem('authToken');
   if (!token) Promise.reject(new Error('missing authorization'));
   return fetch(`${baseURL}/api/users/${id}`, {
     method: 'PATCH',
@@ -152,7 +142,7 @@ function editUser(id, values) {
 };
 
 function deleteUser(id) {
-  const token = window.localStorage.getItem('authToken');
+  const token = window.sessionStorage.getItem('authToken');
   return fetch(`${baseURL}/api/users/${id}`, {
     method: 'DELETE',
     headers: {'Authorization': `Bearer ${token}`}
@@ -160,7 +150,7 @@ function deleteUser(id) {
 };
 
 function getUserById(id) {
-  const token = window.localStorage.getItem('authToken');
+  const token = window.sessionStorage.getItem('authToken');
   return fetch(`${baseURL}/api/users/${id}`, {
     headers: {
       'Content-Type': 'application/json',
@@ -180,7 +170,7 @@ function login(attempt) {
 };
 
 function refreshToken() {
-  const token = window.localStorage.getItem('authToken');
+  const token = window.sessionStorage.getItem('authToken');
   return fetch(`${baseURL}/refresh`, {
     headers: {
       'Authorization': `Bearer ${token}`
@@ -193,8 +183,6 @@ const api = {
   addProject,
   editProject,
   deleteProject,
-  getProjectCollaborators,
-  getIssueCollaborators,
   addIssue,
   editIssue,
   deleteIssue,

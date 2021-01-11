@@ -20,6 +20,11 @@ class IssueEdit extends React.Component {
     const issueID = this.props.match.params.issueID;
     const issue = this.props.state.issues.find(issue => issue.id === issueID);
     const projectID = this.props.match.params.projectID;
+    const startDate =
+      // Choose existing or new Date depending if existing or new issue.
+      (issue) 
+        ? new Date(issue.startDate).toDateString()
+        : new Date().toDateString();
     const values = {
       project_id: projectID,
       name: evt.target.name.value,
@@ -27,15 +32,18 @@ class IssueEdit extends React.Component {
       tools: evt.target.tools.value,
       phase: evt.target.phase.value,
       status: evt.target.status.value,
-      start_date: new Date(issue.startDate).toDateString(),
+      start_date: startDate,
       owner: issue.owner,
       owner_id: issue.owner_id,
       collaboration: evt.target.collaboration.checked,
       github: evt.target.github.value
     };
+
+    // Split functionality, depending on Adding or Editing an issue.
     if (!issueID) {
       api.addIssue(values)
         .then(issue => {
+          // Renaming some keys for data handling
           issue.id = issue.issue_id.toString();
           issue.startDate = issue.start_date.toString();
           issue.projectID = issue.project_id;
@@ -50,6 +58,7 @@ class IssueEdit extends React.Component {
     } else {
       api.editIssue(issueID, values)
         .then(() => {
+          // Renaming some keys for data handling
           values.id = issueID.toString();
           values.projectID = values.project_id.toString();
           values.startDate = values.start_date.toString();
@@ -80,27 +89,26 @@ class IssueEdit extends React.Component {
   };
 
   render() {
-    const token = window.localStorage.getItem('authToken');
+    const token = window.sessionStorage.getItem('authToken');
     const admin = token === API_KEY;
     const username = (token && !admin) ? jwt_decode(token).sub : 'dionisggr';
     const issueID = this.props.match.params.issueID;
-     const issue =
-      (issueID)
-        ? this.props.state.issues.find(issue => issue.id === issueID)
-        : {};
-    const startDate = (issue.startDate) ? new Date(issue.startDate).toDateString().slice(4) : null;
+    let issue = (issueID)
+      ? this.props.state.issues.find(issue => issue.id === issueID)
+      : null;
     const project = 
       (this.props.state.projects)
         ? this.props.state.projects.find(project => project.id === this.props.match.params.projectID)
         : {};
     const projectName = (project) ? project.name : null;
+    if (!issue) issue = {};
     return (
       <form 
         className='issue-edit'
         onSubmit={this.handleSave}
       >
-        <h3>{issue.name || 'New Issue'}</h3>
-        <label id='owner'>Owner: {issue.owner || username}</label>
+        <h3>{(issue) ? issue.name : 'New Issue'}</h3>
+        <label id='owner'>Owner: {(issue) ? issue.owner : username}</label>
         <label id='projectName'>Project: {projectName}</label>
         <label htmlFor='name'>Name:</label>
         <input type='text' name='name' id='name' defaultValue={issue.name}/>
@@ -131,6 +139,7 @@ class IssueEdit extends React.Component {
         <input type='text' name='github' defaultValue={issue.github}/>
         <div className='issue-buttons'>
           {
+            // Show 'Save' and 'Delete' buttons if owner or 'Admin'.
             (token && (admin || username === issue.owner))
               ? <>
                   <button type='submit'>Save</button>
