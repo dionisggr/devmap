@@ -1,5 +1,7 @@
 import React from 'react';
 import { Route, withRouter } from 'react-router-dom';
+import { API_KEY } from './config';
+import jwt_decode from 'jwt-decode';
 import Header from './Header/Header';
 import List from './Main/List/List';
 import Signup from './Header/Signup';
@@ -148,11 +150,19 @@ class App extends React.Component {
     in UserList component to minimize security risks. */
     api.getData()
       .then(data => {
+        const token = window.sessionStorage.getItem('authToken');
+        const newState = {...this.state};
         const [ projects, issues ] = data;
-        this.setState({
-          user: this.state.user, empty: false,
-          projects, issues
-        });
+        newState.projects = projects;
+        newState.issues = issues;
+        if (token) {
+          if (token === API_KEY) {
+            newState.user.username = 'dionisggr'
+          } else {
+            newState.user.username = jwt_decode(token).sub
+          }
+        }
+        this.setState(newState)
       })
       .catch(error => {
         console.log(`Could not fetch data. Error: ${error.message}`);

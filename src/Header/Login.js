@@ -23,6 +23,7 @@ class Login extends React.Component {
           window.sessionStorage.setItem('authToken', authToken);
           this.props.setIdleTimer();
           this.props.updateUser(res.user);
+          this.props.history.push('/');
         } else {
           /* If no 'authToken', highlighth error label and 
             focus field to fix */
@@ -37,16 +38,14 @@ class Login extends React.Component {
   }
 
   render() {
-    const token = window.sessionStorage.getItem('authToken');
-    if (token) this.props.history.push('/'); // Turn to HomePage if already logged in.
     return (
       <form className='login' onSubmit={(evt) => this.login(evt)}>
         <h3>Login:</h3>
         <label htmlFor='username'>Username:</label>
-        <input type='text' name='username' id='username' />
+        <input type='text' name='username' id='username' autoComplete='username'/>
         <span style={{display: 'none'}} id='usernameInvalid'>Invalid username!</span>
         <label htmlFor='password'>Password:</label>
-        <input type='password' name='password' id='password' />
+        <input type='password' name='password' id='password' autoComplete='current-password'/>
         <span style={{display: 'none'}} id='passwordInvalid'>Invalid password!</span>
         <div className='login-buttons'>
           <button type='submit'>Login</button>
@@ -57,6 +56,11 @@ class Login extends React.Component {
         </div>
       </form>
     );
+  };
+
+  componentDidMount() {
+    const token = window.sessionStorage.getItem('authToken');
+    if (token) this.props.history.push('/'); // Turn to HomePage if already logged in.
   };
 };
 

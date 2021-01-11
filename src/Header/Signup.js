@@ -62,7 +62,7 @@ class Signup extends React.Component {
       <form className='signup' onSubmit={this.signup}>
         <h3>Sign-up for an account:</h3>
         <label htmlFor='username'>Username:</label>
-        <input type='text' name='username' id='username' />
+        <input type='text' name='username' id='username'  autoComplete='username'/>
         <span style={{display: 'none'}} id='usernameError'>Username taken!</span>
         <label htmlFor='firstName'>First Name:</label>
         <input type='text' name='firstName' id='firstName' />
@@ -72,9 +72,9 @@ class Signup extends React.Component {
         <input type='text' name='email' id='email'/>
         <span style={{display: 'none'}} id='emailError'>E-mail taken!</span>
         <label htmlFor='password'>Password:</label>
-        <input type='password' name='password' id='password' />
+        <input type='password' name='password' id='password' autoComplete='new-password'/>
         <label htmlFor='repeatPassword'>Repeat password:</label>
-        <input type='password' name='repeatPassword' id='repeatPassword' />
+        <input type='password' name='repeatPassword' id='repeatPassword' autoComplete='new-password'/>
         <span style={{display: 'none'}} id='passwordError'>Passwords don't match!</span>
         <label htmlFor='tools'>Tools:</label>
         <input type='text' name='tools' id='tools' />
