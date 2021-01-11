@@ -69,7 +69,7 @@ class App extends React.Component {
       this.timer = setTimeout(() => {
         this.props.history.push('/noprojects')
         this.setState({...this.state, empty:true })
-      }, 10000);
+      }, 16000);
       return <><Header /><Loader /></>;
     } else {
       clearTimeout(this.timer);
