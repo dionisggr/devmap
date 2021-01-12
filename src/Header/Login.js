@@ -12,9 +12,20 @@ class Login extends React.Component {
 
   login = (evt) => {
     evt.preventDefault();
-    const username = evt.target.username.value;
-    const password = evt.target.password.value;
-    api.login({username, password})
+    const values = {
+      username: evt.target.username.value,
+      password: evt.target.password.value
+    };
+
+    for (const [key, value] of Object.entries(values)) {
+      if (value === '') {
+        evt.target[key].focus();
+        document.getElementById('missing-values').style.display = 'inline-block';
+        return;
+      }
+    };
+    
+    api.login(values)
       .then(res => {
         const authToken = res.apiKey || res.authToken;
         if (authToken) {
@@ -41,6 +52,7 @@ class Login extends React.Component {
     return (
       <form className='login' onSubmit={(evt) => this.login(evt)}>
         <h3>Login:</h3>
+        <span style={{display: 'none'}} id='missing-values'>Missing values!</span>
         <label htmlFor='username'>Username:</label>
         <input type='text' name='username' id='username' autoComplete='username'/>
         <span style={{display: 'none'}} id='usernameInvalid'>Invalid username!</span>
