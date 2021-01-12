@@ -15,6 +15,14 @@ class Signup extends React.Component {
       tools: evt.target.tools.value, startDate: new Date(),
       github: evt.target.github.value, password: evt.target.password.value
     };
+    for (const [key, value] of Object.entries(user)) {
+      if (key === 'tools' || key === 'github' || key === 'start_date') continue;
+      if (value === '') {
+        evt.target[key].focus();
+        document.getElementById('missing-values').style.display = 'inline-block';
+        return;
+      }
+    };
 
     // Catch repeatPassword value without adding to user
     const repeatPassword = evt.target.repeatPassword.value;
@@ -51,7 +59,8 @@ class Signup extends React.Component {
             document.getElementById(field).focus();
             document.getElementById(`${field}Error`).style.display = 'inline-block';
           };
-        });
+        })
+        .catch(error => console.log({ error }));
     };
   };
 
@@ -61,6 +70,7 @@ class Signup extends React.Component {
     return (
       <form className='signup' onSubmit={this.signup}>
         <h3>Sign-up for an account:</h3>
+        <span style={{display: 'none'}} id='missing-values'>Missing values!</span>
         <label htmlFor='username'>Username:</label>
         <input type='text' name='username' id='username'  autoComplete='username'/>
         <span style={{display: 'none'}} id='usernameError'>Username taken!</span>

@@ -110,6 +110,16 @@ exports[`Header Section The Sign-Up page renders the UI as expected 1`] = `
   <h3>
     Sign-up for an account:
   </h3>
+  <span
+    id="missing-values"
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+  >
+    Missing values!
+  </span>
   <label
     htmlFor="username"
   >
