@@ -15,6 +15,7 @@ class Signup extends React.Component {
       tools: evt.target.tools.value, startDate: new Date(),
       github: evt.target.github.value, password: evt.target.password.value
     };
+    
     for (const [key, value] of Object.entries(user)) {
       if (key === 'tools' || key === 'github' || key === 'start_date') continue;
       if (value === '') {

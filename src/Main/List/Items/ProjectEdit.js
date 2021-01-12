@@ -35,6 +35,16 @@ class ProjectPage extends React.Component {
       github: evt.target.github.value,
       owner: document.querySelector('label').innerText.split(': ')[1]
     };
+
+    for (const [key, value] of Object.entries(values)) {
+      console.log(key, value);
+      if (key === 'start_date') continue;
+      if (value === '') {
+        evt.target[key].focus();
+        document.getElementById('missing-values').style.display = 'inline-block';
+        return;
+      }
+    };
     // Split functionality, depending on Adding or Editing a project.
     if (!projectID) {
       api.addProject(values)
@@ -90,6 +100,7 @@ class ProjectPage extends React.Component {
     return (
       <form onSubmit={this.handleSave} className='project-page'>
         <h3>{project.name || 'New Project'}</h3>
+        <span style={{display: 'none'}} id='missing-values'>Missing values!</span>
         <label id='project-owner'>Owner: {username}</label>
         <label htmlFor='name'>Name:
         <input type='text' name='name' id='name' defaultValue={project.name}/></label>

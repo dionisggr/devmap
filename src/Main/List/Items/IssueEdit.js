@@ -16,10 +16,15 @@ class IssueEdit extends React.Component {
   
   handleSave = (evt) => {
     evt.preventDefault();
+    const token = window.sessionStorage.getItem('authToken');
+    if (!token) this.props.history.push('/signup') // Redirect to Signup if not logged in.
     let issues = [...this.props.state.issues];
+    const admin = (token) ? token === API_KEY : false;
     const issueID = this.props.match.params.issueID;
     const issue = this.props.state.issues.find(issue => issue.id === issueID);
+    const username = (token && !admin) ? jwt_decode(token).sub : 'dionisggr';
     const projectID = this.props.match.params.projectID;
+    const ownerID = this.props.state.projects.find(project => project.id === projectID).owner_id;
     const startDate =
       // Choose existing or new Date depending if existing or new issue.
       (issue) 
@@ -33,10 +38,19 @@ class IssueEdit extends React.Component {
       phase: evt.target.phase.value,
       status: evt.target.status.value,
       start_date: startDate,
-      owner: issue.owner,
-      owner_id: issue.owner_id,
+      owner: username,
+      owner_id: ownerID,
       collaboration: evt.target.collaboration.checked,
       github: evt.target.github.value
+    };
+
+    for (const [key, value] of Object.entries(values)) {
+      if (key === 'start_date') continue;
+      if (value === '') {
+        evt.target[key].focus();
+        document.getElementById('missing-values').style.display = 'inline-block';
+        return;
+      }
     };
 
     // Split functionality, depending on Adding or Editing an issue.
@@ -108,7 +122,8 @@ class IssueEdit extends React.Component {
         onSubmit={this.handleSave}
       >
         <h3>{(issue) ? issue.name : 'New Issue'}</h3>
-        <label id='owner'>Owner: {(issue) ? issue.owner : username}</label>
+        <span style={{display: 'none'}} id='missing-values'>Missing values!</span>
+        <label id='owner'>Owner: {username}</label>
         <label id='projectName'>Project: {projectName}</label>
         <label htmlFor='name'>Name:</label>
         <input type='text' name='name' id='name' defaultValue={issue.name}/>
