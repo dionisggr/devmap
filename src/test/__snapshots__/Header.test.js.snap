@@ -42,6 +42,16 @@ exports[`Header Section The Login page renders the UI as expected 1`] = `
   <h3>
     Login:
   </h3>
+  <span
+    id="missing-values"
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+  >
+    Missing values!
+  </span>
   <label
     htmlFor="username"
   >
