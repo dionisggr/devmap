@@ -37,7 +37,6 @@ class ProjectPage extends React.Component {
     };
 
     for (const [key, value] of Object.entries(values)) {
-      console.log(key, value);
       if (key === 'start_date') continue;
       if (value === '') {
         evt.target[key].focus();
