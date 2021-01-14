@@ -10,9 +10,7 @@ class Home extends React.Component {
         <div className='home-primary'>
           <img src={background} alt='background' />
           <h2>Welcome to DevMap!</h2>
-          {/* <p>The stopping point for managing projects and tracking bugs.</p> */}
           <p>A stopping point for developers to keep keep track of their projects and bugs.</p>
-          {/* <p>Whether it's for yourself, your team, or simply your ease of mind!</p> */}
           <p>Establish a phase and status for each project and issue, so you can be through about every project's health!</p>
           <Link to='projects'>Projects</Link>
         </div>
