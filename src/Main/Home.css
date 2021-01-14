@@ -30,7 +30,7 @@ ul {
 img {
   opacity: 0.3;
   position: fixed;
-  top: 0;
+  top: 150px;
   left: 0;
   z-index: 0;
 }
@@ -67,7 +67,7 @@ img {
 @media all and (min-width: 400px) {
   .home {
     font-size: 125%;
-    width: 7a0%;
+    width: 70%;
   }
 
   .home p, ul {
@@ -79,6 +79,6 @@ img {
   }
 
   img {
-    opacity: 0.15;
+    opacity: 0.11;
   }
 }
