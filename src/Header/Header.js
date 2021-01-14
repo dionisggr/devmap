@@ -5,9 +5,11 @@ import './Header.css';
 
 class Header extends React.Component {
   render() {
+    const token = window.sessionStorage.getItem('authToken');
+    const link = (token) ? '/projects' : '/';
     return (
       <header>
-        <Link to='/' className='logo'><h1>#DevMap</h1></Link>
+        <Link to={link} className='logo'><h1>#DevMap</h1></Link>
         <Menu />
       </header>
     );

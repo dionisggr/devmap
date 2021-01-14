@@ -3,6 +3,7 @@ import { Route, withRouter } from 'react-router-dom';
 import { API_KEY } from './config';
 import jwt_decode from 'jwt-decode';
 import Header from './Header/Header';
+import Home from './Main/Home';
 import List from './Main/List/List';
 import Signup from './Header/Signup';
 import Login from './Header/Login';
@@ -86,7 +87,8 @@ class App extends React.Component {
         </UserContext.Provider>
 
         <ErrorBoundary>
-          <Route exact path={['/', '/projects']} render={() => 
+          <Route exact path='/' component={Home} />
+          <Route exact path='/projects' render={() => 
             <List items={this.state.projects} />
           }/>
           <Route exact path='/projects/:projectID/issues' render={() => 

@@ -13,6 +13,62 @@ exports[`Main Section The Errors render the UI as expected 1`] = `
 </div>
 `;
 
+exports[`Main Section The Home Page render the UI as expected 1`] = `
+<div
+  className="home"
+>
+  <div
+    className="home-primary"
+  >
+    <img
+      alt="background"
+      src="background.jpeg"
+    />
+    <h2>
+      Welcome to DevMap!
+    </h2>
+    <p>
+      A stopping point for developers to keep keep track of their projects and bugs.
+    </p>
+    <p>
+      Establish a phase and status for each project and issue, so you can be through about every project's health!
+    </p>
+    <a
+      href="/projects"
+      onClick={[Function]}
+    >
+      Projects
+    </a>
+  </div>
+  <div
+    className="home-secondary"
+  >
+    <p>
+      It's easy:
+    </p>
+    <ul>
+      <li>
+        Sign-Up.
+      </li>
+      <li>
+        Create a project.
+      </li>
+      <li>
+        Establish your issues.
+      </li>
+      <li>
+        Share away!
+      </li>
+    </ul>
+    <p>
+      <i>
+        (Next up: Implementing collaborators and teams!)
+      </i>
+    </p>
+  </div>
+</div>
+`;
+
 exports[`Main Section The Items The Issue Page renders the UI as expected 1`] = `
 <form
   className="issue-page"
@@ -141,7 +197,7 @@ exports[`Main Section The Items The Project Page renders the UI as expected 1`] 
 exports[`Main Section The List renders the UI as expected 1`] = `
 Array [
   <h3>
-    Recent Projects
+    All Projects
   </h3>,
   <a
     className="create"

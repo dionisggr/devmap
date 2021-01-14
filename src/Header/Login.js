@@ -34,7 +34,7 @@ class Login extends React.Component {
           window.sessionStorage.setItem('authToken', authToken);
           this.props.setIdleTimer();
           this.props.updateUser(res.user);
-          this.props.history.push('/');
+          this.props.history.push('/projects');
         } else {
           /* If no 'authToken', highlighth error label and 
             focus field to fix */
@@ -63,7 +63,7 @@ class Login extends React.Component {
           <button type='submit'>Login</button>
           <button
             type='button'
-            onClick={() => this.props.history.push('/')}
+            onClick={() => this.props.history.push('/projects')}
           >Cancel</button>
         </div>
       </form>

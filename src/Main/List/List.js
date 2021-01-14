@@ -18,7 +18,7 @@ class List extends React.Component {
     const admin = (token) ? token === API_KEY : false; 
     const username = (token && !admin) ? jwt_decode(token).sub : 'dionisggr';
     const projectID = this.props.match.params.projectID;
-    const listTitle = (projectID) ? 'Project Issues' : 'Recent Projects';
+    const listTitle = (projectID) ? 'Project Issues' : 'All Projects';
     const items = 
       (projectID)
         ? this.props.items.filter(issue => issue.projectID === projectID)

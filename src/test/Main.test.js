@@ -7,6 +7,7 @@ import ProjectPage from '../Main/List/Items/ProjectPage';
 import IssuePage from '../Main/List/Items/IssuePage';
 import Error from '../Main/Errors/Error';
 import UserPage from '../Main/Users/UserPage';
+import Home from '../Main/Home';
 import Menu from '../Header/Menu';
 
 describe('Main Section', () => {
@@ -17,6 +18,7 @@ describe('Main Section', () => {
   const issue = <BrowserRouter><IssuePage /></BrowserRouter>;
   const user = <BrowserRouter><UserPage /></BrowserRouter>;
   const menu = <BrowserRouter><Menu /></BrowserRouter>;
+  const home = <BrowserRouter><Home /></BrowserRouter>
   describe('The List', () => {
     it('renders without crashing', () => {
       const div = document.createElement('div');
@@ -93,6 +95,17 @@ describe('Main Section', () => {
     });
     it('render the UI as expected', () => {
       const tree = renderer.create(menu).toJSON();
+      expect(tree).toMatchSnapshot();
+    });
+  });
+  describe('The Home Page', () => {
+    it('renders without crashing', () => {
+      const div = document.createElement('div');
+      ReactDOM.render(home, div);
+      ReactDOM.unmountComponentAtNode(div);
+    });
+    it('render the UI as expected', () => {
+      const tree = renderer.create(home).toJSON();
       expect(tree).toMatchSnapshot();
     });
   });

@@ -44,7 +44,7 @@ class Signup extends React.Component {
             window.sessionStorage.setItem('authToken', authToken);
             this.props.setIdleTimer();
             this.props.updateUser(res.user);
-            this.props.history.push('/');
+            this.props.history.push('/projects');
           } else {
             // Catching field validation error from API error response
             const field = 
