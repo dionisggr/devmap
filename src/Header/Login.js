@@ -63,7 +63,7 @@ class Login extends React.Component {
           <button type='submit'>Login</button>
           <button
             type='button'
-            onClick={() => this.props.history.push('/projects')}
+            onClick={() => this.props.history.push('/')}
           >Cancel</button>
         </div>
       </form>

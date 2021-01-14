@@ -54,7 +54,7 @@ class ProjectPage extends React.Component {
                 </>
               : null
           }
-          <button type='button' onClick={() => this.props.history.push('/')}>Back</button>
+          <button type='button' onClick={() => this.props.history.push('/projects')}>Back</button>
         </div>
       </form>
     );
