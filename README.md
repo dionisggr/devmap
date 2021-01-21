@@ -1,5 +1,7 @@
 # DevMap
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A simple meeting point for software developers to collaborate on other projects. *(In dire need of CSS upgrade)*
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A simple meeting point for software developers to collaborate on other projects.
+
+*(In dire need of CSS upgrade)*
 
 ### Live:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; https://devmap.vercel.app/
