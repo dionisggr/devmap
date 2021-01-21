@@ -6,7 +6,8 @@ header {
   width: calc(100% - 5% - 25px);
   height: 45px;
   max-height: 125px;
-  padding: 0 25px 0 10px;
+  padding: 0 40px 0 10px;
+  max-height: 125px;
   z-index: 1;
   color: white;
   background-color: rgb(0, 0, 0);
@@ -118,8 +119,11 @@ nav {
   }
 
   header {
-    height: 100px;
+    display: flex;
+    align-items: flex-start;
+    height: 75px;
     padding-right: 5%;
+    padding: 5px 50px 10px 10px;
   }
 
   .container {

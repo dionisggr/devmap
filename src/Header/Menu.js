@@ -19,6 +19,8 @@ class Menu extends React.Component {
     if (!username && token && token !== API_KEY)
       username = jwt_decode(token).sub;
     return (
+      <>
+      {(username) ? <h4>Welcome, {username}.</h4> : null}
       <nav className={menu ? "faded" : ""}>
         <ul>
           <li><Link to="/signup">Sign-Up</Link></li>
@@ -88,6 +90,7 @@ class Menu extends React.Component {
           </ul>
         </div>
       </nav>
+      </>
     );
   }
 

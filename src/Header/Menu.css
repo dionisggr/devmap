@@ -4,7 +4,6 @@
   justify-content: space-between;
   align-self: center;
   align-items: center;
-  width: 250px;
   width: 50%;
   height: 50px;
   margin-bottom: 10px;
@@ -60,7 +59,7 @@
 }
 
 header h1 {
-  font-size: 5vh;
+  font-size: 4vh;
 }
 
 @media all and (max-width: 400px) {
