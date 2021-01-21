@@ -27,7 +27,7 @@ class Menu extends React.Component {
           <li><Link to="/login">Login</Link></li>
           <li>
             <a
-              href="https://github.com/dionisggr/laptop-customizer"
+              href="https://github.com/dionisggr/devmap"
               target="_blank"
               rel="noreferrer"
             >
@@ -64,7 +64,7 @@ class Menu extends React.Component {
             }
             <li>
               <a
-                href="https://github.com/dionisggr/laptop-customizer"
+                href="https://github.com/dionisggr/devmap"
                 target="_blank"
                 rel="noreferrer"
               >
