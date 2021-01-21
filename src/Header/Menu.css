@@ -55,6 +55,14 @@
   margin-right: 15px;
 }
 
+.nav li + li {
+  margin-top: 25%;
+}
+
+header h1 {
+  font-size: 5vh;
+}
+
 @media all and (max-width: 400px) {
   .header-options {
     align-self: flex-end;
