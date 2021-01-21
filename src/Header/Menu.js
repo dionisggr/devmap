@@ -21,6 +21,8 @@ class Menu extends React.Component {
     return (
       <nav className={menu ? "faded" : ""}>
         <ul>
+          <li><Link to="/signup">Sign-Up</Link></li>
+          <li><Link to="/login">Login</Link></li>
           <li>
             <a
               href="https://github.com/dionisggr/laptop-customizer"
@@ -53,36 +55,9 @@ class Menu extends React.Component {
                   </li>
                 </>
               ) : (
-                <div className="loggedIn">
-                  {
-                    // Show access button to Users if 'Admin', otherwise regular Account button.
-                    admin ? (
-                      <li>
-                        <Link id="users-button" to={`/users`}>
-                          Users
-                        </Link>
-                      </li>
-                    ) : (
-                      <li>
-                        <Link id="account-button" to={`/users/${id}`}>
-                          Account
-                        </Link>
-                      </li>
-                    )
-                  }
-                  <li>
-                    <Link
-                      to="/logout"
-                      id="logout-button"
-                      onClick={() => {
-                        window.sessionStorage.removeItem("authToken");
-                        this.props.history.push("/");
-                      }}
-                    >
-                      Log Out
-                    </Link>
-                  </li>
-                </div>
+                admin
+                  ? <li><Link id="users-button" to={`/users`}>Users</Link></li>
+                  : <li><Link id="account-button" to={`/users/${id}`}>Accounts</Link></li>
               )
             }
             <li>
@@ -94,6 +69,22 @@ class Menu extends React.Component {
                 GitHub
               </a>
             </li>
+            {
+              (!token)
+                ? null
+                : <li>
+                    <Link
+                      to="/logout"
+                      id="logout-button"
+                      onClick={() => {
+                        window.sessionStorage.removeItem("authToken");
+                        this.props.history.push("/");
+                      }}
+                    >
+                      Log Out
+                    </Link>
+                  </li>
+            }
           </ul>
         </div>
       </nav>

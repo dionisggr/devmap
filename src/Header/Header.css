@@ -58,8 +58,9 @@ header i {
 }
 
 nav ul li {
-  font-size: 3vh;
+  font-size: 2.5vh;
   list-style-type: none;
+  width: 135px;
 }
 
 nav ul li a {
@@ -106,16 +107,14 @@ nav {
   top: 35px;
   top: 0;
   left: 0;
-  border: solid red;
 }
 
-@media all and (min-width: 600px) {
+@media all and (min-width: 700px) {
   .header {
     height: 125px;
     justify-content: flex-start;
     padding-left: 5%;
     font-size: 2.5vh;
-    border: solid red;
   }
 
   header {
@@ -151,3 +150,9 @@ nav {
     margin: 0;
   }
 }
+
+/* @media all and (min-width: 800px) {
+  nav ul li {
+    font-size: 3vh;
+  }
+} */
