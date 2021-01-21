@@ -29,6 +29,9 @@ class UserPage extends React.Component {
     const userID = this.props.match.params.userID;
     api.deleteUser(userID)
       .then(() => {
+        if (this.state.user.role !== 'Admin') {
+          window.sessionStorage.removeItem('authToken');
+        }
         this.props.history.push('/users');
       })
       .catch(error => console.log({ error }));
