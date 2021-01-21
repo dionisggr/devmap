@@ -13,7 +13,7 @@ class Home extends React.Component {
           <p>A stopping point for developers to keep keep track of their projects and bugs.</p>
           <p>Establish a phase and status for each project and issue, so you can be thorough on every project's health!</p>
           <Link to='projects'>Projects</Link>
-        </div>
+          <a href='https://github.com/dionisggr/devmap'>GitHub</a>href       </div>
         <div className='home-secondary'>
           <p>It's easy:</p>
           <ul>
