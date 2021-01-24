@@ -45,9 +45,10 @@ This (still in-progress) app allows software development teams to manage life-cy
  
 ---
 ### NAVIGATION
-Main Page: Any User able to browse a list of recent projects.
+Home Page: About & Instructions
 ![HomePage](https://github.com/dionisggr/devmap/blob/main/src/img/homepage.png)
 
+Main Page: Any User able to browse a list of recent projects.
 ![Projects Page](https://github.com/dionisggr/devmap/blob/main/src/img/projects.PNG)
 
 Signup Page: Any User able to sign-up for an account.
