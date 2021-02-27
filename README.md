@@ -7,7 +7,7 @@ The DevMap App is directed for developers who wish to maintain a simple log of t
 #### Client Live:
 https://devmap.vercel.app
 
-#### API URL
+#### API URL (Landing):
 https://afternoon-dawn-05389.herokuapp.com
 
 #### API GitHub:
@@ -159,11 +159,11 @@ headers" {'Content-Type': 'application/json'}
 
 ### User related
 Each endpoint manipulates information related to users.
-- [Get Users](): `GET /users`
+- [Get Users](Users): `GET /users`
 - [Create User (Register)](): `POST /users`
-- [Get Users](): `GET /users/:user`
-- [Edit User](): `PATCH /users/:user`
-- [Delete User](): `DELETE /users/:user`
+- [Get Users](Users): `GET /users/:user`
+- [Edit User](Users): `PATCH /users/:user`
+- [Delete User](Users): `DELETE /users/:user`
 
 ### Get Users
 **URL:** `/users` \
@@ -321,11 +321,11 @@ All values will be necessary in Update due to previous empty field validation
 
 ### Project related
 Each endpoint manipulates information of projects.
-- [Get Projects](): `GET /projects` \
-- [Create Project](): `POST /projects`
-- [Get Project](): `GET /projects/:project`
-- [Edit Project](): `PATCH /projects/:project`
-- [Delete Project](): `DELETE /projects/:project`
+- [Get Projects](https://github.com/dionisggr/devmap-api/wiki/Projects): `GET /projects` \
+- [Create Project](https://github.com/dionisggr/devmap-api/wiki/Projects): `POST /projects`
+- [Get Project](https://github.com/dionisggr/devmap-api/wiki/Projects): `GET /projects/:project`
+- [Edit Project](https://github.com/dionisggr/devmap-api/wiki/Projects): `PATCH /projects/:project`
+- [Delete Project](https://github.com/dionisggr/devmap-api/wiki/Projects): `DELETE /projects/:project`
 
 ---
 
@@ -487,11 +487,11 @@ All values will be necessary in Update due to previous empty field validation
 
 ### Issues related
 Each endpoint manipulates information related to project issues.
-- [Get Issues](): `GET /issues`
-- [Create Issue (Register)](): `POST /issues`
-- [Get Issues](): `GET /issues/:issue`
-- [Edit Issue](): `PATCH /issues/:issue`
-- [Delete Issue](): `DELETE /issues/:issue`
+- [Get Issues](https://github.com/dionisggr/devmap-api/wiki/Issues): `GET /issues`
+- [Create Issue](https://github.com/dionisggr/devmap-api/wiki/Issues): `POST /issues`
+- [Get Issues](https://github.com/dionisggr/devmap-api/wiki/Issues): `GET /issues/:issue`
+- [Edit Issue](https://github.com/dionisggr/devmap-api/wiki/Issues): `PATCH /issues/:issue`
+- [Delete Issue](https://github.com/dionisggr/devmap-api/wiki/Issues): `DELETE /issues/:issue`
 
 ### Get Issues
 **URL:** `/issues` \
