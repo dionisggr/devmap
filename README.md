@@ -17,6 +17,7 @@ https://github.com/dionisggr/devmap-api
 
 ### User Stories
 - As a prospective user:
+  - I want to land in the Welcome Page with more instructions
   - I want to browse all projects
   - I want to browse all project issues
   - I want to sign up for an account
@@ -47,18 +48,13 @@ https://github.com/dionisggr/devmap-api
 The app's functionality includes:
 * Every User
   * May create an account
-  * May browse public suggestion lists
-  * May read full movie information
+  * May browse projects and issues
 * Registered User
-  * May edit and delete their account
-  * May create, edit and delete their lists
-  * May generate suggestions from other lists
-  * May search for any movie
+  * May manage their account
+  * May manage their projects and issues
 * Admin
-  * May see a list of all users
-    * May create, edit and delete any user
-  * May see a list of all lists
-    * May create, edit and delete any list
+  * May manage the list of all users
+  * May manage any project and issue
     
 ---
 
@@ -164,6 +160,8 @@ Each endpoint manipulates information related to users.
 - [Get Users](Users): `GET /users/:user`
 - [Edit User](Users): `PATCH /users/:user`
 - [Delete User](Users): `DELETE /users/:user`
+
+---
 
 ### Get Users
 **URL:** `/users` \
@@ -492,6 +490,8 @@ Each endpoint manipulates information related to project issues.
 - [Get Issues](https://github.com/dionisggr/devmap-api/wiki/Issues): `GET /issues/:issue`
 - [Edit Issue](https://github.com/dionisggr/devmap-api/wiki/Issues): `PATCH /issues/:issue`
 - [Delete Issue](https://github.com/dionisggr/devmap-api/wiki/Issues): `DELETE /issues/:issue`
+
+---
 
 ### Get Issues
 **URL:** `/issues` \
