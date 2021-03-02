@@ -3,6 +3,7 @@ import { Route, withRouter } from 'react-router-dom';
 import { API_KEY } from './config';
 import jwt_decode from 'jwt-decode';
 import Header from './Header/Header';
+import Footer from './Footer/Footer';
 import Home from './Main/Home';
 import List from './Main/List/List';
 import Signup from './Header/Signup';
@@ -81,51 +82,64 @@ class App extends React.Component {
     return (
       <main className='App'>
         <UserContext.Provider value={this.state.user}>
+
           <ErrorBoundary>
             <Header />
           </ErrorBoundary>
+
         </UserContext.Provider>
 
         <ErrorBoundary>
+          <Route exact path='/users' component={UserList} />
+
+          <Route exact path='/users/:userID' component={UserPage} />
+
+          <Route path='/edit/users/:userID' component={UserEdit} />
+        </ErrorBoundary>
+
+        <ErrorBoundary>
           <Route exact path='/' component={Home} />
+
           <Route exact path='/projects' render={() => 
             <List items={this.state.projects} />
-          }/>
+          } />
+          
           <Route exact path='/projects/:projectID/issues' render={() => 
             <List items={this.state.issues} />
-          }/>
+          } />
+          
           <Route exact path='/projects/:projectID' render={() => 
             <ProjectPage
               projects={this.state.projects}
               updateProjects={this.updateProjects}
             />
           }/>
-          <Route exact path={['/edit/projects/:projectID', '/new-project']}
+          <Route 
+            exact path={['/edit/projects/:projectID', '/new-project']}
             render={() => 
               <ProjectEdit
                 projects={this.state.projects}
                 updateProjects={this.updateProjects}
               />
-          }/>
+          } />
+          
           <Route path='/projects/:projectID/issues/:issueID' render={() => 
               <IssuePage state={this.state} />
-          }/>
-          <Route exact path={
-            ['/projects/:projectID/new-issue','/edit/projects/:projectID/issues/:issueID']
+          } />
+          
+          <Route exact path={[
+              '/projects/:projectID/new-issue',
+              '/edit/projects/:projectID/issues/:issueID'
+            ]
           }
             render={() => 
               <IssueEdit
                 state={this.state}
                 updateIssues={this.updateIssues}
               />
-          }/>
+          } />
+          
           <Route path='/noprojects' component={NoProjects} />
-        </ErrorBoundary>
-
-        <ErrorBoundary>
-          <Route exact path='/users' component={UserList} />
-          <Route exact path='/users/:userID' component={UserPage} />
-          <Route path='/edit/users/:userID' component={UserEdit} />
         </ErrorBoundary>
 
         <ErrorBoundary>
@@ -135,13 +149,19 @@ class App extends React.Component {
               updateUser={this.updateUser}
             />
           } />
+
           <Route path='/login' render={() =>
             <Login
               setIdleTimer={this.setIdleTimer}
               updateUser={this.updateUser}
             />
           } />
+
           <Route path='/logout' component={Logout} />
+        </ErrorBoundary>
+
+        <ErrorBoundary>
+          <Footer />
         </ErrorBoundary>
       </main>
     );

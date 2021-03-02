@@ -1,13 +1,15 @@
+* {
+  box-sizing: border-box;
+}
+
 html, body, #root, main {
   background-color: rgba(0, 0, 0, 0.945);
-  box-sizing: border-box;
-  min-height: 100%;
-  height: fit-content;
-  /* height: 100%; */
   margin: 0;
+  min-height: 100vh;
 }
+
 body {
-  height: 100vh;
+  min-width: 100%;
 }
 
 main {
@@ -16,5 +18,9 @@ main {
   align-items: center;
   font-family: 'Courier New', Courier, monospace;
   width: 100%;
-  margin-bottom: 50px;
+  position: relative;
+}
+
+button {
+  cursor: pointer;
 }

@@ -30,7 +30,7 @@ main h3 {
   margin-bottom: 50px;
 }
 
-button {
+.list button {
   display: flex;
   justify-content: center;
   align-items: center;

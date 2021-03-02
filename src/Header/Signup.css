@@ -3,24 +3,41 @@
   flex-direction: column;
   align-items: center;
   color: white;
-  width: 50%;
-  margin-top: 4%;
+  width: 100%;
+  margin-bottom: 150px;
+  margin-top: 3vw;
 }
 
 .signup h3 {
   text-align: center;
-  font-size: 4vh;
+  font-size: 8vw;
   margin-bottom: 25px;
 }
 
+.signup h4 {
+  font-size: 4.5vmin;
+  margin-top: 35px;
+}
+
+.signup h4:nth-of-type(1) {
+  margin-top: 15px;
+}
+
 .signup input {
-  height: 2em;
-  margin-top: 3px;
-  border-radius: 3px;
+  line-height: 2em;
+  width: 70%;
+  max-width: 350px;
+  border-radius: 20px;
+  border: solid 2px rgb(61, 0, 61);
+  font-size: 15px;
+  outline: none;
+  margin-top: 2px;
+  margin-bottom: 25px;
+  text-align: center;
 }
 
 .signup label {
-  margin-top: 25px;
+  font-weight: bold;
 }
 
 .signup span {
@@ -31,32 +48,29 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  max-width: 350px;
-  height: 2em;
-  margin: 50px 10px;
   width: 100%;
+  max-width: 300px;
 }
 
 .signup-buttons button {
-  background-color: rgb(8, 255, 8);
-  border: none;
-  width: 120px;
-  height: 1.8em;
-  outline: none;
-  font-family:'Courier New', Courier, monospace;
-  font-weight: bolder;
-  font-size: 20px;
-  color: rgb(95, 0, 95);
-  border-radius: 3px;
-}
-
-.signup-buttons button + button {
-  margin-left: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 185, 0, 0.925);
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 18px;
+  color: white;
+  height: 35px;
+  width: 100px;
+  text-align: center;
+  margin: 10px 0;
+  border: solid 1px rgba(82, 82, 82, 0.637);
+  border-radius: 10px;
 }
 
 .signup button:hover {
   background-color: rgba(8, 255, 8, 0.76);
-  border-color: rgba(8, 255, 8, 0.76);
 }
 
 .signup button:active {
@@ -67,7 +81,7 @@
   color: red;
 }
 
-@media all and (max-width: 400px) {
+@media all and (min-width: 400px) {
   .signup {
     width: 100%;
   }
@@ -77,18 +91,18 @@
     margin-bottom: 30px;
   }
 
-  .signup-buttons {
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    margin-top: 35px;
-  }
-
   .signup button {
     margin: 50px 10px;
     min-height: 1.5em;
     width: 100px;
     height: 1.8em;
     font-size: 18px;
+  }
+}
+
+
+@media all and (min-width: 500px) {
+  .signup h4 {
+    font-size: 2.5vh;
   }
 }

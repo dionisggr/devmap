@@ -70,27 +70,44 @@ class Signup extends React.Component {
     if (token) this.props.history.goBack(); // Turn back if already logged in.
     return (
       <form className='signup' onSubmit={this.signup}>
-        <h3>Sign-up for an account:</h3>
-        <span style={{display: 'none'}} id='missing-values'>Missing values!</span>
-        <label htmlFor='username'>Username:</label>
-        <input type='text' name='username' id='username'  autoComplete='username'/>
-        <span style={{display: 'none'}} id='usernameError'>Username taken!</span>
+        <h3>Sign-Up</h3>
+
+        <h4>USER INFORMATION</h4>
+        
         <label htmlFor='firstName'>First Name:</label>
         <input type='text' name='firstName' id='firstName' />
+        
         <label htmlFor='lastName'>Last Name:</label>
         <input type='text' name='lastName' id='lastName' />
+
+        <h4>ACCOUNT INFORMATION</h4>
+
+        <span style={{display: 'none'}} id='missing-values'>Missing values!</span>
+        <label htmlFor='username'>Username:</label>
+        
+        <input type='text' name='username' id='username' autoComplete='username' />
+        <span style={{display: 'none'}} id='usernameError'>Username taken!</span>
+        
         <label htmlFor='email'>E-mail:</label>
-        <input type='text' name='email' id='email'/>
-        <span style={{display: 'none'}} id='emailError'>E-mail taken!</span>
+        <input type='text' name='email' id='email' />
+
+        <span style={{ display: 'none' }} id='emailError'>E-mail taken!</span>
         <label htmlFor='password'>Password:</label>
-        <input type='password' name='password' id='password' autoComplete='new-password'/>
+        
+        <input type='password' name='password' id='password' autoComplete='new-password' />
         <label htmlFor='repeatPassword'>Repeat password:</label>
-        <input type='password' name='repeatPassword' id='repeatPassword' autoComplete='new-password'/>
-        <span style={{display: 'none'}} id='passwordError'>Passwords don't match!</span>
+        
+        <input type='password' name='repeatPassword' id='repeatPassword' autoComplete='new-password' />
+        <span style={{display: 'none'}} id='passwordError'>Passwords don't match!</span>        
+        
+        <h4>EXTRA</h4>
+
         <label htmlFor='tools'>Tools:</label>
         <input type='text' name='tools' id='tools' />
+
         <label htmlFor='github'>GitHub:</label>
         <input type='text' name='github' id='github' />
+
         <div className='signup-buttons'>
           <button type='submit'>Sign-Up</button>
           <button
@@ -100,6 +117,7 @@ class Signup extends React.Component {
             Cancel
           </button>
         </div>
+
       </form>
     );
   };

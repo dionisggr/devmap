@@ -21,7 +21,7 @@
   width: 100%;
 }
 
-label:last-of-type {
+.project-page label:last-of-type {
   margin-bottom: 25px;
 }
 

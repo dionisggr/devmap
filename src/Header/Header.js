@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Menu from './Menu';
 import './Header.css';
 
 class Header extends React.Component {
@@ -10,7 +9,10 @@ class Header extends React.Component {
     return (
       <header>
         <Link to={link} className='logo'><h1>#DevMap</h1></Link>
-        <Menu />
+        <nav>
+          <Link to="/signup">Sign-Up</Link>
+          <Link to="/login">Login</Link>
+        </nav>
       </header>
     );
   };

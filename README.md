@@ -1,4 +1,5 @@
 # DevMap App
+*(Currently going through CSS revamp)* \
 The DevMap App is directed for developers who wish to maintain a simple log of their projects and issues, and even share them with their team! The app looks to facilitate the sharing of essential project health information among peers for a simpler collaboration dynamic.
 
 ---

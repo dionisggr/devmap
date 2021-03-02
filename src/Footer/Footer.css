@@ -1,0 +1,37 @@
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border-top: solid 1px rgba(255, 255, 255, 0.774);
+  color: white;
+  padding: 10px 15px 5px 15px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
+footer .icons {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 5px;
+}
+
+footer h2 {
+  margin: 0;
+  font-size: 16px;
+}
+
+footer a {
+  color: white;
+  font-size: 35px;
+  margin: 0 3vw;
+}
+
+@media only screen and (min-width: 600px) {
+  footer {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    height: 65px;
+  }
+}
