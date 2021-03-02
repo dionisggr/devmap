@@ -676,7 +676,7 @@ All values will be necessary in Update due to previous empty field validation
 **Code:** `200 OK` \
 **Content example**
 
---
+---
 
 ### Screenshots
 
