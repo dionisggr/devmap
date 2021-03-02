@@ -677,9 +677,6 @@ All values will be necessary in Update due to previous empty field validation
 **Content example**
 
 ---
-![<HTML file>](https://github.com/dionisggr/devmap-api/blob/main/public/img/landing.png)
-
----
 
 ### Screenshots
 
