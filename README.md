@@ -1,13 +1,12 @@
 # DevMap App
-*(Currently going through CSS revamp)*
-
 The DevMap App is directed for developers who wish to maintain a simple log of their projects and issues, and even share them with their team! The app looks to facilitate the sharing of essential project health information among peers for a simpler collaboration dynamic.
 
 ---
 
 ### Working Prototype
 #### Client Live:
-https://devmap.vercel.app
+<!-- https://devmap.vercel.app -->
+*(Under Revamp)*
 
 #### API URL (Landing):
 https://afternoon-dawn-05389.herokuapp.com
