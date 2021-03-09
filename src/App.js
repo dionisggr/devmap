@@ -24,10 +24,7 @@ import api from './api';
 import './App.css';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.timer = null; // Timer for Loading component below
-  };
+  static defaultProps = { timer: null };
 
   state = { 
     projects: [], issues: [], user: {}
@@ -67,69 +64,98 @@ class App extends React.Component {
     });
   };
 
+  componentDidMount() {
+    // API fetch for data.
+    api.getData()
+      .then(([projects, issues]) => {
+        const newState = this.state;
+        newState.project = projects;
+        newState.issues = issues;
+
+        this.setState(newState);
+      })
+      .catch(error => console.log({ error }));
+  };
+
   render = () => {
+    const { projects, issues } = this.state;
+
     // Validation for empty project list, shows Loading component.
     if (this.state.projects.length < 1 && window.location.pathname === '/') {
       this.timer = setTimeout(() => {
         this.props.history.push('/noprojects')
-        this.setState({...this.state, empty:true })
+        this.setState({...this.state, empty: true })
       }, 16000);
       return <><Header /><Loader /></>;
     } else {
       clearTimeout(this.timer);
-    }
+    };
 
     return (
       <main className='App'>
         <UserContext.Provider value={this.state.user}>
-
           <ErrorBoundary>
+
             <Header />
+
           </ErrorBoundary>
-
         </UserContext.Provider>
-
-        <ErrorBoundary>
-          <Route exact path='/users' component={UserList} />
-
-          <Route exact path='/users/:userID' component={UserPage} />
-
-          <Route path='/edit/users/:userID' component={UserEdit} />
-        </ErrorBoundary>
 
         <ErrorBoundary>
           <Route exact path='/' component={Home} />
 
-          <Route exact path='/projects' render={() => 
-            <List items={this.state.projects} />
-          } />
+          <Route exact path='/users' component={UserList} />
+
+          <Route exact path='/users/:userId' component={UserPage} />
+
+          <Route path='/edit/users/:userId' component={UserEdit} />
+
+          <Route path='/noprojects' component={NoProjects} />
+
+          <Route path='/logout' component={Logout} />
+        </ErrorBoundary>
+
+        <ErrorBoundary>
+          <Route exact path='/projects'
+            render={() =>
+              <List items={projects} />
+            }
+          />
           
-          <Route exact path='/projects/:projectID/issues' render={() => 
-            <List items={this.state.issues} />
-          } />
-          
-          <Route exact path='/projects/:projectID' render={() => 
-            <ProjectPage
-              projects={this.state.projects}
-              updateProjects={this.updateProjects}
-            />
-          }/>
-          <Route 
-            exact path={['/edit/projects/:projectID', '/new-project']}
-            render={() => 
-              <ProjectEdit
-                projects={this.state.projects}
+          <Route exact path='/projects/:projectId'
+            render={() =>
+              <ProjectPage
+                projects={projects}
                 updateProjects={this.updateProjects}
               />
-          } />
+            }
+          />
           
-          <Route path='/projects/:projectID/issues/:issueID' render={() => 
+          <Route exact path='/projects/:projectId/issues'
+            render={() =>
+              <List items={issues} />
+            }
+          />
+
+          <Route exact path={['/edit/projects/:projectId', '/new-project']}
+            render={() => 
+              <ProjectEdit
+                projects={projects}
+                updateProjects={this.updateProjects}
+              />
+            }
+          />
+          
+          <Route path='/projects/:projectId/issues/:issueID'
+            render={() =>
               <IssuePage state={this.state} />
-          } />
+            }
+          />
           
-          <Route exact path={[
-              '/projects/:projectID/new-issue',
-              '/edit/projects/:projectID/issues/:issueID'
+          <Route exact path={
+            [
+              '/projects/:projectId/new-issue',
+              '/edit/projects/:projectId/issues/:issueID'
             ]
           }
             render={() => 
@@ -137,9 +163,8 @@ class App extends React.Component {
                 state={this.state}
                 updateIssues={this.updateIssues}
               />
-          } />
-          
-          <Route path='/noprojects' component={NoProjects} />
+            }
+          />
         </ErrorBoundary>
 
         <ErrorBoundary>
@@ -156,39 +181,15 @@ class App extends React.Component {
               updateUser={this.updateUser}
             />
           } />
-
-          <Route path='/logout' component={Logout} />
         </ErrorBoundary>
 
         <ErrorBoundary>
+
           <Footer />
+
         </ErrorBoundary>
       </main>
     );
-  };
-  
-  componentDidMount() {
-    /* API fetch for data. User data fetched separately (when necessary)
-    in UserList component to minimize security risks. */
-    api.getData()
-      .then(data => {
-        const token = window.sessionStorage.getItem('authToken');
-        const newState = {...this.state};
-        const [ projects, issues ] = data;
-        newState.projects = projects;
-        newState.issues = issues;
-        if (token) {
-          if (token === API_KEY) {
-            newState.user.username = 'dionisggr'
-          } else {
-            newState.user.username = jwt_decode(token).sub
-          }
-        }
-        this.setState(newState)
-      })
-      .catch(error => {
-        console.log(`Could not fetch data. Error: ${error.message}`);
-      });
   };
 };
 

@@ -11,7 +11,19 @@ import './List.css';
 class List extends React.Component {
   static defaultProps = { items: [] };
 
+  state = { items: [] };
+
   static propTypes = { items: PropTypes.array.isRequired };
+
+  componentDidMount() {
+    const projectID = this.props.match.params.projectID;
+
+    const items = (projectID)
+      ? this.props.items.filter(issue => issue.projectID === projectID)
+      : this.props.items;
+    
+    this.setState({ items });
+  };
 
   render() {
     const token = window.sessionStorage.getItem('authToken');
@@ -19,16 +31,17 @@ class List extends React.Component {
     const username = (token && !admin) ? jwt_decode(token).sub : 'dionisggr';
     const projectID = this.props.match.params.projectID;
     const listTitle = (projectID) ? 'Project Issues' : 'All Projects';
-    const items = 
-      (projectID)
-        ? this.props.items.filter(issue => issue.projectID === projectID)
-        : this.props.items
-    const project =
-      (this.props.items)
-        ? this.props.items.find(project => project.id === projectID)
-        : null;
+   
+    const project = (this.props.items)
+      ? this.props.items.find(project => project.id === projectID)
+      : null;
+    
     const owner = (project) ? project.owner : null;
-    if (!items) return <Error message='No data.'/>
+
+    const { items } = this.state;
+    
+    if (!items) return <Error message='No data.' />
+    
     return (
       <>
         <h3>{listTitle}</h3>
