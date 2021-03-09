@@ -5,8 +5,8 @@ The DevMap App is directed for developers who wish to maintain a simple log of t
 
 ### Working Prototype
 #### Client Live:
-<!-- https://devmap.vercel.app -->
-*(Under Revamp)*
+https://devmap.vercel.app \
+*(Under Revamp, minimum CSS)*
 
 #### API URL (Landing):
 https://afternoon-dawn-05389.herokuapp.com
